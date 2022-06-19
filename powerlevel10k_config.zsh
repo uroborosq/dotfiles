@@ -905,6 +905,11 @@
   # Anaconda environment color.
   typeset -g POWERLEVEL9K_ANACONDA_FOREGROUND=37
 
+  typeset -g POWERLEVEL9K_HOST_FOREGROUND=255
+  typeset -g POWERLEVEL9K_USER_FOREGROUND=255
+
+
+
   # Anaconda segment format. The following parameters are available within the expansion.
   #
   # - CONDA_PREFIX                 Absolute path to the active Anaconda/Miniconda environment.
