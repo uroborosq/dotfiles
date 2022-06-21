@@ -85,5 +85,10 @@ alias bd='sudo cpufreqctl --boost --set=0'
 alias be='sudo cpufreqctl --boost --set=1'
 alias bs='cpufreqctl --boost'
 
+# Path
+
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/Рабочий стол/Скрипты:$PATH"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
