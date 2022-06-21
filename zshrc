@@ -84,6 +84,8 @@ alias pg='pwgen -cn1sy 16'
 alias bd='sudo cpufreqctl --boost --set=0'
 alias be='sudo cpufreqctl --boost --set=1'
 alias bs='cpufreqctl --boost'
+alias ls="ls --color"
+alias l="lsd --date '+%d.%m.%Y %H:%M' -lah"
 
 # Path
 
