@@ -19,7 +19,7 @@ HISTSIZE=1000
 SAVEHIST=10000
 bindkey -e
 
-source /home/uroborosq/.local/share/antigen/antigen.zsh
+source /usr/share/zsh/share/antigen.zsh
 # End of lines configured by zsh-newuser-install
 
 
@@ -86,6 +86,7 @@ alias be='sudo cpufreqctl --boost --set=1'
 alias bs='cpufreqctl --boost'
 alias ls="ls --color"
 alias l="lsd --date '+%d.%m.%Y %H:%M' -lah"
+alias brave='flatpak run com.brave.Browser'
 
 # Path
 
