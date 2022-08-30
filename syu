@@ -21,7 +21,7 @@ echo -e "${ICyan}git repos updating...${Default}"
 echo -e "${Cyan}libadwaita-theme-changer${Default}"
 cd /home/uroborosq/.local/share/libadwaita-theme-changer/
 
-git pull
+git pull || cd ~/.local/share/ && git clone https://github.com/odziom91/libadwaita-theme-changer
 
 
 cd -- "$current_directory"

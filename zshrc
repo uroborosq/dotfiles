@@ -86,7 +86,9 @@ alias be='sudo cpufreqctl --boost --set=1'
 alias bs='cpufreqctl --boost'
 alias ls="ls --color"
 alias l="lsd --date '+%d.%m.%Y %H:%M' -lah"
-alias brave='flatpak run com.brave.Browser'
+alias gte='gnome-text-editor'
+alias св='cd'
+alias rmunsed='sudo pacman -Rnucs $(pacman -Qtdq)'
 
 # Path
 
