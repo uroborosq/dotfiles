@@ -1,0 +1,8 @@
+#!/bin/bash
+
+status=$(playerctl metadata | grep "title\|artist" | awk '{for(i=3; i<=NF; i++) printf "%s ", $i; print ""}' | sed -z 's/\n/| /g')
+if [[ ${#status} -ge 1 ]]; then
+echo "${status::-2}"
+else 
+echo "⏸"
+fi
