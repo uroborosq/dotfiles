@@ -10,20 +10,21 @@ function restore()
     gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-timeout $installed_suspend_time_battery
     echo "Restored, exiting..."
 }
-
+log="playerctl.txt"
 trap restore exit
 suspend_enabled=1
 while true; do
     playerctl_status=$(playerctl status)
+    echo "$(date): $playerctl_status)" >> $log
     if [[ "$playerctl_status" == 'Playing' ]] && [[ $suspend_enabled -eq 1 ]]
     then
-        echo "Audio playing was detected, suspend disabled"
+        echo "Audio playing was detected, suspend disabled" >> $log
         suspend_enabled=0
         gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 0
         gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-timeout 0
     elif [[ "$playerctl_status" != "Playing" ]] && [[ $suspend_enabled -eq 0 ]]
     then
-        echo "Suspend enabled"
+        echo "Suspend enabled" > $log
         suspend_enabled=1
         gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout $installed_suspend_time_ac
         gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-timeout $installed_suspend_time_battery

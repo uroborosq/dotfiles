@@ -89,6 +89,8 @@ alias l="lsd --date '+%d.%m.%Y %H:%M' -lah"
 alias gte='gnome-text-editor'
 alias св='cd'
 alias rmunsed='sudo pacman -Rnucs $(pacman -Qtdq)'
+alias gscale='gsettings set org.gnome.desktop.interface text-scaling-factor'
+alias swconf='code ~/.config/sway/config; code ~/.config/waybar/config'
 
 # Path
 

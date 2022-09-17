@@ -1,6 +1,6 @@
 #!/bin/bash
 while true
     do
-        temperature
+        python ./memory-status.py
         sleep 2
     done
