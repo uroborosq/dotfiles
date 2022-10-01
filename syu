@@ -7,13 +7,13 @@ ICyan='\033[0;96m'
 
 echo -e  "${Green}Welcome to the UroborosQ's update script!${Default}"
 
-echo -e "${ICyan}yay updating...${Default}"
+echo -e "${ICyan}paru updating...${Default}"
 
-yay
+paru
 
-echo -e "${ICyan}flatpak updating...${Default}"
+#echo -e "${ICyan}flatpak updating...${Default}"
 
-flatpak update
+#flatpak update
 
 current_directory=$(pwd)
 
@@ -24,6 +24,9 @@ echo -e "${Cyan}libadwaita-theme-changer${Default}"
 cd /home/uroborosq/.local/share/libadwaita-theme-changer/
 
 git pull || cd ~/.local/share/ && git clone https://github.com/odziom91/libadwaita-theme-changer
+
+
+
 
 
 cd -- "$current_directory"

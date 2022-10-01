@@ -75,6 +75,9 @@ key[Shift-Tab]="${terminfo[kcbt]}"
 [[ -n "${key[PageDown]}"  ]] && bindkey -- "${key[PageDown]}"   end-of-buffer-or-history
 [[ -n "${key[Shift-Tab]}" ]] && bindkey -- "${key[Shift-Tab]}"  reverse-menu-complete
 
+
+export GEDITOR=code
+
 # Aliases definitions part
 
 alias ok=exit
@@ -90,7 +93,6 @@ alias gte='gnome-text-editor'
 alias св='cd'
 alias rmunsed='sudo pacman -Rnucs $(pacman -Qtdq)'
 alias gscale='gsettings set org.gnome.desktop.interface text-scaling-factor'
-alias swconf='code ~/.config/sway/config; code ~/.config/waybar/config'
 
 # Path
 

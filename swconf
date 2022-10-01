@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+code ~/.config/sway/config; 
+code ~/.config/waybar/config
+code  ~/.config/waybar/style.css
+code ~/.config/alacritty/alacritty.yml
+code ~/.config/mako/config

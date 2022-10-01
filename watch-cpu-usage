@@ -1,3 +1,0 @@
-#!/bin/bash
-
-echo "$(top -b -n 1 | grep Cpu | awk '{print $2 "+" $4}' | tr ',' '.' | bc)%"
