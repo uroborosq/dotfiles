@@ -1,0 +1,4 @@
+# ninja log v5
+1	36	1665945419070049193	build.ninja	9b915ed728deb3ab
+7	801	1664785564564277788	CMakeFiles/cpu_usage_C__.dir/main.cpp.o	5b1d7a6b84a3c94a
+802	901	1664785564660944381	cpu_usage_C__	57d461c7a16e08b1

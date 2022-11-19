@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+maxFreq=$(cat /proc/cpuinfo | grep "MHz" | awk '{print $4}' | sort | tail -n 1)
+echo "${maxFreq::-4}MHz"
