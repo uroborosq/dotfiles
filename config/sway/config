@@ -1,56 +1,42 @@
-### Variables
+### Переменные
 
 set $mod Mod4
-# Home row direction keys, like vim
-set $left h
-set $down j
-set $up k
-set $right l
-
+set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 set $term alacritty --class=alacritty-floating
-
+set $menu wofi --allow-images --insensitive true --show drun -a
 set $opacity 0.95
+
+### Правила окон
 
 for_window [class="jetbrains-(.*)" title="splash"] floating enable
 for_window [app_id="python3"] floating enable
 for_window [title="Choose ONE of the audio conference options"] floating enable
 for_window [title="Открыть файл"] floating enable
 for_window [title="Открыть папку"] floating enable
-for_window [title="Firefox-индикатор доступа"] floating enable
-
-bindsym --release button3 kill
-bindsym $mod+button4 workspace next_on_output
-
+for_window [title="Firefox — индикатор доступа"] floating enable
 for_window [app_id="alacritty-floating"] floating enable
-# set $menu exec $term --class=launcher -e /usr/bin/sway-launcher-desktop
 
-# set $menu exec nwg-drawer
+### Настройка мониторов
 
-set $menu wofi --allow-images --insensitive true --show drun -a -W 100% -H 80% -w 6
-bindcode $mod+40 exec $menu
+# Управление обоями
+exec ~/.azotebg 
 
-# for_window [class=".*"] border csd
-# for_window [app_id=".*"] border csd
-### Output configuration
-#
-
-output * bg /usr/share/backgrounds/archlinux/geolanes.png fill
 output eDP-1 position 0 0
 output eDP-1 scale 1.5
 output HDMI-A-1 resolution 1920x1080@72Hz position 1280 0
 
-### Idle configuration2
+### Настройка энергосбережения
 
 exec swayidle -w \
 	    timeout 270 'notify-send Энергосбережение "скоро засну"' \
-        timeout 300 'swaylock -f -i /usr/share/backgrounds/archlinux/geolanes-blurry.png' \
+        timeout 299 'swaylock -f -i /usr/share/backgrounds/archlinux/geolanes.png' \
         timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-        before-sleep 'swaylock -f -i /usr/share/backgrounds/archlinux/geolanes-blurry.png' \
-        timeout 300 "/home/uroborosq/Рабочий\ стол/Скрипты/check-playerctl-suspend"
+        before-sleep 'swaylock -f -i /usr/share/backgrounds/archlinux/geolanes.png' \
+        timeout 301 "/home/uroborosq/Рабочий\ стол/Скрипты/check-playerctl-suspend"
 
-### Input configuration
+### Настройки устройств ввода
 
-# Touchpad
+# Тачпад
 
   input "1739:52560:SYNA32AC:00_06CB:CD50_Touchpad" {
       dwt enabled
@@ -60,14 +46,17 @@ exec swayidle -w \
       scroll_factor 0.3
   }
 
-# Keyboard layout
+# Клавиатура
 
-input type:keyboard {
-xkb_layout us,ru
-xkb_options grp:win_space_toggle
+  input type:keyboard {
+  xkb_layout us,ru
+  xkb_options grp:win_space_toggle
+  xkb_numlock enable
 }
 
 ### Комбинации клавиш
+
+bindcode $mod+40 exec $menu
 
 # Start a terminal
 bindsym $mod+Return exec $term
@@ -78,7 +67,7 @@ bindcode Mod1+24 kill
 floating_modifier $mod normal
 
 bindsym $mod+Shift+c reload
-
+bindsym $mod+l exec swaylock -f -i /usr/share/backgrounds/archlinux/geolanes-blurry.png
 
 # Exit sway (logs you out of your Wayland session)
 bindsym $mod+Shift+e exec nwg-bar
@@ -86,21 +75,11 @@ bindsym $mod+Shift+e exec nwg-bar
 # Moving around:
 #
 # Move your focus around
-bindsym $mod+$left focus left
-bindsym $mod+$down focus down
-bindsym $mod+$up focus up
-bindsym $mod+$right focus right
-# Or use $mod+[up|down|left|right]
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# Move the focused window with the same, but add Shift
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
 # Ditto, with arrow keys
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
@@ -171,11 +150,6 @@ bindsym $mod+minus scratchpad show
 # Resizing containers:
 #
 mode "resize" {
-    
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
 
     bindsym Left resize shrink width 10px
     bindsym Down resize grow height 10px
@@ -190,6 +164,8 @@ mode "resize" {
 
 bindsym $mod+p exec "swaymsg output eDP-1 disable; swaymsg output HDMI-A-1 resolution 1920x1080@72Hz position 0 0"
 bindsym $mod+Shift+p exec "swaymsg output eDP-1 position 0 0 scale 1.5 enable; swaymsg output HDMI-A-1 resolution 1920x1080@72Hz position 1280 0"
+bindsym Alt+Shift+p exec "swaymsg output \* enable"
+
 ### Звук
 
 # Pipewire
@@ -197,20 +173,27 @@ bindsym $mod+Shift+p exec "swaymsg output eDP-1 position 0 0 scale 1.5 enable; s
 #bindsym XF86AudioLowerVolume exec "pw-volume change -2.5%"
 #bindsym XF86AudioMute exec "pw-volume mute toggle"
 
-# PulseAudio
+# PulseAudio + wob
 
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioRaiseVolume exec pamixer -ui 5 && pamixer --get-volume > $WOBSOCK
+bindsym XF86AudioLowerVolume exec pamixer -ud 5 && pamixer --get-volume > $WOBSOCK
+bindsym XF86AudioMute exec pamixer --toggle-mute && ( [ "$(pamixer --get-mute)" = "true" ] && echo 0 > $WOBSOCK ) || pamixer --get-volume > $WOBSOCK
+
+# Alsa + wob
+
+# bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+ | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $WOBSOCK
+# bindsym XF86AudioLowerVolume exec amixer sset Master 5%- | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $WOBSOCK
+# bindsym XF86AudioMute exec amixer set Master toggle | sed -En '/\[on\]/ s/.*\[([0-9]+)%\].*/\1/ p; /\[off\]/ s/.*/0/p' | head -1 > $WOBSOCK
+
 
 # Скриншоты
 
-bindsym Print exec grim -g "$(slurp -d)" - | wl-copy # Скриншот области
+bindsym Print exec slurp | grim -g - - | wl-copy && wl-paste > $HOME/Изображения/Снимки\ экрана/$(date +'%Y-%m-%d-%H%M%SС.png') # Скриншот области
 
 # Яркость
 
-bindsym --locked XF86MonBrightnessUp exec light -T 1.4
-bindsym --locked XF86MonBrightnessDown exec light -T 0.72
+bindsym XF86MonBrightnessUp exec light -A 5 && light -G | cut -d'.' -f1 > $WOBSOCK
+bindsym XF86MonBrightnessDown exec light -U 5 && light -G | cut -d'.' -f1 > $WOBSOCK
 
 # Управление мультимедиа
 
@@ -218,13 +201,10 @@ bindsym --no-warn XF86AudioPlay exec playerctl play-pause
 bindsym --no-warn XF86AudioNext exec playerctl next
 bindsym --no-warn XF86AudioPrev exec playerctl previous
 
-
-
 ### Внешний вид
 
-font pango:Ubuntu 10
+font pango:Noto Sans 10
 
-gaps inner 5
 set $bg #171717
 set $fg #eff1f5
 set $br #353535
@@ -239,14 +219,18 @@ client.unfocused        $bg     $bg     $fg     $bg       $bg
 
 ### Автостарт
 
-# bar swaybar_command waybar
-input * xkb_numlock enable
+set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
+
 exec_always {
     gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'  
     gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
 }
+
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob --anchor bottom --height 25 --width 300 --border-color "#353535FF" --background-color "#353535FF" --bar-color "#FFFFFFFF" --padding 2 --border 0 --margin 40
 exec wmname LG3DС
-exec_always --no-startup-id dex --autostart --environment sway
-# exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec dex -a --environment sway
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/lib/pam_kwallet_init
 include /etc/sway/config.d/*
 exec_always "killall waybar; waybar"

@@ -22,28 +22,24 @@
 
 /* Reset all styles */
 * {
-    border: none;
     border-radius: 4;
     min-height: 0;
     margin: 0;
     padding: 0;
-    background-color: rgba(0, 0, 0, 0.2);
 }
 
 /* The whole bar */
 #waybar {
-    background: @theme_bg_color;
-    color: @theme_fg_color;
+    background: rgba(35, 35, 35, 0.8);
+    color: white;
     font-family: "Noto Sans";
-    font-size: 14px;
+    font-size: 12px;
 }
 
 #window {
-    margin-left: 10px;
 }
 
 window#waybar {
-    margin-left: 10px;
     border-radius: 0;
 }
 
@@ -53,24 +49,30 @@ window#waybar.hidden {
 
 #workspaces button {
     /* To compensate for the top border and still have vertical centering */
-    padding: 0 0.5em;
-    margin: 4px 3px;
-    color: @wm_icon_bg;
+    padding: 0px 7px;
+    margin: 2px 2px;
+    color: gray;
+    border: solid rgb(50, 50, 50) 1px;
+    background-color:  rgba(35, 35, 35, 0.6);
 }
 
 #workspaces button.focused {
-    border-color: #353535;
-    color: @wm_icon_bg;
-    background-color: #353535;
+    border-color: rgba(35, 35, 35, 0.6);
+    color: white;
+    background-color: rgba(35, 35, 35, 0.6);
+    border: solid white 1px
+
 }
 
 #workspaces button.urgent {
     border-color: @error_color;
     color: @error_color;
+    border: solid blue 1px
+
 }
 
 #mode {
-    background: @background_color;
+    background: rgba(36, 35, 35, 0.6);
 }
 
 #clock,
@@ -89,17 +91,21 @@ window#waybar.hidden {
 #mode,
 #custom-temp,
 #custom-close,
-
+#custom-telegram,
+#custom-dolphin,
+#custom-firefox,
 #temperature,
 #idle_inhibitor {
+    border: solid rgba(100, 100, 100, 0.6) 1px;
     padding-left: 10px;
     padding-right: 10px;
     margin: 2px 2px;
 }
 #custom-temp,
 #temperature,
+#tray,
 #custom-close {
-    background: #353535;
+    background: rgba(36, 35, 35, 0.6);
     color: @theme_selected_fg_color;
 }
 
@@ -111,60 +117,56 @@ window#waybar.hidden {
     color: @theme_selected_fg_color;
 } */
 #taskbar {
-    background:  @theme_bg_color;
+    border: solid rgba(100, 100, 100, 0.6) 1px;
+    background:  rgba(36, 35, 35, 0.6);
 }
 
 
 #taskbar button {
+    /* border: solid rgba(60, 60, 60, 0.6) 1px; */
     padding-left: 2px;
     padding-right: 2px;
     margin: 2px 2px;
-    border: solid #353535 1px;
-    color: #353535;
+    color: rgba(36, 35, 35, 0.6);
 }
-
-
 
 #clock {
-    background: #353535;
-    color: @theme_selected_fg_color;
-}
-
-#custom-weather {
-    background: #353535;
+    background:rgba(36, 35, 35, 0.6);
     color: @theme_selected_fg_color;
 }
 
 #custom-playerctl {
-    background: #353535;
+    background: rgba(36, 35, 35, 0.6);
     color: @theme_selected_fg_color;
 }
 
 #custom-power {
-    background: #353535;
+    background:rgba(36, 35, 35, 0.6);
     color: @theme_selected_fg_color;
 }
 
 #custom-temp {
-    background: #353535;
+    background:rgba(36, 35, 35, 0.6);
     color: @theme_selected_fg_color;
 }
 
 #custom-clipboard {
-    background: #353535;
+    background: rgba(36, 35, 35, 0.6);
     color: @theme_selected_fg_color;
 }
 
 #custom-menu {
-    background: #353535;
+    background: rgba(36, 35, 35, 0.6);
     color: @theme_selected_fg_color;
 }
-
+#custom-telegram,
+#custom-dolphin,
+#custom-firefox,
 #battery {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
-    background: #353535;
+    background-color: rgba(36, 35, 35, 0.6);
     color: @theme_selected_fg_color;
 }
 
@@ -187,46 +189,46 @@ window#waybar.hidden {
 }
 
 label:focus {
-    background-color: #000000;
+    background-color: rgba(36, 35, 35, 0.6);
 }
 
 #cpu {
-    background: #353535;
+    background:rgba(36, 35, 35, 0.6);
     color: @theme_selected_fg_color;
 }
 
 #language {
-    background: #353535;
+    background:rgba(36, 35, 35, 0.6);
     color: @theme_selected_fg_color;
 }
 
 #memory {
-    background: #353535;
+    background:rgba(36, 35, 35, 0.6);
     color: @theme_selected_fg_color;
 }
 
 #custom-gpu-usage {
-    background: #353535;
+    background:rgba(36, 35, 35, 0.6);
     color: @theme_selected_fg_color;
 }
 
 #network {
-    background: #353535;
+    background: rgba(36, 35, 35, 0.6);
     color: @theme_selected_fg_color;
 }
 
 #network.disconnected {
-    background: @theme_bg_color;
+    background:rgba(36, 35, 35, 0.6);
     color: @wm_icon_bg
 }
 
 #pulseaudio {
-    background: #353535;
+    background: rgba(36, 35, 35, 0.6);
     color: @theme_selected_fg_color;
 }
 
 #pulseaudio.muted {
-    background: @theme_bg_color;
+    background: rgba(36, 35, 35, 0.6);
     color: @wm_icon_bg;
 }
 
@@ -241,10 +243,10 @@ label:focus {
 }
 
 #idle_inhibitor {
-    background: #353535;
+    background:rgba(36, 35, 35, 0.6);
 }
 
 #idle_inhibitor.activated {
-    background: #353535;
+    background:rgba(36, 35, 35, 0.6);
     color: @theme_selected_fg_color;
 }

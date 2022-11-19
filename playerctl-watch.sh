@@ -18,7 +18,6 @@ suspend_enabled=1
 
 while true; do
     playerctl_status=$(playerctl status)
-    echo "$(date): $playerctl_status)" >> $log
     if [[ "$playerctl_status" == 'Playing' ]] && [[ $suspend_enabled -eq 1 ]]
     then
         echo "Audio playing was detected, suspend disabled"

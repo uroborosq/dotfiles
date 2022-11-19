@@ -11,19 +11,21 @@ echo -e "${ICyan}paru updating...${Default}"
 
 paru
 
-#echo -e "${ICyan}flatpak updating...${Default}"
-
 #flatpak update
+
+if [[ -f /usr/bin/flatpak ]]; then
+
+	echo -e "${ICyan}flatpak updating...${Default}"
+	flatpak update
+fi
 
 current_directory=$(pwd)
 
 
-echo -e "${ICyan}git repos updating...${Default}"
 
-echo -e "${Cyan}libadwaita-theme-changer${Default}"
-cd /home/uroborosq/.local/share/libadwaita-theme-changer/
 
-git pull || cd ~/.local/share/ && git clone https://github.com/odziom91/libadwaita-theme-changer
+
+
 
 
 

@@ -1,7 +1,4 @@
 #!/bin/zsh
 
-code ~/.config/sway/config; 
-code ~/.config/waybar/config
-code  ~/.config/waybar/style.css
-code ~/.config/alacritty/alacritty.yml
-code ~/.config/mako/config
+code ~/.config/sway/config  ~/.config/waybar/config ~/.config/waybar/style.css  ~/.config/alacritty/alacritty.yml  ~/.config/mako/config  ~/.config/wofi/style.css
+exit
