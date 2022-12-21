@@ -1,3 +1,0 @@
-/home/uroborosq/Рабочий стол/Linux-related/Мониторинг/Загрузка процессора/cpu-usage-C++-once/cmake-build-release/CMakeFiles/cpu_usage_C__.dir
-/home/uroborosq/Рабочий стол/Linux-related/Мониторинг/Загрузка процессора/cpu-usage-C++-once/cmake-build-release/CMakeFiles/edit_cache.dir
-/home/uroborosq/Рабочий стол/Linux-related/Мониторинг/Загрузка процессора/cpu-usage-C++-once/cmake-build-release/CMakeFiles/rebuild_cache.dir

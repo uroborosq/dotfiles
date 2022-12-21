@@ -1,9 +1,0 @@
-# ninja log v5
-469	567	1661770569469218777	temperature_modules	8033af029947402f
-1	469	1661770569372553327	CMakeFiles/temperature_modules.dir/main.cpp.o	9a1efcf3b7d57d58
-1	390	1663577436071249950	CMakeFiles/temperature_modules.dir/main.cpp.o	e9d209f2fc4d72cb
-391	501	1663577436181251064	temperature_modules	8033af029947402f
-0	395	1663577506508650908	CMakeFiles/temperature_modules.dir/main.cpp.o	e9d209f2fc4d72cb
-395	515	1663577506628652193	temperature_modules	8033af029947402f
-1	387	1663577569876011579	CMakeFiles/temperature_modules.dir/main.cpp.o	e9d209f2fc4d72cb
-387	493	1663577569979346068	temperature_modules	8033af029947402f

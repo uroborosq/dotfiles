@@ -1,3 +1,0 @@
-/home/uroborosq/Рабочий стол/Linux-related/Мониторинг/Вывод температуры/temperature-modules_C++/cmake-build-release/CMakeFiles/temperature_modules.dir
-/home/uroborosq/Рабочий стол/Linux-related/Мониторинг/Вывод температуры/temperature-modules_C++/cmake-build-release/CMakeFiles/edit_cache.dir
-/home/uroborosq/Рабочий стол/Linux-related/Мониторинг/Вывод температуры/temperature-modules_C++/cmake-build-release/CMakeFiles/rebuild_cache.dir

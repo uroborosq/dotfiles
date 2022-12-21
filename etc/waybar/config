@@ -1,0 +1,149 @@
+[{
+    "layer": "top",
+    "modules-left": ["sway/mode", "sway/language", "tray", "pulseaudio", "custom/temp", "network"],
+    "modules-center": ["clock"],
+    "modules-right": ["cpu", "memory","battery"],
+    "sway/window": {
+        "max-length": 50
+    },
+    "custom/close": {
+        "format":"kill",
+        "on-click": "swaymsg kill"
+    },
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10
+    },
+
+    "battery": {
+        "interval": 3,
+        "format": "{capacity}% {icon}  {power:0.1f} W",
+        "format-icons": ["", "", "", "", ""]
+    },
+
+    "cpu": {
+        "interval": 2,
+        "format": "ЦП: {usage}%  {max_frequency} GHz", 
+        "on-click": "alacritty --class=alacritty-floating -e htop"
+    },
+
+    "memory" : {
+        "interval": 5,
+        "format": "ОП: {used:0.1f} GiB, swap: {swapUsed:0.1f} GiB",
+        "max-length": 100
+    },
+
+    "clock": {
+        "format": "{:%H:%M %d %b %a}",
+        "on-click": "alacritty --class=alacritty-floating -e calcurse"
+    },
+
+    "custom/pipewire": {
+        "format": "{icon}",
+        "return-type": "json",
+        "signal": 8,
+        "interval": "once",
+        "format-icons": {
+            "mute": "",
+            "default": ["", "", "", ""]
+        },
+        "exec": "pw-volume status"
+    },
+    "pulseaudio": {
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-muted": "",
+        "format-icons": {
+            "alsa_output.pci-0000_00_1f.3.analog-stereo": "",
+            "headphones": "",
+            "handsfree": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", ""]
+        },
+        "scroll-step": 1,
+        "on-click": "pavucontrol"
+    },
+    "sway/language": {
+        "format": "{}",
+        "min-length": 3
+    },
+    "custom/temp": {
+        "format": " {}",
+        "interval": 2,
+        "exec": "/home/uroborosq/Рабочий\\ стол/Linux-related/src/Мониторинг/Вывод\\ температуры/GolangSolution/main",
+        "min-length": 16
+    },
+    
+    "network": {
+        "interval": 2,
+        "format": "{ifname}",
+        "format-wifi": "",
+        "format-ethernet": "",
+        "format-disconnected": "",
+        "tooltip-format": "{ifname}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+        "tooltip-format-ethernet": "{ifname} ",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 50,
+        "min-length": 2,
+        "on-click": "alacritty --class=alacritty-floating -e nmtui"
+    }
+},
+{
+    "layer": "top",
+    "position": "bottom",
+    "modules-left": ["custom/menu", "sway/workspaces", "custom/firefox", "custom/dolphin", "custom/telegram"],
+    "modules-center": ["wlr/taskbar"],
+    "modules-right": ["custom/playerctl"],
+    "wlr/taskbar": {
+        "all-outputs": true,
+        "format": "{icon}",
+        "icon-size": 32,
+        "icon-theme": "Papirus-Dark",
+        "tooltip-format": "{title}",
+        "on-click": "activate",
+        "on-click-middle": "close",
+        "ignore-list": [
+        ],
+        "app_ids-mapping": {
+        }
+    },
+    "custom/menu": {
+        "format": "",
+        "on-click": "exec wofi --allow-images --insensitive true --show drun -a -W 100% -H 80% -w 6",
+        "tooltip": false
+    },
+    "custom/playerctl":{
+        "format": "{}",
+        "interval": 2,
+        "exec": "/home/uroborosq/Рабочий\\ стол/Одиночные\\ проекты/goPlayerctlStatus/main",
+        "max-length": 10000
+    },
+    "sway/workspaces": {
+        "all-outputs": true,
+        "persistent_workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": []
+        }
+    },
+
+    "custom/firefox": {
+        "format": "",
+        "on-click": "firefox"
+    },
+    "custom/dolphin": {
+        "format": "",
+        "on-click": "dolphin"
+    },
+    "custom/telegram": {
+        "format": "",
+        "on-click": "telegram-desktop"
+    } 
+}
+]
