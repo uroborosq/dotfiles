@@ -9,10 +9,8 @@ import (
 	"time"
 )
 
-func main() {
-	file, _ := os.Open("/proc/net/dev")
-	scanner := bufio.NewScanner(file)
 
+func readStats(scanner *bufio.Scanner) (int64, int64) {
 	send := int64(0)
 	received := int64(0)
 
@@ -30,26 +28,27 @@ func main() {
 			send += tmp
 		}
 	}
+	return received, send
+}
+
+
+
+func main() {
+	file, _ := os.Open("/proc/net/dev")
+	scanner := bufio.NewScanner(file)
+
+	received, send := readStats(scanner)
+
 	file.Close()
 	time.Sleep(1 * time.Second)
 
 	file, _ = os.Open("/proc/net/dev")
 	scanner = bufio.NewScanner(file)
 
-	for i := 0; scanner.Scan(); i++ {
-		if i < 2 {
-			continue
-		}
-
-		splittedString := strings.Fields(scanner.Text())
-
-		if splittedString[0] == "wlo1:" || splittedString[0] == "enp3s0f3u1u1:" {
-			tmp, _ := strconv.ParseInt(splittedString[1], 10, 64)
-			received -= tmp
-			tmp, _ = strconv.ParseInt(splittedString[9], 10, 64)
-			send -= tmp
-		}
-	}
+	receivedSecond, sendSecond := readStats(scanner)
+	received -= receivedSecond
+	send -= sendSecond
+	
 	file.Close()
 
 	sendHumanView := float64(-send)
