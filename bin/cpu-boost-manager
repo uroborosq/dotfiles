@@ -1,23 +1,23 @@
 #!/bin/bash
 
 while true; do
-    boost=$(cpufreqctl --boost)
+    boost=$(cat /sys/devices/system/cpu/cpufreq/boost)
     status=$(cat /sys/class/power_supply/BAT0/status)
     if [[ $status == "Discharging" ]] && [[ $boost == "0" ]]
     then
         echo "Boost enabled"
         boost=1
-        cpufreqctl --boost --set=1
+        boost-cli on
     elif [[ $status == "Charging" ]] && [[ $boost == "1" ]]
     then
         boost=0
         echo "Boost disabled"
-        cpufreqctl --boost --set=0
+        boost-cli off
     elif [[ $status == "Full" ]] && [[ $boost == "1" ]]
     then
         boost=0
         echo "Boost disabled"
-        cpufreqctl --boost --set=0
+        boost-cli off
     fi 
     sleep 5
 done
