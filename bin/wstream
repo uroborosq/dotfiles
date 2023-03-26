@@ -1,3 +1,0 @@
-#!/bin/zsh
-
-streamlink -p mpv $1 best
