@@ -1,0 +1,8 @@
+#!/bin/bash
+
+paru -S \
+plasma \
+kdesysguard \
+konsole \
+yakuake \
+spectacle
