@@ -31,3 +31,12 @@ uninstall:
 
 clean:
 	rm bin/*
+
+sync:
+	for i in $(shell find config); do \
+		path=$$(echo "$$i" | cut -c7-) ; \
+		if [[ -f $$i ]]; then \
+			echo "Syncing $$path to $$i" ; \
+			ln -f $$path $$i ; \
+		fi ; \
+	done
