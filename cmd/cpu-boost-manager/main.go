@@ -1,9 +1,6 @@
 package main
 
 import (
-	"os"
-	"path/filepath"
-
 	"github.com/spf13/viper"
 
 	"linux/pkg/battery"
@@ -21,45 +18,45 @@ type Booster interface {
 	Status() (bool, error)
 }
 
-type Policy string
 
 const (
-	Auto      Policy = "auto"
-	AlwaysOn  Policy = "always-on"
-	AlwaysOff Policy = "always-off"
+	Auto       = "auto"
+	AlwaysOn   = "always-on"
+	AlwaysOff  = "always-off"
 )
 
 type Config struct {
-	Policy
+	Boost CpuBoostConfig `json:"boost"`
+}
+
+type CpuBoostConfig struct {
+	Policy string 
 }
 
 func main() {
-	homedir, err := os.UserHomeDir()
-	if err != nil {
-		logger.Fatal(err.Error())
-	}
-
-	viper.SetConfigFile(filepath.Join(homedir, ".config", "uq.conf"))
+	viper.SetConfigFile("/etc/uq.conf")
 	viper.SetConfigType("json")
 
-	if err = viper.ReadInConfig(); err != nil {
+	if err := viper.ReadInConfig(); err != nil {
 		logger.Fatal(err.Error())
 	}
-
-	config := viper.Get("cpu-boost-manager").(map[string]interface{})
+	var config Config
+	if err := viper.Unmarshal(&config); err != nil {
+		logger.Fatal(err.Error())
+	}
 
 	booster, err := boost.GetBooster()
 	if err != nil {
 		logger.Fatal(err.Error())
 	}
-
+	logger.Info("Applying policy %s", config.Boost.Policy)
 	battery := battery.NewPrimaryBattery()
 
-	if config["policy"] == AlwaysOn {
+	if config.Boost.Policy == AlwaysOn {
 		booster.SetStatus(true)
-	} else if config["policy"] == AlwaysOff {
+	} else if config.Boost.Policy == AlwaysOff {
 		booster.SetStatus(false)
-	} else {
+	} else if config.Boost.Policy == Auto {
 		for {
 			if battery.IsCharging() && booster.Status() {
 				err := booster.SetStatus(false)
@@ -76,4 +73,5 @@ func main() {
 			time.Sleep(5 * time.Second)
 		}
 	}
+	
 }
