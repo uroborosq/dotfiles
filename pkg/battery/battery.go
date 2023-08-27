@@ -1,6 +1,9 @@
 package battery
 
-import "os"
+import (
+	"os"
+	"strings"
+)
 
 
 type Battery interface {
@@ -13,7 +16,7 @@ type PrimaryBattery struct {
 
 func NewPrimaryBattery() PrimaryBattery {
 	return PrimaryBattery{
-		path: "/sys/class/power_suply/BAT0/status",
+		path: "/sys/class/power_supply/BAT0/status",
 	}
 }
 
@@ -22,5 +25,5 @@ func (b *PrimaryBattery) IsCharging() bool {
 	if err != nil {
 		return false
 	}
-	return string(output) != "Discharging"
+	return strings.TrimSpace(string(output)) != "Discharging"
 }
