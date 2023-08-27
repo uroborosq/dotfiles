@@ -27,7 +27,7 @@ sync:
 		host_path=$$(echo "$$i" | cut -c13-) ; \
 		if [[ -f $$i ]]; then \
 			echo "Linking $$host_path to $$i" ; \
-			# ln -f $$host_path $$i ; \
+			ln -f $$host_path $$i ; \
 		fi ; \
 	done
 
@@ -35,7 +35,7 @@ sync:
 		host_path="$$HOME/$$(echo "$$i" | cut -c14-)" ; \
 		if [[ -f $$i ]]; then \
 			echo "Linking $$i to $$host_path" ; \
-			# ln -f $$i $$host_path ; \
+			ln -f $$i $$host_path ; \
 		fi ; \
 	done
 
