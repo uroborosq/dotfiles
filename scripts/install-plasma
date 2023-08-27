@@ -5,4 +5,5 @@ plasma \
 kdesysguar \
 konsole \
 yakuake \
-spectacle
+spectacle \
+plasma-wayland-session
