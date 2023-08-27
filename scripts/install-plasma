@@ -2,7 +2,7 @@
 
 paru -S \
 plasma \
-kdesysguard \
+kdesysguar \
 konsole \
 yakuake \
 spectacle
