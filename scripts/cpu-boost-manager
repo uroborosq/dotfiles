@@ -7,17 +7,17 @@ while true; do
     then
         echo "Boost enabled"
         boost=1
-        /home/uroborosq/Рабочий\ стол/Linux/cmd/bin/boost-cli on
+        /usr/bin/boost-cli on
     elif [[ $status == "Charging" ]] && [[ $boost == "1" ]]
     then
         boost=0
         echo "Boost disabled"
-        /home/uroborosq/Рабочий\ стол/Linux/cmd/bin/boost-cli off
+        /usr/bin/boost-cli off
     elif [[ $status == "Full" ]] && [[ $boost == "1" ]]
     then
         boost=0
         echo "Boost disabled"
-         /home/uroborosq/Рабочий\ стол/Linux/cmd/bin/boost-cli off
+        /usr/bin/boost-cli off
     fi 
     sleep 5
 done
