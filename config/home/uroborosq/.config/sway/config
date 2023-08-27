@@ -5,6 +5,7 @@ set $mod Mod4
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 set $term alacritty --class=alacritty-floating
 set $menu wofi --allow-images --insensitive true --show drun -a
+set $FULLSCREEN_MENU wofi --allow-images --insensitive true --show drun -a -W 100% -H 80% -w 6
 set $opacity 0.95
 
 ### Правила окон
@@ -25,12 +26,12 @@ for_window [app_id="alacritty-floating"] floating enable
 output "*" bg /usr/share/backgrounds/archlinux/geolanes.png fill
 
 output eDP-1 position 0 0
-output eDP-1 scale 1.5
-output HDMI-A-1 resolution 1920x1080@72Hz position 1280 0
+output eDP-1 scale 1.25
+output HDMI-A-1 resolution 1920x1080@72Hz position 1536 0
 
 ### Настройка энергосбережения
 
-set $SWAYLOCK_COMMAND "swaylock --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5 --effect-vignette 0.5:0.5 --ring-color ffffff --key-hl-color 00CCff --line-color 00000000 --inside-color 00000088 --separator-color 00000000 --text-color ffffff"
+set $SWAYLOCK_COMMAND "swaylock -f --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5 --effect-vignette 0.5:0.5 --ring-color ffffff --key-hl-color 00CCff --line-color 00000000 --inside-color 00000088 --separator-color 00000000 --text-color ffffff"
 
 exec swayidle -w \
 timeout 270 'notify-send Энергосбережение "скоро засну"' \
@@ -38,6 +39,8 @@ timeout 299 $SWAYLOCK_COMMAND \
 timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
 before-sleep $SWAYLOCK_COMMAND \
 timeout 301 "/home/uroborosq/Рабочий\ стол/Linux/cmd/bin/check-playerctl-suspend"
+
+for_window [class="^.*"] inhibit_idle fullscreen
 
 ### Настройки устройств ввода
 
@@ -57,6 +60,10 @@ input type:keyboard {
     xkb_layout us,ru
     xkb_options grp:win_space_toggle
     xkb_numlock enable
+}
+
+input type:mouse {
+    accel_profile flat
 }
 
 ### Комбинации клавиш
@@ -120,6 +127,8 @@ bindsym $mod+Shift+0 move container to workspace number 10
 #
 # Layout stuff:
 #
+bindsym --whole-window $mod+button5 workspace next
+bindsym --whole-window $mod+button4 workspace prev
 
 bindsym $mod+b splith
 bindsym $mod+v splitv
@@ -180,9 +189,9 @@ bindsym Alt+Shift+p exec "swaymsg output \* enable"
 
 # PulseAudio + wob
 
-bindsym XF86AudioRaiseVolume exec pamixer -ui 5 && pamixer --get-volume > $WOBSOCK
-bindsym XF86AudioLowerVolume exec pamixer -ud 5 && pamixer --get-volume > $WOBSOCK
-bindsym XF86AudioMute exec pamixer --toggle-mute && ( [ "$(pamixer --get-mute)" = "true" ] && echo 0 > $WOBSOCK ) || pamixer --get-volume > $WOBSOCK
+bindsym --locked XF86AudioRaiseVolume exec pamixer -ui 5 && pamixer --get-volume > $WOBSOCK
+bindsym --locked XF86AudioLowerVolume exec pamixer -ud 5 && pamixer --get-volume > $WOBSOCK
+bindsym --locked XF86AudioMute exec pamixer --toggle-mute && ( [ "$(pamixer --get-mute)" = "true" ] && echo 0 > $WOBSOCK ) || pamixer --get-volume > $WOBSOCK
 
 # Alsa + wob
 
@@ -202,13 +211,20 @@ bindsym XF86MonBrightnessDown exec light -U 5 && light -G | cut -d'.' -f1 > $WOB
 
 # Управление мультимедиа
 
-bindsym --no-warn XF86AudioPlay exec playerctl play-pause
-bindsym --no-warn XF86AudioNext exec playerctl next
-bindsym --no-warn XF86AudioPrev exec playerctl previous
+bindsym --locked --no-warn XF86AudioPlay exec playerctl play-pause
+bindsym --locked --no-warn XF86AudioNext exec playerctl next
+bindsym --locked --no-warn XF86AudioPrev exec playerctl previous
+
+# Жесты тачпада
+
+bindgesture swipe:3:right workspace prev
+bindgesture swipe:3:left workspace next
+bindgesture swipe:3:up exec $FULLSCREEN_MENU
+bindgesture swipe:3:down exec ydotool key 0x27
 
 ### Внешний вид
 
-font pango:Noto Sans 10
+font pango:inglobal 10
 
 set $bg #171717
 set $fg #eff1f5
@@ -240,8 +256,9 @@ exec wmname LG3DС
 exec dex -a --environment sway
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id /usr/lib/pam_kwallet_init
+exec "killall exec-waybar"
 exec_always "killall waybar"
-exec /home/uroborosq/Рабочий\ стол/Linux/cmd/bin/exec-waybar
+exec /usr/bin/exec-waybar
 exec kanshi
+exec /usr/lib/xdg-desktop-portal -r & /usr/lib/xdg-desktop-portal-wlr
 include /etc/sway/config.d/*
-

@@ -16,3 +16,6 @@ font:
     style: Bold Italic
 
   size: 11
+window:
+  decorations: full
+  gtk_theme_variant: dark

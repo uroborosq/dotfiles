@@ -6,7 +6,7 @@
 
 LIBVA_DRIVER_NAME=radeonsi
 
-#QT_QPA_PLATFORM="wayland;xcb"
+# QT_QPA_PLATFORM="wayland;xcb"
 QT_QPA_PLATFORMTHEME=gnome
 
 GOPATH=/home/uroborosq/.local/share/go
@@ -14,5 +14,7 @@ GOPATH=/home/uroborosq/.local/share/go
 MOZ_ENABLE_WAYLAND=1
 MOZ_USE_XINPUT2=1
 
-#XCURSOR_THEME=breeze_cursors
-#XCURSOR_SIZE=24
+XCURSOR_THEME=Breeze_Snow
+XCURSOR_SIZE=24
+
+CONF='/home/uroborosq/Рабочий стол/Linux'

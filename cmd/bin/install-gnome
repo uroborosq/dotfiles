@@ -1,3 +1,0 @@
-#!/bin/bash
-
-paru -S gnome-desktop mutter gnome-shell gnome-tweaks gnome-control-center gnome-shell-extension-dash-to-dock gnome-browser-connector gdm gnome-randr

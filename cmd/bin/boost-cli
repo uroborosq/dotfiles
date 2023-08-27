@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-if [[ $1 == "on" ]]; then
-    echo 1 > /sys/devices/system/cpu/cpufreq/boost
-elif [[ $1 == "off" ]]; then
-    echo 0 > /sys/devices/system/cpu/cpufreq/boost
-
-fi

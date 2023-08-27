@@ -49,8 +49,8 @@ window#waybar.hidden {
 
 #workspaces button {
     /* To compensate for the top border and still have vertical centering */
-    padding: 0px 7px;
-    margin: 2px 2px;
+    padding: 2px 3px;
+    margin: 2px 1px;
     color: gray;
     border: solid rgb(50, 50, 50) 1px;
     background-color:  rgba(35, 35, 35, 0.6);
@@ -95,6 +95,8 @@ window#waybar.hidden {
 #custom-dolphin,
 #custom-firefox,
 #temperature,
+#custom-cpu,
+#custom-ram,
 #idle_inhibitor {
     border: solid rgba(100, 100, 100, 0.6) 1px;
     padding-left: 10px;

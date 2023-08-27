@@ -1,8 +1,8 @@
 [{
     "layer": "top",
-    "modules-left": ["sway/mode", "sway/language", "tray", "pulseaudio", "custom/temp", "network"],
+    "modules-left": ["custom/cpu", "custom/ram", "custom/temp"],
     "modules-center": ["clock"],
-    "modules-right": ["cpu", "memory","battery"],
+    "modules-right": ["tray", "sway/language", "pulseaudio", "battery"],
     "sway/window": {
         "max-length": 50
     },
@@ -25,6 +25,17 @@
         "interval": 2,
         "format": "ЦП: {usage}%  {max_frequency} GHz", 
         "on-click": "alacritty --class=alacritty-floating -e htop"
+    },
+    "custom/cpu":{
+        "format": "{}",
+        "interval": 1,
+        "exec": "/usr/bin/cpu-usage-once",
+        "on-click": "alacritty --class=alacritty-floating -e htop"
+    },
+    "custom/ram":{
+        "format": "{}",
+        "interval": 3,
+        "exec": "/usr/bin/ram"
     },
 
     "memory" : {
@@ -64,7 +75,7 @@
             "default": ["", ""]
         },
         "scroll-step": 1,
-        "on-click": "pavucontrol"
+        "on-click": "alacritty --class=alacritty-floating -e ncpamixer -t o"
     },
     "sway/language": {
         "format": "{}",
@@ -73,7 +84,7 @@
     "custom/temp": {
         "format": " {}",
         "interval": 2,
-        "exec": "/home/uroborosq/Рабочий\\ стол/Linux-related/src/Мониторинг/Вывод\\ температуры/GolangSolution/main",
+        "exec": "/usr/bin/temperature",
         "min-length": 16
     },
     
@@ -119,7 +130,7 @@
     "custom/playerctl":{
         "format": "{}",
         "interval": 2,
-        "exec": "/home/uroborosq/Рабочий\\ стол/Одиночные\\ проекты/goPlayerctlStatus/main",
+        "exec": "/usr/bin/current-song",
         "max-length": 10000
     },
     "sway/workspaces": {
@@ -143,7 +154,7 @@
     },
     "custom/telegram": {
         "format": "",
-        "on-click": "telegram-desktop"
+        "on-click": "telegram-desktop || flatpak run org.telegram.desktop"
     } 
 }
 ]

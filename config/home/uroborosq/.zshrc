@@ -7,7 +7,7 @@ fi
 
 
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/uroborosq/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -Uz compinit
 compinit
@@ -96,10 +96,14 @@ alias св='cd'
 alias rmunsed='sudo pacman -Rnucs $(pacman -Qtdq)'
 alias gscale='gsettings set org.gnome.desktop.interface text-scaling-factor'
 alias shx='sudo helix'
+alias grep='grep --color=auto'
+alias mpv='mpv-wrapper'
 # Path
 
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/Рабочий стол/Linux-related/bin/:$PATH"
+export PATH="$HOME/Рабочий стол/Linux/bin/:$PATH"
+export PATH="$HOME/Рабочий стол/Linux/scripts/:$PATH"
+export PATH="$HOME/.local/share/go/bin/:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

@@ -29,23 +29,23 @@ func main() {
 		fil, _ := os.Open("/proc/stat")
 		buf := make([]byte, 1)
 		fil.Read(buf)
-		tmpString := string(buf)
+		builder := strings.Builder{}
 		for buf[0] != 10 {
 			fil.Read(buf)
-			tmpString += string(buf)
+			builder.WriteByte(buf[0])
 		}
-		totalFirst, workFirst := getStats(tmpString)
+		totalFirst, workFirst := getStats(builder.String())
 		fil.Close()
 		time.Sleep(time.Second)
 		fil, _ = os.Open("/proc/stat")
 		fil.Seek(0, 0)
 		fil.Read(buf)
-		tmpString = string(buf)
+		builder.Reset()
 		for buf[0] != 10 {
 			fil.Read(buf)
-			tmpString += string(buf)
+			builder.WriteByte(buf[0])
 		}
-		totalSecond, workSecond := getStats(tmpString)
+		totalSecond, workSecond := getStats(builder.String())
 
 		fmt.Printf("%.1f%%\n", 100*float32(workSecond-workFirst)/float32(totalSecond-totalFirst))
 		fil.Close()
