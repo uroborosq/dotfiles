@@ -22,7 +22,12 @@ build:
 
 
 install: build
-	cp -f bin/* /usr/bin/
-	cp -f scripts/* /usr/bin
+	chmod 755 bin/*
+	chmod 755 scripts/*
+	cp -fp bin/* /usr/bin/
+	cp -fp scripts/* /usr/bin
 
 uninstall:
+
+clean:
+	rm bin/*

@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"runtime"
 )
 
 func get(path string, first chan []byte, second chan byte) {
@@ -15,7 +14,6 @@ func get(path string, first chan []byte, second chan byte) {
 }
 
 func main() {
-	runtime.GOMAXPROCS(8)
 	firstFirst := make(chan []byte)
 	firstSecond := make(chan byte)
 	secondFirst := make(chan []byte)
