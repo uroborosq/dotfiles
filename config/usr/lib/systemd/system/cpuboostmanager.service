@@ -1,0 +1,8 @@
+[Unit]
+Description=Foo
+
+[Service]
+ExecStart=/usr/bin/cpu-boost-manager
+
+[Install]
+WantedBy=multi-user.target
