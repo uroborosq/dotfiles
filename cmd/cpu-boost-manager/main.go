@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"linux/pkg/battery"
 	"linux/pkg/boost"
 	"linux/pkg/logger"
@@ -27,9 +26,6 @@ func main() {
 	battery := battery.NewPrimaryBattery()
 
 	for {
-		fmt.Println(booster.Status(), battery.IsCharging())
-
-
 		if battery.IsCharging() && booster.Status() {
 			err := booster.SetStatus(false)
 			if err != nil {
