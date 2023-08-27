@@ -33,4 +33,5 @@ ydotool \
 xorg-xwayland \
 awesome-terminal-fonts \
 playerctl \
-kwallet
+kwallet \
+calcurse
