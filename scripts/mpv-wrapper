@@ -1,0 +1,6 @@
+if [[ $XDG_CURRENT_DESKTOP == "GNOME" && $XDG_SESSION_TYPE == "wayland" ]]; then
+	gnome-session-inhibit mpv "$@"
+else
+	mpv "$@"
+fi
+

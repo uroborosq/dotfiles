@@ -1,0 +1,5 @@
+#!/bin/env bash
+
+modprobe -r 8821ce
+modprobe 8821ce
+systemctl restart NetworkManager
