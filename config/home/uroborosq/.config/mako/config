@@ -1,0 +1,10 @@
+default-timeout=6000
+ignore-timeout=0
+
+padding=20
+border-size=1
+border-radius=5
+background-color=#353535DD
+border-color=#666666
+width=400
+height=300

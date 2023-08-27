@@ -1,0 +1,4 @@
+#!/bin/bash
+
+paru -S azote nwg-drawer-bin nwg-bar-bin xdg-desktop-portal-wlr grim slurp jq grimshot mako waybar wl-clipboard wlr-randr wofi wob swayidle sway
+
