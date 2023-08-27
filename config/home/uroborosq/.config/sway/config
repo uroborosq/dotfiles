@@ -1,5 +1,6 @@
+#!/bin/bash
+# это костыль для вскода
 ### Переменные
-
 set $mod Mod4
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 set $term alacritty --class=alacritty-floating
@@ -19,7 +20,9 @@ for_window [app_id="alacritty-floating"] floating enable
 ### Настройка мониторов
 
 # Управление обоями
-exec ~/.azotebg 
+# exec ~/.azotebg
+
+output "*" bg /usr/share/backgrounds/archlinux/geolanes.png fill
 
 output eDP-1 position 0 0
 output eDP-1 scale 1.5
@@ -27,31 +30,33 @@ output HDMI-A-1 resolution 1920x1080@72Hz position 1280 0
 
 ### Настройка энергосбережения
 
+set $SWAYLOCK_COMMAND "swaylock --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5 --effect-vignette 0.5:0.5 --ring-color ffffff --key-hl-color 00CCff --line-color 00000000 --inside-color 00000088 --separator-color 00000000 --text-color ffffff"
+
 exec swayidle -w \
-	    timeout 270 'notify-send Энергосбережение "скоро засну"' \
-        timeout 299 'swaylock -f -i /usr/share/backgrounds/archlinux/geolanes.png' \
-        timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-        before-sleep 'swaylock -f -i /usr/share/backgrounds/archlinux/geolanes.png' \
-        timeout 301 "/home/uroborosq/Рабочий\ стол/Скрипты/bin/check-playerctl-suspend"
+timeout 270 'notify-send Энергосбережение "скоро засну"' \
+timeout 299 $SWAYLOCK_COMMAND \
+timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+before-sleep $SWAYLOCK_COMMAND \
+timeout 301 "/home/uroborosq/Рабочий\ стол/Linux/cmd/bin/check-playerctl-suspend"
 
 ### Настройки устройств ввода
 
 # Тачпад
 
-  input "1739:52560:SYNA32AC:00_06CB:CD50_Touchpad" {
-      dwt enabled
-      tap enabled
-      natural_scroll enabled
-      middle_emulation enabled
-      scroll_factor 0.3
-  }
+input "type:touchpad" {
+    dwt enabled
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+    scroll_factor 0.3
+}
 
 # Клавиатура
 
-  input type:keyboard {
-  xkb_layout us,ru
-  xkb_options grp:win_space_toggle
-  xkb_numlock enable
+input type:keyboard {
+    xkb_layout us,ru
+    xkb_options grp:win_space_toggle
+    xkb_numlock enable
 }
 
 ### Комбинации клавиш
@@ -67,7 +72,7 @@ bindcode Mod1+24 kill
 floating_modifier $mod normal
 
 bindsym $mod+Shift+c reload
-bindsym $mod+l exec swaylock -f -i /usr/share/backgrounds/archlinux/geolanes-blurry.png
+bindsym $mod+l exec $SWAYLOCK_COMMAND
 
 # Exit sway (logs you out of your Wayland session)
 bindsym $mod+Shift+e exec nwg-bar
@@ -137,8 +142,8 @@ bindsym $mod+c focus mode_toggle
 # Move focus to the parent container
 bindsym $mod+a focus parent
 
-bindsym Mod1+tab workspace next_on_output 
-bindsym Mod1+Shift+tab workspace prev_on_output 
+bindsym Mod1+tab workspace next_on_output
+bindsym Mod1+Shift+tab workspace prev_on_output
 #
 # Scratchpad:
 #
@@ -150,12 +155,12 @@ bindsym $mod+minus scratchpad show
 # Resizing containers:
 #
 mode "resize" {
-
+    
     bindsym Left resize shrink width 10px
     bindsym Down resize grow height 10px
     bindsym Up resize shrink height 10px
     bindsym Right resize grow width 10px
-
+    
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -163,7 +168,7 @@ mode "resize" {
 # Быстрое управление мониторами
 
 bindsym $mod+p exec "swaymsg output eDP-1 disable; swaymsg output HDMI-A-1 resolution 1920x1080@72Hz position 0 0"
-bindsym $mod+Shift+p exec "swaymsg output eDP-1 position 0 0 scale 1.5 enable; swaymsg output HDMI-A-1 resolution 1920x1080@72Hz position 1280 0"
+bindsym $mod+Shift+p exec "swaymsg output eDP-1 position 0 0 scale 1.25 enable; swaymsg output HDMI-A-1 resolution 1920x1080@72Hz position 1536 0"
 bindsym Alt+Shift+p exec "swaymsg output \* enable"
 
 ### Звук
@@ -222,17 +227,21 @@ client.unfocused        $bg     $bg     $fg     $bg       $bg
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 
 exec_always {
-    gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'  
+    gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'
     gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
+    # gsettings set org.gnome.desktop.interface cursor-theme 'Breeze_Snow'
 }
+seat seat0 xcursor_theme Breeze_Snow 24
+# seat seat0 xcursor_size 24
 
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
-exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob --anchor bottom --height 25 --width 300 --border-color "#353535FF" --background-color "#353535FF" --bar-color "#FFFFFFFF" --padding 2 --border 0 --margin 40
+exec_always rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 exec wmname LG3DС
 exec dex -a --environment sway
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id /usr/lib/pam_kwallet_init
-exec /home/uroborosq/Рабочий\ стол/Linux-related/bin/exec-waybar
-include /etc/sway/config.d/*
 exec_always "killall waybar"
+exec /home/uroborosq/Рабочий\ стол/Linux/cmd/bin/exec-waybar
+exec kanshi
+include /etc/sway/config.d/*
 

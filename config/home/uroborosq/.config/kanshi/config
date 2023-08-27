@@ -1,0 +1,8 @@
+profile twomonitors {
+	output eDP-1 disable
+	output HDMI-A-1 mode 1920x1080@71.910Hz position 1280,0 enable
+}
+profile laptoponly {
+	output eDP-1 scale 1.5 position 0,0 enable
+}
+
