@@ -2,7 +2,7 @@
 Description=Foo
 
 [Service]
-ExecStart="/home/uroborosq/Рабочий стол/Linux/cmd/bin/cpu-boost-manager"
+ExecStart="/usr/bin/cpu-boost-manager"
 
 [Install]
 WantedBy=multi-user.target

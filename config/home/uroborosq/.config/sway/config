@@ -1,5 +1,3 @@
-#!/bin/bash
-# это костыль для вскода
 ### Переменные
 set $mod Mod4
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
@@ -38,7 +36,7 @@ timeout 270 'notify-send Энергосбережение "скоро засну
 timeout 299 $SWAYLOCK_COMMAND \
 timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
 before-sleep $SWAYLOCK_COMMAND \
-timeout 301 "/home/uroborosq/Рабочий\ стол/Linux/cmd/bin/check-playerctl-suspend"
+timeout 301 "/usr/bin/check-playerctl-suspend"
 
 for_window [class="^.*"] inhibit_idle fullscreen
 

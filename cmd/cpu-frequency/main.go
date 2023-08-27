@@ -4,8 +4,8 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"strings"
 	"strconv"
+	"strings"
 )
 
 func main() {
@@ -16,7 +16,7 @@ func main() {
 		s := scanner.Text()
 		if len(s) > 6 && s[:7] == "cpu MHz" {
 			splittedStr := strings.Fields(s)
-			
+
 			if value, _ := strconv.ParseFloat(splittedStr[3], 64); value > maxFreq {
 				maxFreq = value
 			}

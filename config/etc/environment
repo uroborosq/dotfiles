@@ -18,3 +18,5 @@ XCURSOR_THEME=Breeze_Snow
 XCURSOR_SIZE=24
 
 CONF='/home/uroborosq/Рабочий стол/Linux'
+
+RADV_PERFTEST=aco
