@@ -167,9 +167,14 @@ func TwoMonitors(conn *dbus.Conn, state State, builtinMonitorInfo Info) error {
 	logicalMonitors := make([]LogicalMonitorRequest, 2)
 
 	logicalMonitors[0] = resToReq(state.LogicalMonitors[0], state.Monitors[builtinIdx])
+	logicalMonitors[0].Scale = 1.25
 	logicalMonitors[0].IsPrimary = false
+
+	especiallySmartValue := int32((1 / logicalMonitors[0].Scale) * float64(state.Monitors[builtinIdx].Modes[0].Width))
+	fmt.Println(especiallySmartValue)
+
 	logicalMonitors[1] = LogicalMonitorRequest{
-		X:         int32(state.LogicalMonitors[0].Scale * float64(state.Monitors[builtinIdx].Modes[0].Width)),
+		X:         especiallySmartValue,
 		Y:         0,
 		Scale:     1,
 		Transform: 0,
