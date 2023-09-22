@@ -20,8 +20,6 @@ func main() {
 		logger.Fatal(err.Error())
 	}
 
-	_, _ = pretty.Println(state)
-
 	idx, err := monitor.GetBuiltinIndex(state)
 	if err != nil {
 		logger.Fatal(err.Error())

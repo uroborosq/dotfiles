@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/godbus/dbus/v5"
+	"github.com/kr/pretty"
 	"golang.org/x/exp/slices"
 )
 
@@ -139,13 +140,15 @@ func ExternalOny(conn *dbus.Conn, state State, builtinMonitorInfo Info) error {
 		Monitors:  make([]InfoRequest, len(state.LogicalMonitors[1-builtinPhysicalMonitorIdx].Monitors)),
 	}
 
-	for i, mon := range state.LogicalMonitors[0].Monitors {
+	for i, mon := range state.LogicalMonitors[1-builtinLogicalMonitorIdx].Monitors {
 		logicalMonitors[0].Monitors[i] = InfoRequest{
 			Connector:     mon.Connector,
 			MonitorModeID: state.Monitors[1-builtinPhysicalMonitorIdx].Modes[0].Id,
 			Properties:    map[string]dbus.Variant{},
 		}
 	}
+
+	pretty.Println(logicalMonitors)
 
 	mutter := conn.Object(dbusDestMutterDisplayConfig, dbusPathMutterDisplayConfig)
 	return mutter.Call(dbusMethodApplyMonitorsConfig, 0, state.Serial, Persistent, logicalMonitors, state.Properties).Err
