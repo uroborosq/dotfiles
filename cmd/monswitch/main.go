@@ -2,8 +2,6 @@ package main
 
 import (
 	"github.com/godbus/dbus/v5"
-	"github.com/kr/pretty"
-
 	"linux/pkg/logger"
 	"linux/pkg/monitor"
 )
