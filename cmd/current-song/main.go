@@ -17,7 +17,7 @@ func main() {
 	cmd := exec.Command("playerctl", "metadata", "xesam:title")
 	title, err := cmd.Output()
 	if err != nil {
-		fmt.Println("Ничего не вопроизводится")
+		fmt.Println(" Ничего не вопроизводится")
 		return
 	}
 
@@ -25,14 +25,8 @@ func main() {
 	artist, _ := cmd.Output()
 	status, _ := exec.Command("playerctl", "status").Output()
 
-
 	artist = bytes.TrimSpace(artist)
 	title = bytes.TrimSpace(title)
-
-
-	if len(artist) > *limit {
-		
-	}
 
 	var output strings.Builder
 
