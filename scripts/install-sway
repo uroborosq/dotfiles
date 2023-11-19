@@ -6,7 +6,7 @@ nwg-drawer-bin \
 nwg-bar-bin \
 xdg-desktop-portal-wlr \
 grim \
-slurp \ 
+slurp \
 jq \
 grimshot \
 mako \

@@ -21,7 +21,7 @@ func readStats(scanner *bufio.Scanner) (int64, int64) {
 
 		splittedString := strings.Fields(scanner.Text())
 
-		if splittedString[0] == "wlo1:" || splittedString[0] == "enp3s0f3u1u1:" {
+		if splittedString[0] == "wlo1:" || splittedString[0] == "enp3s0f3u1u1:" || splittedString[0] == "enp0s13f0u1u3c2:" || splittedString[0] == "wlp0s20f3:" || splittedString[0] == "enp0s31f6:" {
 			tmp, _ := strconv.ParseInt(splittedString[1], 10, 64)
 			received += tmp
 			tmp, _ = strconv.ParseInt(splittedString[9], 10, 64)
