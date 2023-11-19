@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	limit := flag.Int("limit", 100, "limit output")
+	limit := flag.Int("limit", 50, "limit output")
 	flag.Parse()
 
 	cmd := exec.Command("playerctl", "metadata", "xesam:title")
@@ -35,7 +35,7 @@ func main() {
 	} else if slices.Equal(status, []byte("Paused\n")) {
 		output.WriteString(" ")
 	}
-
+	
 	if len(title) > *limit {
 		output.WriteString(string([]rune(string(title)[:*limit])) + "...")
 	} else {
