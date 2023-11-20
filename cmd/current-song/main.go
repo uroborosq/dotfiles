@@ -15,18 +15,18 @@ func main() {
 	flag.Parse()
 
 	cmd := exec.Command("playerctl", "metadata", "xesam:title")
-	title, err := cmd.Output()
+	titleBytes, err := cmd.Output()
 	if err != nil {
 		fmt.Println(" Ничего не вопроизводится")
 		return
 	}
 
 	cmd = exec.Command("playerctl", "metadata", "xesam:artist")
-	artist, _ := cmd.Output()
+	artistBytes, _ := cmd.Output()
 	status, _ := exec.Command("playerctl", "status").Output()
 
-	artist = bytes.TrimSpace(artist)
-	title = bytes.TrimSpace(title)
+	artist := []rune(string(bytes.TrimSpace(artistBytes)))
+	title := []rune(string(bytes.TrimSpace(titleBytes)))
 
 	var output strings.Builder
 
@@ -35,19 +35,19 @@ func main() {
 	} else if slices.Equal(status, []byte("Paused\n")) {
 		output.WriteString(" ")
 	}
-	
-	if len(title) > *limit {
-		output.WriteString(string([]rune(string(title)[:*limit])) + "...")
-	} else {
-		output.Write(title)
-	}
 
+	if len(title) > *limit {
+		output.WriteString((string(title[:*limit]) + "..."))
+	} else {
+		output.WriteString(string(title))
+	}
+	
 	if len(artist) > *limit {
 		output.WriteString(" | ")
-		output.WriteString(string([]rune(string(artist)[:*limit])) + "...")
+		output.WriteString(string(artist[:*limit]) + "...")
 	} else if len(artist) != 0 {
 		output.WriteString(" | ")
-		output.Write(artist)
+		output.WriteString(string(artist))
 	}
 	fmt.Println(output.String())
 }
