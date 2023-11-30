@@ -14,14 +14,14 @@ func readStats(scanner *bufio.Scanner) (int64, int64) {
 	send := int64(0)
 	received := int64(0)
 
+	
 	for i := 0; scanner.Scan(); i++ {
 		if i < 2 {
 			continue
 		}
 
 		splittedString := strings.Fields(scanner.Text())
-
-		if splittedString[0] == "wlo1:" || splittedString[0] == "enp3s0f3u1u1:" || splittedString[0] == "enp0s13f0u1u3c2:" || splittedString[0] == "wlp0s20f3:" || splittedString[0] == "enp0s31f6:" {
+		if strings.HasPrefix(splittedString[0], "enp") || strings.HasPrefix(splittedString[0], "wlp") || strings.HasPrefix(splittedString[0], "wlo") {
 			tmp, _ := strconv.ParseInt(splittedString[1], 10, 64)
 			received += tmp
 			tmp, _ = strconv.ParseInt(splittedString[9], 10, 64)
