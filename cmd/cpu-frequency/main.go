@@ -7,12 +7,10 @@ import (
 	"strconv"
 	"sync"
 	"sync/atomic"
-	"time"
 	"unsafe"
 )
 
 func main() {
-	start := time.Now()
 	var maxFreq atomic.Int64
 	var wg sync.WaitGroup
 	wg.Add(runtime.NumCPU())
@@ -42,6 +40,4 @@ func main() {
 	}
 	wg.Wait()
 	fmt.Printf("%vMHz\n", maxFreq.Load()/1000)
-
-	fmt.Println(time.Since(start))
 }
