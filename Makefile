@@ -6,7 +6,7 @@ build:
 	@for i in $(shell ls cmd) ; do \
 		cd cmd/$$i ; \
 		echo "Building $$i" ; \
-		go build -o ../../bin/$$i main.go && echo 'Build successful' ; \
+		go build -o ../../bin/uq-$$i main.go && echo 'Build successful' ; \
 		cd ../.. ; \
 	done
 

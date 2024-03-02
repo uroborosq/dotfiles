@@ -2,8 +2,11 @@ package main
 
 import (
 	"fmt"
-	"os"
+	"linux/pkg/hwmon"
+	"log"
 	"os/exec"
+	"strconv"
+	"strings"
 )
 
 func gpuTemp(ch chan string) {
@@ -11,24 +14,22 @@ func gpuTemp(ch chan string) {
 	ch <- string(output[:len(output)-1])
 }
 
-func diskTemp(ch chan string) {
-	output, _ := os.ReadFile("/sys/class/hwmon/hwmon0/temp3_input")
-	ch <- string(output[:2])+"."+string(output[2])
-}
-
-func cpuTemp(ch chan string) {
-	output, _ := os.ReadFile("/sys/class/hwmon/hwmon1/temp1_input")
-	ch <- string(output[:2])+"."+string(output[2])
+func floatToTemp(value float64) string {
+	s := strconv.FormatFloat(value, 'f', 0, 64)
+	return strings.Join([]string{s[:2], ".", s[2:3]}, "")
 }
 
 func main() {
 	gpu := make(chan string)
-	cpu := make(chan string)
-	disk := make(chan string)
-
 	go gpuTemp(gpu)
-	go diskTemp(disk)
-	go cpuTemp(cpu)
 
-	fmt.Printf("%s°C %s°C %s°C\n", <-cpu, <-disk, <-gpu)
+	parser := hwmon.NewSensorParser()
+
+	sensors, err := parser.Parse()
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+
+	fmt.Printf("%s°C %s°C %s°C\n", floatToTemp(sensors["k10temp"]["Tctl"]), floatToTemp(sensors["nvme"]["Sensor 2"]), <-gpu)
+
 }
