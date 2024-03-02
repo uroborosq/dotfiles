@@ -1,13 +1,11 @@
 module linux
 
-go 1.20
+go 1.22
 
 require (
 	github.com/charmbracelet/log v0.2.2
 	github.com/juju/loggo v1.0.0
 	github.com/kr/pretty v0.3.1
-	github.com/prometheus-community/pro-bing v0.3.0
-	github.com/prometheus/procfs v0.11.1
 	golang.org/x/exp v0.0.0-20230728194245-b0cb94b80691
 )
 
@@ -36,7 +34,6 @@ require (
 	github.com/charmbracelet/lipgloss v0.7.1 // indirect
 	github.com/go-logfmt/logfmt v0.6.0 // indirect
 	github.com/godbus/dbus/v5 v5.1.0
-	github.com/google/uuid v1.3.0 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
 	github.com/mattn/go-isatty v0.0.18 // indirect
 	github.com/mattn/go-runewidth v0.0.14 // indirect
@@ -44,7 +41,5 @@ require (
 	github.com/muesli/termenv v0.15.1 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/spf13/viper v1.16.0
-	golang.org/x/net v0.17.0 // indirect
-	golang.org/x/sync v0.3.0 // indirect
 	golang.org/x/sys v0.13.0 // indirect
 )

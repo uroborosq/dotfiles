@@ -37,7 +37,7 @@ func main() {
 	}
 
 	if len(title) > *limit {
-		output.WriteString((string(title[:*limit]) + "..."))
+		output.WriteString(string(title[:*limit]) + "...")
 	} else {
 		output.WriteString(string(title))
 	}
