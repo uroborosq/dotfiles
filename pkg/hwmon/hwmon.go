@@ -68,8 +68,8 @@ func (p *LinuxSensorParser) parseLinuxMonitor(dir os.DirEntry) (string, map[stri
 			continue
 		}
 
-		if number > len(sensors) {
-			sensors = append(sensors, make([]Sensor, number-len(sensors))...)
+		if number >= len(sensors) {
+			sensors = append(sensors, make([]Sensor, number-len(sensors)+1)...)
 		}
 
 		content, err := os.ReadFile(filepath.Join(path, file.Name()))
