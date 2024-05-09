@@ -4,7 +4,7 @@ set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 set $term alacritty --class=alacritty-floating
 set $menu wofi --allow-images --insensitive true --show drun -a
 set $FULLSCREEN_MENU wofi --allow-images --insensitive true --show drun -a -W 100% -H 80% -w 6
-set $opacity 0.95
+set $opacity 0.85
 
 ### Правила окон
 
@@ -14,8 +14,11 @@ for_window [title="Choose ONE of the audio conference options"] floating enable
 for_window [title="Открыть файл"] floating enable
 for_window [title="Открыть папку"] floating enable
 for_window [title="Firefox — индикатор доступа"] floating enable
-for_window [app_id="alacritty-floating"] floating enable
+for_window [app_id="alacritty-floating"] floating enable, blur enable
+for_window [app_id="alacritty"] blur enable, opacity $opacity, blue_xray disable
 
+
+layer_effects "waybar" blur enable; corner_radius 6
 ### Настройка мониторов
 
 # Управление обоями
@@ -23,9 +26,9 @@ for_window [app_id="alacritty-floating"] floating enable
 
 output "*" bg /usr/share/backgrounds/archlinux/geolanes.png fill
 
-output eDP-1 position 0 0
-output eDP-1 scale 1.25
-output HDMI-A-1 resolution 1920x1080@72Hz position 1536 0 adaptive_sync on
+#output eDP-1 position 0 0
+#output eDP-1 scale 1.25
+#output HDMI-A-1 resolution 1920x1080@72Hz position 1536 0 adaptive_sync on
 
 ### Настройка энергосбережения
 
@@ -238,7 +241,8 @@ exec_always {
     gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
     gsettings set org.gnome.desktop.interface cursor-theme 'Breeze_Snow'
 }
-seat seat0 xcursor_theme Breeze_Snow 24
+
+# seat * xcursor_theme Breeze_Snow
 # seat seat0 xcursor_size 24
 
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
@@ -247,9 +251,8 @@ exec wmname LG3DС
 exec dex -a --environment sway
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id /usr/lib/pam_kwallet_init
-exec "killall exec-waybar"
+exec "killall uq-exec-waybar; uq-exec-waybar"
 exec_always "killall waybar"
-exec /usr/bin/exec-waybar
-exec kanshi
+exec_always "killall kanshi; kanshi"
 exec /usr/lib/xdg-desktop-portal -r & /usr/lib/xdg-desktop-portal-wlr
 include /etc/sway/config.d/*
