@@ -1,6 +1,6 @@
 [{
     "layer": "top",
-    "modules-left": ["custom/cpu", "custom/ram", "custom/temp"],
+    "modules-left": ["custom/cpu", "custom/cpu-freq", "custom/ram", "custom/temp", "custom/net"],
     "modules-center": ["clock"],
     "modules-right": ["tray", "sway/language", "pulseaudio", "battery"],
     "sway/window": {
@@ -29,13 +29,23 @@
     "custom/cpu":{
         "format": "{}",
         "interval": 1,
-        "exec": "/usr/bin/cpu-usage-once",
+        "exec": "/usr/bin/uq-cpu-usage-once",
         "on-click": "alacritty --class=alacritty-floating -e htop"
     },
     "custom/ram":{
         "format": "{}",
         "interval": 3,
-        "exec": "/usr/bin/ram"
+        "exec": "/usr/bin/uq-ram"
+    },
+    "custom/cpu-freq": {
+        "format": "{}",
+        "interval": 1,
+        "exec": "/usr/bin/uq-cpu-frequency"
+    },
+    "custom/net": {
+        "format": "{}",
+        "interval": 1,
+        "exec": "/usr/bin/uq-net"
     },
 
     "memory" : {
@@ -84,8 +94,8 @@
     "custom/temp": {
         "format": " {}",
         "interval": 2,
-        "exec": "/usr/bin/temperature",
-        "min-length": 16
+        "exec": "/usr/bin/uq-thinkpad-e14-gen-temperature",
+        "min-length": 10
     },
     
     "network": {
@@ -130,7 +140,7 @@
     "custom/playerctl":{
         "format": "{}",
         "interval": 2,
-        "exec": "/usr/bin/current-song",
+        "exec": "/usr/bin/uq-current-song",
         "max-length": 10000
     },
     "sway/workspaces": {
