@@ -2,19 +2,22 @@ package main
 
 import (
 	"fmt"
-	"linux/pkg/temperature"
+	"linux/pkg/hwmon"
+	"log"
+	"strconv"
+	"strings"
 )
 
 func main() {
-	cpuPath := "/sys/devices/platform/thinkpad_hwmon/hwmon/hwmon3/temp1_input"
-	gpuPath := "/sys/devices/platform/thinkpad_hwmon/hwmon/hwmon3/temp2_input"
+	parser := hwmon.NewSensorParser()
+	sensors, err := parser.Parse()
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+	fmt.Printf("%s°C %s°C", floatToTemp(sensors["thinkpad"]["CPU"]), floatToTemp(sensors["thinkpad"]["GPU"]))
+}
 
-	cpuFirst, cpuSecond := make(chan []byte), make(chan byte)
-	gpuFirst, gpuSecond := make(chan []byte), make(chan byte)
-
-	go temperature.Get(cpuPath, cpuFirst, cpuSecond)
-	go temperature.Get(gpuPath, gpuFirst, gpuSecond)
-
-	fmt.Printf("%s.%c°C ", <-cpuFirst, <-cpuSecond)
-	fmt.Printf("%s.%c°C \n", <-gpuFirst, <-gpuSecond)
+func floatToTemp(value float64) string {
+	s := strconv.FormatFloat(value, 'f', 0, 64)
+	return strings.Join([]string{s[:2], ".", s[2:3]}, "")
 }
