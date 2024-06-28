@@ -6,3 +6,9 @@ profile laptoponly {
 	output eDP-1 scale 1.25 position 0,0 enable
 }
 
+profile home_three_monitors {
+	output eDP-1 disable
+	output HDMI-A-1 mode 2560x1440@144Hz position 0,0
+	output DP-1 scale 1.25 mode 3840x2160@144Hz position 2560,0
+}
+

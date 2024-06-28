@@ -14,21 +14,20 @@ for_window [title="Choose ONE of the audio conference options"] floating enable
 for_window [title="Открыть файл"] floating enable
 for_window [title="Открыть папку"] floating enable
 for_window [title="Firefox — индикатор доступа"] floating enable
-for_window [app_id="alacritty-floating"] floating enable, blur enable
-for_window [app_id="alacritty"] blur enable, opacity $opacity, blue_xray disable
+for_window [app_id="alacritty-floating"] floating enable, opacity $opacity
+for_window [app_id="Alacritty"] opacity $opacity
+for_window [app_id="neovide"] opacity $opacity
 
-
-layer_effects "waybar" blur enable; corner_radius 6
+# layer_effects "waybar" blur enable; corner_radius 6
 ### Настройка мониторов
+# default_border pixel 10px
+gaps inner 3
+# corner_radius 10
 
 # Управление обоями
-# exec ~/.azotebg
+exec ~/.azotebg
 
-output "*" bg /usr/share/backgrounds/archlinux/geolanes.png fill
-
-#output eDP-1 position 0 0
-#output eDP-1 scale 1.25
-#output HDMI-A-1 resolution 1920x1080@72Hz position 1536 0 adaptive_sync on
+# output "*" bg /usr/share/backgrounds/archlinux/svalbard.jpg fill
 
 ### Настройка энергосбережения
 
@@ -38,8 +37,7 @@ exec swayidle -w \
 timeout 270 'notify-send Энергосбережение "скоро засну"' \
 timeout 299 $SWAYLOCK_COMMAND \
 timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-before-sleep $SWAYLOCK_COMMAND \
-timeout 301 "/usr/bin/check-playerctl-suspend"
+before-sleep $SWAYLOCK_COMMAND 
 
 for_window [class="^.*"] inhibit_idle fullscreen
 
@@ -80,7 +78,7 @@ bindcode Mod1+24 kill
 floating_modifier $mod normal
 
 bindsym $mod+Shift+c reload
-bindsym $mod+l exec $SWAYLOCK_COMMAND
+bindsym $mod+Mod1+l exec $SWAYLOCK_COMMAND
 
 # Exit sway (logs you out of your Wayland session)
 bindsym $mod+Shift+e exec nwg-bar
@@ -93,11 +91,22 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+
 # Ditto, with arrow keys
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+#
 #
 # Workspaces:
 #
@@ -155,6 +164,7 @@ bindsym $mod+a focus parent
 bindsym Mod1+tab workspace next_on_output
 bindsym Mod1+Shift+tab workspace prev_on_output
 #
+
 # Scratchpad:
 #
 
@@ -170,7 +180,12 @@ mode "resize" {
     bindsym Down resize grow height 10px
     bindsym Up resize shrink height 10px
     bindsym Right resize grow width 10px
+    bindsym h resize shrink width 10px
+    bindsym j resize grow height 10px
+    bindsym k resize shrink height 10px
+    bindsym l resize grow width 10px
     
+
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
