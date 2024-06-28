@@ -84,7 +84,8 @@ export GEDITOR=code
 
 alias ok=exit
 alias nf=fastfetch
-alias svim='sudo vim'
+alias vim='nvim'
+alias svim='sudo nvim'
 alias pg='pwgen -cn1sy 16'
 alias bd='sudo cpufreqctl --boost --set=0'
 alias be='sudo cpufreqctl --boost --set=1'
@@ -95,9 +96,10 @@ alias gte='gnome-text-editor'
 alias св='cd'
 alias rmunsed='sudo pacman -Rnucs $(pacman -Qtdq)'
 alias gscale='gsettings set org.gnome.desktop.interface text-scaling-factor'
-alias shx='sudo helix'
 alias grep='grep --color=auto'
 alias mpv='mpv-wrapper'
+alias ssh='TERM=xterm-256color ssh'
+alias sssh='TERM=xterm-256color ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null'
 # Path
 
 export PATH="$HOME/.local/bin:$PATH"
