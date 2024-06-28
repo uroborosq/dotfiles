@@ -51,11 +51,11 @@ func main() {
 	
 	file.Close()
 
-	sendHumanView := float64(-send)
-	receivedHumanView := float64(-received)
+	sendHumanView := 8 * float64(-send)
+	receivedHumanView := 8 * float64(-received)
 
 	measurePoints := []string{
-		"B/s", "KiB/s", "MiB/s", "GiB/s",
+		"b/s", "Kib/s", "Mib/s", "Gib/s",
 	}
 
 	sendMeasure := 0
