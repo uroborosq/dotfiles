@@ -1,11 +1,11 @@
 #!/bin/bash
 
 Green='\033[0;32m'
-Cyan='\033[0;36m'  
-Default='\033[0m'  
-ICyan='\033[0;96m' 
+Cyan='\033[0;36m'
+Default='\033[0m'
+ICyan='\033[0;96m'
 
-echo -e  "${Green}Welcome to the UroborosQ's update script!${Default}"
+echo -e "${Green}Welcome to the UroborosQ's update script!${Default}"
 
 echo -e "${ICyan}paru updating...${Default}"
 
@@ -21,14 +21,4 @@ fi
 
 current_directory=$(pwd)
 
-
-
-
-
-
-
-
-
-
-
-cd -- "$current_directory"
+cd -- "$current_directory" || exit
