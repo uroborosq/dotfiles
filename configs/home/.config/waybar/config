@@ -2,7 +2,7 @@
     "layer": "top",
     "modules-left": ["custom/cpu", "custom/cpu-freq", "custom/ram", "custom/temp", "custom/net"],
     "modules-center": ["clock"],
-    "modules-right": ["tray", "sway/language", "pulseaudio", "battery"],
+    "modules-right": ["tray", "sway/language", "pulseaudio", "network", "battery"],
     "sway/window": {
         "max-length": 50
     },
