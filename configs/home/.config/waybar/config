@@ -110,7 +110,7 @@
         "tooltip-format-disconnected": "Disconnected",
         "max-length": 50,
         "min-length": 2,
-        "on-click": "alacritty --class=alacritty-floating -e nmtui"
+        "on-click": "alacritty --class=alacritty-floating -e nmtui-connect"
     }
 },
 {
