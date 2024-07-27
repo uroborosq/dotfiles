@@ -9,32 +9,32 @@ import (
 func main() {
 	conn, err := dbus.ConnectSessionBus()
 	if err != nil {
-		logger.Fatal(err.Error())
+		logger.Fatalf(err.Error())
 	}
 	defer conn.Close()
 
 	state, err := monitor.GetCurrentState(conn)
 	if err != nil {
-		logger.Fatal(err.Error())
+		logger.Fatalf(err.Error())
 	}
 
 	idx, err := monitor.GetBuiltinIndex(state)
 	if err != nil {
-		logger.Fatal(err.Error())
+		logger.Fatalf(err.Error())
 	}
 
 	switch len(state.LogicalMonitors) {
 	case 1:
 		err = monitor.TwoMonitors(conn, state, state.Monitors[idx].Info)
 		if err != nil {
-			logger.Fatal(err.Error())
+			logger.Fatalf(err.Error())
 		}
 	case 2:
 		err = monitor.ExternalOny(conn, state, state.Monitors[idx].Info)
 		if err != nil {
-			logger.Fatal(err.Error())
+			logger.Fatalf(err.Error())
 		}
 	default:
-		logger.Fatal("Unsupported monitor configuration")
+		logger.Fatalf("Unsupported monitor configuration")
 	}
 }

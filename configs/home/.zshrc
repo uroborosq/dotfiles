@@ -107,5 +107,20 @@ export PATH="$HOME/Рабочий стол/Linux/bin/:$PATH"
 export PATH="$HOME/Рабочий стол/Linux/scripts/:$PATH"
 export PATH="$HOME/.local/share/go/bin/:$PATH"
 
+ulimit -n 10000
+
+if [ -n "$NVIM" ]; then
+    NVIM_LISTEN_ADDRESS="$NVIM"
+    alias nvim=nvr -cc split --remote-wait +'set bufhidden=wipe'
+fi
+
+if [ -n "$NVIM" ]; then
+    NVIM_LISTEN_ADDRESS="$NVIM"
+    export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+    export EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+else
+    export VISUAL="nvim"
+    export EDITOR="nvim"
+fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

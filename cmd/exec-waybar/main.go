@@ -2,17 +2,19 @@ package main
 
 import (
 	"context"
-	"linux/pkg/logger"
 	"os"
 	"os/exec"
 	"os/signal"
 	"syscall"
 
 	"github.com/charmbracelet/log"
+
+	"linux/pkg/logger"
 )
 
 const (
-	sway = "sway"
+	sway  = "sway"
+	limit = 1000
 )
 
 func main() {
@@ -24,9 +26,7 @@ func main() {
 
 	ctx, _ := signal.NotifyContext(context.Background(), syscall.SIGHUP, syscall.SIGINT, syscall.SIGKILL, syscall.SIGQUIT)
 
-	counter := 0
-
-	for {
+	for range limit {
 		select {
 		case <-ctx.Done():
 			log.Infof("Received interrupt signal! Aboring...")
@@ -34,13 +34,10 @@ func main() {
 		default:
 			err := exec.Command("waybar").Run()
 			if err != nil {
-				logger.Warn(err.Error())
-			}
-			counter++
-			if counter >= 1000 {
-				logger.Fatal("Exceeded number of attempts")
-				os.Exit(1)
+				logger.Warnf(err.Error())
 			}
 		}
 	}
+	logger.Fatalf("Exceeded number of attempts: %d", limit)
+	os.Exit(1)
 }
