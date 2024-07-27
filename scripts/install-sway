@@ -16,7 +16,7 @@ paru -S \
 	wofi \
 	wob \
 	swayidle \
-	sway \
+	swayfx \
 	kwallet \
 	polkit-gnome \
 	dex \
@@ -35,4 +35,3 @@ paru -S \
 	playerctl \
 	kwallet \
 	calcurse
-

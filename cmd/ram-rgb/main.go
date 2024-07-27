@@ -6,14 +6,23 @@ import (
 	"os"
 	"os/exec"
 	"time"
+	"unsafe"
 )
 
 const (
-	delay = time.Millisecond * 50
+	delay             = time.Millisecond * 50
+	red          byte = 0
+	green        byte = 255
+	blue         byte = 255
+	deviceNumber      = "7"
 )
 
 func i2csetPerDevice(deviceNumber string, stickNumber string, first string, second string) error {
-	return exec.Command("i2cset", "-y", deviceNumber, stickNumber, first, second).Run()
+	output, err := exec.Command("i2cset", "-y", deviceNumber, stickNumber, first, second).CombinedOutput()
+	if err != nil {
+		return fmt.Errorf("i2cet -y %s %s %s %s finished with error: %s, %s", deviceNumber, stickNumber, first, second, unsafe.String(&output[0], len(output)), err.Error())
+	}
+	return nil
 }
 
 func setStaticColorToSingleStick(deviceNumber string, stickAddress string, red byte, green byte, blue byte) error {
@@ -37,7 +46,7 @@ func setStaticColorToSingleStick(deviceNumber string, stickAddress string, red b
 		return err
 	}
 	time.Sleep(delay)
-	err =i2csetPerDevice(deviceNumber, stickAddress, "0x33", fmt.Sprintf("0x%x", blue))
+	err = i2csetPerDevice(deviceNumber, stickAddress, "0x33", fmt.Sprintf("0x%x", blue))
 	if err != nil {
 		return err
 	}
@@ -51,18 +60,19 @@ func setStaticColorToSingleStick(deviceNumber string, stickAddress string, red b
 }
 
 func setOrange() error {
-	err := setStaticColorToSingleStick("2", "0x61", 255, 60, 0)
+	err := setStaticColorToSingleStick(deviceNumber, "0x61", red, green, blue)
 	if err != nil {
 		return err
 	}
-	return setStaticColorToSingleStick("2", "0x63", 255, 60, 0)
+	return setStaticColorToSingleStick(deviceNumber, "0x63", red, green, blue)
 }
+
 func turnOff() error {
-	err := setStaticColorToSingleStick("2", "0x61", 0, 0, 0)
+	err := setStaticColorToSingleStick(deviceNumber, "0x61", 0, 0, 0)
 	if err != nil {
 		return err
 	}
-	return setStaticColorToSingleStick("2", "0x63", 0, 0, 0)
+	return setStaticColorToSingleStick(deviceNumber, "0x63", 0, 0, 0)
 }
 
 func main() {

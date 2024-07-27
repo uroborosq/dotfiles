@@ -16,7 +16,7 @@ paru -Rnucs \
 	wofi \
 	wob \
 	swayidle \
-	sway \
+	swayfx \
 	kwallet \
 	polkit-gnome \
 	dex \

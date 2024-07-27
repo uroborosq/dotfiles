@@ -20,10 +20,9 @@ for_window [app_id="Alacritty"] opacity $opacity, blur enable
 for_window [app_id="neovide"] blur enable, opacity $opacity, blue_xray disable
 
 layer_effects "waybar" blur enable; corner_radius 6
-### Настройка мониторов
 # default_border pixel 10px
 gaps inner 3
-# corner_radius 10
+corner_radius 10
 
 # Управление обоями
 exec ~/.azotebg
