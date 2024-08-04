@@ -15,7 +15,7 @@ type Battery interface {
 }
 
 type Booster interface {
-	SetStatus(bool) error
+	SetStatus(boostEnabled bool) error
 	Status() (bool, error)
 }
 

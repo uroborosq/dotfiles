@@ -8,19 +8,21 @@ import (
 	"time"
 )
 
-func getStats(str string) (int, int) {
-	valuesOfFirstTime := strings.Split(str, " ")[2:]
-	total := 0
-	work := 0
-	valuesCount := len(valuesOfFirstTime)
-	for i := 0; i < valuesCount; i++ {
-		parsedValue, _ := strconv.Atoi(valuesOfFirstTime[i])
+func getStats(stats string) (int, int) {
+	var (
+		total, work int
+		values      = strings.Split(stats, " ")[2:]
+	)
+
+	for i := range len(values) {
+		parsedValue, _ := strconv.Atoi(values[i])
 		total += parsedValue
 
 		if i < 3 {
 			work += parsedValue
 		}
 	}
+
 	return total, work
 }
 
