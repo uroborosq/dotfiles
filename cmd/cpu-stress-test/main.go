@@ -6,16 +6,18 @@ import (
 )
 
 func main() {
-	coreNumber := runtime.NumCPU()
-	var lol sync.Mutex
-	lol.Lock()
-	for i := 0; i < coreNumber; i++ {
+	var lock sync.Mutex
+
+	lock.Lock()
+	defer lock.Unlock()
+
+	for range runtime.NumCPU() {
 		go func() {
-			a := 0
+			var a int
+
 			for {
 				a++
 			}
 		}()
 	}
-	lol.Lock()
 }
