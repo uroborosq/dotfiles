@@ -15,7 +15,7 @@ type Battery interface {
 }
 
 type Booster interface {
-	SetStatus(boostEnabled bool) error
+	SetStatus(bool) error
 	Status() (bool, error)
 }
 
@@ -25,11 +25,15 @@ const (
 	AlwaysOff = "always-off"
 )
 
+const (
+	updateTimeout = 5 * time.Second
+)
+
 type Config struct {
-	Boost CpuBoostConfig `json:"boost"`
+	Boost CPUBoostConfig `json:"boost"`
 }
 
-type CpuBoostConfig struct {
+type CPUBoostConfig struct {
 	Policy string
 }
 
@@ -40,6 +44,7 @@ func main() {
 	if err := viper.ReadInConfig(); err != nil {
 		logger.Fatalf(err.Error())
 	}
+
 	var config Config
 	if err := viper.Unmarshal(&config); err != nil {
 		logger.Fatalf(err.Error())
@@ -49,29 +54,33 @@ func main() {
 	if err != nil {
 		logger.Fatalf(err.Error())
 	}
+
 	logger.Infof("Applying policy %s", config.Boost.Policy)
+
 	battery := battery.NewPrimaryBattery()
 
 	switch config.Boost.Policy {
 	case AlwaysOn:
-		booster.SetStatus(true)
+		if setError := booster.SetStatus(true); setError != nil {
+			logger.Fatalf("can't turn on the boost due to error: %s", setError.Error())
+		}
 	case AlwaysOff:
-		booster.SetStatus(false)
+		if setError := booster.SetStatus(false); setError != nil {
+			logger.Errorf("can't turn off the boost due to error: %s", setError.Error())
+		}
 	case Auto:
 		for {
 			if battery.IsCharging() && booster.Status() {
-				err := booster.SetStatus(false)
-				if err != nil {
-					logger.Warnf("can't switch boost mode: %s", err.Error())
+				if setError := booster.SetStatus(false); setError != nil {
+					logger.Warnf("can't switch boost mode: %s", setError.Error())
 				}
 			} else if !battery.IsCharging() && !booster.Status() {
-				booster.SetStatus(true)
-				if err != nil {
-					logger.Warnf("can't switch boost mode: %s", err.Error())
+				if setError := booster.SetStatus(true); setError != nil {
+					logger.Warnf("can't switch boost mode: %s", setError.Error())
 				}
 			}
 
-			time.Sleep(5 * time.Second)
+			time.Sleep(updateTimeout)
 		}
 	}
 }
