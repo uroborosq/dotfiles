@@ -2,7 +2,6 @@
 
 paru -S \
 	azote \
-	nwg-drawer-bin \
 	nwg-bar-bin \
 	xdg-desktop-portal-wlr \
 	grim \
@@ -20,8 +19,6 @@ paru -S \
 	kwallet \
 	polkit-gnome \
 	dex \
-	pamixer \
-	ncpamixer \
 	swaybg \
 	light \
 	kwallet-pam \
@@ -34,4 +31,5 @@ paru -S \
 	awesome-terminal-fonts \
 	playerctl \
 	kwallet \
-	calcurse
+	calcurse \
+	wireplumber
