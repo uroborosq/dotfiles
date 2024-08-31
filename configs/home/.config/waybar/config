@@ -116,7 +116,7 @@
 {
     "layer": "top",
     "position": "bottom",
-    "modules-left": ["custom/menu", "sway/workspaces", "custom/firefox", "custom/dolphin", "custom/telegram"],
+    "modules-left": ["sway/workspaces"],
     "modules-center": ["wlr/taskbar"],
     "modules-right": ["custom/playerctl"],
     "wlr/taskbar": {
@@ -131,11 +131,6 @@
         ],
         "app_ids-mapping": {
         }
-    },
-    "custom/menu": {
-        "format": "",
-        "on-click": "exec wofi --allow-images --insensitive true --show drun -a -W 100% -H 80% -w 6",
-        "tooltip": false
     },
     "custom/playerctl":{
         "format": "{}",
@@ -153,18 +148,5 @@
             "5": []
         }
     },
-
-    "custom/firefox": {
-        "format": "",
-        "on-click": "firefox"
-    },
-    "custom/dolphin": {
-        "format": "",
-        "on-click": "dolphin"
-    },
-    "custom/telegram": {
-        "format": "",
-        "on-click": "telegram-desktop || flatpak run org.telegram.desktop"
-    } 
 }
 ]
