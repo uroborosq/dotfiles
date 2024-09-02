@@ -1,4 +1,4 @@
 #!/bin/zsh
 
-xdg-open ~/.config/sway/config  ~/.config/waybar/config ~/.config/waybar/style.css  ~/.config/alacritty/alacritty.yml  ~/.config/mako/config  ~/.config/wofi/style.css ~/.config/wob/wob.ini
+xdg-open ~/.config/sway/config  ~/.config/waybar/config.json ~/.config/waybar/style.css  ~/.config/alacritty/alacritty.yml  ~/.config/mako/config  ~/.config/wofi/style.css ~/.config/wob/wob.ini
 exit
