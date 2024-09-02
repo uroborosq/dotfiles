@@ -99,13 +99,13 @@ window#waybar.hidden {
 #temperature,
 #custom-cpu,
 #custom-ram,
+#custom-temp,
 #idle_inhibitor {
     border: solid rgba(100, 100, 100, 0.6) 1px;
     padding-left: 10px;
     padding-right: 10px;
     margin: 2px 2px;
 }
-#custom-temp,
 #temperature,
 #tray,
 #custom-close {

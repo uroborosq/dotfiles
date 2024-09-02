@@ -1,6 +1,8 @@
 CMD_FILES=$(shell ls cmd)
 CONF_FILES=$(shell find config)
 
+USER_HOME ?= $$HOME
+
 build:
 	@go mod tidy
 	@for i in $(shell ls cmd) ; do \
@@ -29,12 +31,12 @@ sync:
 			echo "Linking $$host_path to $$i" ; \
 			ln -f $$host_path $$i ; \
 		fi ; \
-	done
+	done 
 
 	@for i in $(shell find configs/home); do \
-		host_path="$$HOME/$$(echo "$$i" | cut -c14-)" ; \
+		host_path="${USER_HOME}/$$(echo "$$i" | cut -c14-)" ; \
 		if [[ -f $$i ]]; then \
-			echo "Linking $$i to $$host_path" ; \
+			echo "Linking $$host_path to $$i" ; \
 			ln -f $$i $$host_path ; \
 		fi ; \
 	done

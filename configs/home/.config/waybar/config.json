@@ -1,8 +1,8 @@
 [{
     "layer": "top",
-    "modules-left": ["custom/cpu", "custom/cpu-freq", "custom/ram", "custom/temp", "custom/net"],
+    "modules-left": ["sway/workspaces", "custom/cpu", "custom/cpu-freq", "custom/ram", "custom/temp", "custom/net"],
     "modules-center": ["clock"],
-    "modules-right": ["tray", "sway/language", "pulseaudio", "network", "battery"],
+    "modules-right": ["custom/playerctl", "tray", "sway/language", "pulseaudio", "network", "battery"],
     "sway/window": {
         "max-length": 50
     },
@@ -20,7 +20,22 @@
         "format": "{capacity}% {icon}  {power:0.1f} W",
         "format-icons": ["", "", "", "", ""]
     },
-
+    "sway/workspaces": {
+        "all-outputs": true,
+        "persistent_workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": []
+        }
+    },
+    "custom/playerctl":{
+        "format": "{}",
+        "interval": 2,
+        "exec": "/usr/bin/uq-current-song",
+        "max-length": 10000
+    },
     "cpu": {
         "interval": 2,
         "format": "ЦП: {usage}%  {max_frequency} GHz", 
@@ -113,40 +128,4 @@
         "on-click": "alacritty --class=alacritty-floating -e nmtui-connect"
     }
 },
-{
-    "layer": "top",
-    "position": "bottom",
-    "modules-left": ["sway/workspaces"],
-    "modules-center": ["wlr/taskbar"],
-    "modules-right": ["custom/playerctl"],
-    "wlr/taskbar": {
-        "all-outputs": true,
-        "format": "{icon}",
-        "icon-size": 32,
-        "icon-theme": "Papirus-Dark",
-        "tooltip-format": "{title}",
-        "on-click": "activate",
-        "on-click-middle": "close",
-        "ignore-list": [
-        ],
-        "app_ids-mapping": {
-        }
-    },
-    "custom/playerctl":{
-        "format": "{}",
-        "interval": 2,
-        "exec": "/usr/bin/uq-current-song",
-        "max-length": 10000
-    },
-    "sway/workspaces": {
-        "all-outputs": true,
-        "persistent_workspaces": {
-            "1": [],
-            "2": [],
-            "3": [],
-            "4": [],
-            "5": []
-        }
-    },
-}
 ]

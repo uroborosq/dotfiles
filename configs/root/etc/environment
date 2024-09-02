@@ -3,6 +3,7 @@
 #
 # Syntax: simple "KEY=VAL" pairs on separate lines
 #
+MOZ_ENABLE_WAYLAND=1
 GOPATH="/home/dmitriy.tikhomirov/.local/share/go"
 QT_QPA_PLATFORMTHEME=qt5ct
 QT_QPA_PLATFORM="wayland;xcb"
