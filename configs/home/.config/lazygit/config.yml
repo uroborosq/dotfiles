@@ -1,0 +1,3 @@
+os:
+  open: "nvr --remote {{filename}}"
+  # open: "nvr --remote-send ':e {{filename}}'"

@@ -6,49 +6,47 @@
 /*     --dl: #4B5162 */
 /*     --white: white; */
 /* } */
-*
-{
-    font-family: Source Code Pro;
+* {
+  font-family: Source Code Pro;
 }
 
 window {
-    background-color: #7C818C;
+  background-color: #7c818c;
 }
 
 #input {
-    margin: 5px;
-    border-radius: 0px;
-    border: none;
-    border-bottom: 3px solid black;
-    background-color: #383C4A;
-    color: white;
+  margin: 1px;
+  border-radius: 0px;
+  border: none;
+  border-bottom: 2px solid white;
+  background-color: #383c4a;
+  color: white;
 }
 
 #inner-box {
-    background-color: #383C4A;
-
+  background-color: #383c4a;
 }
 
 #outer-box {
-    margin: 5px;
-    padding:20px;
-    background-color: #383C4A;
+  margin: 1px;
+  padding: 20px;
+  background-color: #383c4a;
 }
 
 #scroll {
 }
 
 #text {
-padding: 5px;
-color: white;
+  padding: 5px;
+  color: white;
 }
 
-#entry:nth-child(even){
-    background-color: #404552;
+#entry:nth-child(even) {
+  background-color: #404552;
 }
 
 #entry:selected {
-    background-color: #5291e2;
+  background-color: #5291e2;
 }
 
 #text:selected {

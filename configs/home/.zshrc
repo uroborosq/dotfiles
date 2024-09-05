@@ -107,7 +107,7 @@ if [ -n "$NVIM" ]; then
 fi
 
 if [ -n "$NVIM" ]; then
-    NVIM_LISTEN_ADDRESS="$NVIM"
+    export NVIM_LISTEN_ADDRESS="$NVIM"
     export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
     export EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
 else
