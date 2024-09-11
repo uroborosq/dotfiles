@@ -9,12 +9,10 @@ import (
 	"time"
 )
 
-
 func readStats(scanner *bufio.Scanner) (int64, int64) {
 	send := int64(0)
 	received := int64(0)
 
-	
 	for i := 0; scanner.Scan(); i++ {
 		if i < 2 {
 			continue
@@ -31,8 +29,6 @@ func readStats(scanner *bufio.Scanner) (int64, int64) {
 	return received, send
 }
 
-
-
 func main() {
 	file, _ := os.Open("/proc/net/dev")
 	scanner := bufio.NewScanner(file)
@@ -48,7 +44,7 @@ func main() {
 	receivedSecond, sendSecond := readStats(scanner)
 	received -= receivedSecond
 	send -= sendSecond
-	
+
 	file.Close()
 
 	sendHumanView := 8 * float64(-send)
