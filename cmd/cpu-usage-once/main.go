@@ -21,6 +21,7 @@ func getStats(str string) (int, int) {
 			work += parsedValue
 		}
 	}
+
 	return total, work
 }
 
