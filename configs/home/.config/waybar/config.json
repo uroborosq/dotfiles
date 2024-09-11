@@ -1,131 +1,159 @@
-[{
+[
+  {
     "layer": "top",
-    "modules-left": ["sway/workspaces", "custom/cpu", "custom/cpu-freq", "custom/ram", "custom/temp", "custom/net"],
-    "modules-center": ["clock"],
-    "modules-right": ["custom/playerctl", "tray", "sway/language", "pulseaudio", "network", "battery"],
+    "modules-left": [
+      "sway/workspaces",
+      "custom/cpu",
+      "custom/cpu-freq",
+      "custom/ram",
+      "custom/temp",
+      "custom/net"
+    ],
+    "modules-center": [
+      "custom/clock"
+    ],
+    "modules-right": [
+      "custom/playerctl",
+      "tray",
+      "sway/language",
+      "pulseaudio",
+      "network",
+      "battery"
+    ],
     "sway/window": {
-        "max-length": 50
+      "max-length": 50
     },
     "custom/close": {
-        "format":"kill",
-        "on-click": "swaymsg kill"
+      "format": "kill",
+      "on-click": "swaymsg kill"
     },
     "tray": {
-        "icon-size": 21,
-        "spacing": 10
+      "icon-size": 21,
+      "spacing": 10
     },
-
     "battery": {
-        "interval": 3,
-        "format": "{capacity}% {icon}  {power:0.1f} W",
-        "format-icons": ["", "", "", "", ""]
+      "interval": 3,
+      "format": "{capacity}% {icon}  {power:0.1f} W",
+      "format-icons": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
     },
     "sway/workspaces": {
-        "all-outputs": true,
-        "persistent_workspaces": {
-            "1": [],
-            "2": [],
-            "3": [],
-            "4": [],
-            "5": []
-        }
+      "all-outputs": true,
+      "persistent_workspaces": {
+        "1": [],
+        "2": [],
+        "3": [],
+        "4": [],
+        "5": []
+      }
     },
-    "custom/playerctl":{
-        "format": "{}",
-        "interval": 2,
-        "exec": "/usr/bin/uq-current-song",
-        "max-length": 10000
+    "custom/playerctl": {
+      "format": "{}",
+      "interval": 2,
+      "exec": "/usr/bin/uq-current-song",
+      "max-length": 10000
     },
     "cpu": {
-        "interval": 2,
-        "format": "ЦП: {usage}%  {max_frequency} GHz", 
-        "on-click": "alacritty --class=alacritty-floating -e htop"
+      "interval": 2,
+      "format": "ЦП: {usage}%  {max_frequency} GHz",
+      "on-click": "alacritty --class=alacritty-floating -e htop"
     },
-    "custom/cpu":{
-        "format": "{}",
-        "interval": 1,
-        "exec": "/usr/bin/uq-cpu-usage-once",
-        "on-click": "alacritty --class=alacritty-floating -e htop"
+    "custom/cpu": {
+      "format": "{}",
+      "interval": 1,
+      "exec": "/usr/bin/uq-cpu-usage-once",
+      "on-click": "alacritty --class=alacritty-floating -e htop"
     },
-    "custom/ram":{
-        "format": "{}",
-        "interval": 3,
-        "exec": "/usr/bin/uq-ram"
+    "custom/ram": {
+      "format": "{}",
+      "interval": 3,
+      "exec": "/usr/bin/uq-ram"
     },
     "custom/cpu-freq": {
-        "format": "{}",
-        "interval": 1,
-        "exec": "/usr/bin/uq-cpu-frequency"
+      "format": "{}",
+      "interval": 1,
+      "exec": "/usr/bin/uq-cpu-frequency"
     },
     "custom/net": {
-        "format": "{}",
-        "interval": 1,
-        "exec": "/usr/bin/uq-net"
+      "format": "{}",
+      "interval": 1,
+      "exec": "/usr/bin/uq-net"
     },
-
-    "memory" : {
-        "interval": 5,
-        "format": "ОП: {used:0.1f} GiB, swap: {swapUsed:0.1f} GiB",
-        "max-length": 100
+    "memory": {
+      "interval": 5,
+      "format": "ОП: {used:0.1f} GiB, swap: {swapUsed:0.1f} GiB",
+      "max-length": 100
     },
-
-    "clock": {
-        "format": "{:%H:%M %d %b %a}",
-        "on-click": "alacritty --class=alacritty-floating -e calcurse"
+    "custom/clock": {
+      "exec": "date '+%H:%M %d %b %a'",
+      "format": "{}",
+      "interval": 1,
+      "on-click": "alacritty --class=alacritty-floating -e calcurse"
     },
-
     "custom/pipewire": {
-        "format": "{icon}",
-        "return-type": "json",
-        "signal": 8,
-        "interval": "once",
-        "format-icons": {
-            "mute": "",
-            "default": ["", "", "", ""]
-        },
-        "exec": "pw-volume status"
+      "format": "{icon}",
+      "return-type": "json",
+      "signal": 8,
+      "interval": "once",
+      "format-icons": {
+        "mute": "",
+        "default": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "exec": "pw-volume status"
     },
     "pulseaudio": {
-        "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon}",
-        "format-muted": "",
-        "format-icons": {
-            "alsa_output.pci-0000_00_1f.3.analog-stereo": "",
-            "headphones": "",
-            "handsfree": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", ""]
-        },
-        "scroll-step": 1,
-        "on-click": "alacritty --class=alacritty-floating -e ncpamixer -t o"
+      "format": "{volume}% {icon}",
+      "format-bluetooth": "{volume}% {icon}",
+      "format-muted": "",
+      "format-icons": {
+        "alsa_output.pci-0000_00_1f.3.analog-stereo": "",
+        "headphones": "",
+        "handsfree": "",
+        "headset": "",
+        "phone": "",
+        "portable": "",
+        "car": "",
+        "default": [
+          "",
+          ""
+        ]
+      },
+      "scroll-step": 1,
+      "on-click": "alacritty --class=alacritty-floating -e ncpamixer -t o"
     },
     "sway/language": {
-        "format": "{}",
-        "min-length": 3
+      "format": "{}",
+      "min-length": 3
     },
     "custom/temp": {
-        "format": " {}",
-        "interval": 2,
-        "exec": "/usr/bin/uq-thinkpad-e14-gen-temperature",
-        "min-length": 10
+      "format": " {}",
+      "interval": 2,
+      "exec": "/usr/bin/uq-thinkpad-e14-gen-temperature",
+      "min-length": 10
     },
-    
     "network": {
-        "interval": 2,
-        "format": "{ifname}",
-        "format-wifi": "",
-        "format-ethernet": "",
-        "format-disconnected": "",
-        "tooltip-format": "{ifname}",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
-        "tooltip-format-ethernet": "{ifname} ",
-        "tooltip-format-disconnected": "Disconnected",
-        "max-length": 50,
-        "min-length": 2,
-        "on-click": "alacritty --class=alacritty-floating -e nmtui-connect"
+      "interval": 2,
+      "format": "{ifname}",
+      "format-wifi": "",
+      "format-ethernet": "",
+      "format-disconnected": "",
+      "tooltip-format": "{ifname}",
+      "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+      "tooltip-format-ethernet": "{ifname} ",
+      "tooltip-format-disconnected": "Disconnected",
+      "max-length": 50,
+      "min-length": 2,
+      "on-click": "alacritty --class=alacritty-floating -e nmtui-connect"
     }
-},
+  }
 ]

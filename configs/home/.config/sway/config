@@ -201,8 +201,6 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 
-
-
 # wireplumber
 bindsym --locked XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ && wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -o '[0-9.]\+' | awk '{ print $1 * 100 }' > $WOBSOCK
 bindsym --locked XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -o '[0-9.]\+' | awk '{ print $1 * 100 }' > $WOBSOCK
@@ -234,7 +232,7 @@ bindgesture swipe:3:down exec ydotool key 0x27
 
 ### Внешний вид
 
-font pango:Noto Sans 11
+font pango:Cantarell 11
 
 set $bg #171717
 set $fg #eff1f5
