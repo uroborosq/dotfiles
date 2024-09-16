@@ -1,8 +1,8 @@
 ### Переменные
 set $mod Mod4
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
-set $floating_term alacritty --class=alacritty-floating
-set $term alacritty
+set $floating_term kitty --class=alacritty-floating
+set $term kitty
 set $menu wofi --allow-images --insensitive true --show drun -a -w 2
 set $FULLSCREEN_MENU wofi --allow-images --insensitive true --show drun -a -W 100% -H 80% -w 6
 set $opacity 0.9
@@ -15,9 +15,9 @@ for_window [title="Choose ONE of the audio conference options"] floating enable
 for_window [title="Открыть файл"] floating enable
 for_window [title="Открыть папку"] floating enable
 for_window [title="Firefox — индикатор доступа"] floating enable
-for_window [app_id="alacritty-floating"] floating enable, opacity $opacity, blur enable
+for_window [app_id="terminal-floating"] floating enable, opacity $opacity, blur enable
 for_window [app_id="Alacritty"] opacity $opacity, blur enable
-for_window [app_id="Kitty"] opacity $opacity, blur enable
+for_window [app_id="kitty"] opacity $opacity, blur enable
 for_window [app_id="neovide"] blur enable, opacity $opacity
 
 corner_radius 5
@@ -73,12 +73,14 @@ bindsym --to-code $mod+d exec $menu
 
 # Start a terminal
 bindsym $mod+Return exec $floating_term
+# Start an normal terminal
 bindsym $mod+Mod1+Return exec $term
+# Start file manager
+bindsym --to-code $mod+Mod1+m exec $term ranger
 
 
 # Kill focused window
 bindsym --to-code $mod+q kill
-
 
 floating_modifier $mod normal
 
@@ -91,15 +93,20 @@ bindsym --to-code $mod+Shift+e exec nwg-bar
 # Moving around:
 #
 # Move your focus around
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+# bindsym $mod+Left focus left
+# bindsym $mod+Down focus down
+# bindsym $mod+Up focus up
+# bindsym $mod+Right focus right
 
-bindsym --to-code $mod+h focus left
-bindsym --to-code $mod+j focus down
-bindsym --to-code $mod+k focus up
-bindsym --to-code $mod+l focus right
+bindsym --to-code $mod+h exec vim-sway-nav left
+bindsym --to-code $mod+j exec vim-sway-nav down
+bindsym --to-code $mod+k exec vim-sway-nav up
+bindsym --to-code $mod+l exec vim-sway-nav right
+
+# bindsym --to-code $mod+h focus left
+# bindsym --to-code $mod+j focus down
+# bindsym --to-code $mod+k focus up
+# bindsym --to-code $mod+l focus right
 
 # Ditto, with arrow keys
 bindsym $mod+Shift+Left move left
@@ -173,9 +180,7 @@ bindsym --to-code $mod+Control+Shift+h move workspace to output left
 bindsym --to-code $mod+Control+Shift+j move workspace to output down
 bindsym --to-code $mod+Control+Shift+k move workspace to output up
 
-#
 # Scratchpad:
-#
 
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
