@@ -1,7 +1,6 @@
 #!/bin/bash
 
 Green='\033[0;32m'
-Cyan='\033[0;36m'
 Default='\033[0m'
 ICyan='\033[0;96m'
 
@@ -20,5 +19,16 @@ if [[ -f /usr/bin/flatpak ]]; then
 fi
 
 current_directory=$(pwd)
+
+cd -- "$HOME"/apps || (echo "no ~/apps directory!" && exit)
+
+echo -e "${ICyan} git apps updating...${Default}"
+
+for DIR in *; do
+	echo -e "${Green} updating $DIR${Default}"
+	cd "$DIR" || continue
+	git pull
+	cd ..
+done
 
 cd -- "$current_directory" || exit
