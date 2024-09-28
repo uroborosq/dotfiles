@@ -1,15 +1,16 @@
-profile work {
-	output eDP-1 scale 1.25 position 0,0 enable
-	output DP-1 scale 1.0 position 1536,0 enable 
-}
-
 profile laptoponly {
 	output eDP-1 scale 1.25 position 0,0 enable 
 }
 
 profile home_three_monitors {
 	output eDP-1 disable
-	output HDMI-A-1 scale 1.25 mode 2560x1440@144Hz position 0,0 
-	output DP-1 scale 1.5 mode 3840x2160@144Hz position 2048,0 
+	output "LG Electronics LG ULTRAGEAR 310NTTQDU745" scale 1.25 mode 2560x1440@144Hz position 0,0 
+	output "Acer Technologies XV322QK KV 54030A5414200" scale 1.5 mode 3840x2160@144Hz position 2048,0 
 }
+profile work {
+	output eDP-1 disable
+	output HDMI-A-1 scale 1.0 position 0,360 enable 
+	output DP-1 scale 1.0 position 1920,0 enable
+}
+
 

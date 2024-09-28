@@ -27,7 +27,7 @@ echo -e "${ICyan} git apps updating...${Default}"
 for DIR in *; do
 	echo -e "${Green} updating $DIR${Default}"
 	cd "$DIR" || continue
-	git pull
+	[[ -d .git ]] && git pull || echo "no git repo!"
 	cd ..
 done
 
