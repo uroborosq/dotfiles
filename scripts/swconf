@@ -1,4 +1,9 @@
 #!/bin/zsh
 
-nvim ~/.config/sway/config  ~/.config/waybar/config.json ~/.config/waybar/style.css  ~/.config/alacritty/alacritty.yml  ~/.config/mako/config  ~/.config/wofi/style.css ~/.config/wob/wob.ini
-exit
+nvim ~/.config/sway/config \
+    ~/.config/waybar/config.json \
+    ~/.config/waybar/style.css \
+    ~/.config/kitty/kitty.conf \
+    ~/.config/mako/config \
+    ~/.config/wofi/style.css \
+    ~/.config/wob/wob.ini
