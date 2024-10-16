@@ -30,13 +30,10 @@
 
 /* The whole bar */
 #waybar {
-  background: rgba(35, 35, 35, 0.4);
+  background: rgba(35, 35, 35, 0.8);
   color: white;
   font-family: "Cantarell";
   font-size: 13px;
-}
-
-#window {
 }
 
 window#waybar {
@@ -45,6 +42,12 @@ window#waybar {
 
 window#waybar.hidden {
   opacity: 0.2;
+}
+
+#workspaces {
+  padding: 0px 2px;
+  margin: 0px 3px;
+  border: solid rgba(100, 100, 100, 0.8) 1px;
 }
 
 #workspaces button {
