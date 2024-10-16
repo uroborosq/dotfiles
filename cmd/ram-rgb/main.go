@@ -20,8 +20,17 @@ const (
 func i2csetPerDevice(deviceNumber string, stickNumber string, first string, second string) error {
 	output, err := exec.Command("i2cset", "-y", deviceNumber, stickNumber, first, second).CombinedOutput()
 	if err != nil {
-		return fmt.Errorf("i2cet -y %s %s %s %s finished with error: %s, %s", deviceNumber, stickNumber, first, second, unsafe.String(&output[0], len(output)), err.Error())
+		return fmt.Errorf(
+			"i2cet -y %s %s %s %s finished with error: %s, %w",
+			deviceNumber,
+			stickNumber,
+			first,
+			second,
+			unsafe.String(&output[0], len(output)),
+			err,
+		)
 	}
+
 	return nil
 }
 
@@ -30,12 +39,16 @@ func setStaticColorToSingleStick(deviceNumber string, stickAddress string, red b
 	if err != nil {
 		return err
 	}
+
 	time.Sleep(delay)
+
 	err = i2csetPerDevice(deviceNumber, stickAddress, "0x09", "0x00")
 	if err != nil {
 		return err
 	}
+
 	time.Sleep(delay)
+
 	err = i2csetPerDevice(deviceNumber, stickAddress, "0x31", fmt.Sprintf("0x%x", red))
 	if err != nil {
 		return err
