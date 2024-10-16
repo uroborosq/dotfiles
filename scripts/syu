@@ -38,3 +38,8 @@ echo -e "${ICyan} go binaries updating...${Default}"
 go install github.com/Gelio/go-global-update@latest
 
 go-global-update
+
+echo -e "${ICyan} rust packages updating...${Default}"
+
+cargo install cargo-update
+cargo install-update -a
