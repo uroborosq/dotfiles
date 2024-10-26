@@ -2,3 +2,8 @@ os:
   # edit: '[ -z "$NVIM" ] && (nvim -- {{filename}}) || (nvim --server "$NVIM" --remote-send "q<CR>q" )'
   # open: "nvr --remote-send ':e {{filename}}'"
   editPreset: "nvim-remote"
+
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
