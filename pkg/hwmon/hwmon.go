@@ -129,7 +129,6 @@ func parseSensorName(name string) (int, fileType, error) {
 			break
 		}
 		buffer.WriteRune(r)
-
 	}
 	number, err := strconv.Atoi(buffer.String())
 	if err != nil {
