@@ -5,7 +5,6 @@
 // software and the intellectual property contained therein is expressly
 // limited to the terms and conditions of the License Agreement under which
 // it is provided by YADRO.
-//
 package main
 
 import (
@@ -15,6 +14,8 @@ import (
 	"os/exec"
 	"os/signal"
 	"path/filepath"
+	"slices"
+	"strings"
 	"syscall"
 
 	"github.com/charmbracelet/log"
@@ -23,15 +24,16 @@ import (
 )
 
 const (
-	sway  = "sway"
 	limit = 1000
 )
+
+var allowedDE = []string{"sway", "Hyprland"}
 
 func main() {
 	log.Infof("Starting EXEC-WAYBAR service")
 
-	if os.Getenv("XDG_CURRENT_DESKTOP") != sway {
-		log.Fatalf("Can be used only on %s", sway)
+	if !slices.Contains(allowedDE, os.Getenv("XDG_CURRENT_DESKTOP")) {
+		log.Fatalf("Can be used only on %s", strings.Join(allowedDE, ", "))
 	}
 
 	ctx, _ := signal.NotifyContext(context.Background(), syscall.SIGHUP, syscall.SIGINT, syscall.SIGKILL, syscall.SIGQUIT)
