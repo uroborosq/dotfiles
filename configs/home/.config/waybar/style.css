@@ -30,8 +30,8 @@
 
 /* The whole bar */
 #waybar {
-  background: rgba(35, 35, 35, 0.8);
-  color: white;
+  background: #232831;
+  color: #bcbec1;
   font-family: "Cantarell";
   font-size: 13px;
 }
@@ -54,13 +54,13 @@ window#waybar.hidden {
   /* To compensate for the top border and still have vertical centering */
   padding: 2px 3px;
   margin: 2px 1px;
-  color: white;
+  color: #bcbec1;
   border: solid rgba(150, 150, 150, 0.8) 1px;
 }
 
 #workspaces button.focused {
   border: solid rgba(150, 150, 150, 0.8) 1px;
-  color: white;
+  color: #bcbec1;
   border: solid white 1px;
 }
 
@@ -79,6 +79,7 @@ window#waybar.hidden {
 #mode {
 }
 
+#pulseaudio,
 #clock,
 #custom-playerctl,
 #custom-power,
@@ -105,23 +106,21 @@ window#waybar.hidden {
 #custom-ram,
 #custom-clock,
 #custom-temp,
+#temperature,
+#custom-close,
 #idle_inhibitor {
   border: solid rgba(150, 150, 150, 0.8) 1px;
   padding-left: 10px;
+  color: #bcbec1;
   padding-right: 10px;
   margin: 2px 2px;
-}
-#temperature,
-#tray,
-#custom-close {
-  color: @theme_selected_fg_color;
 }
 
 #battery {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate;
-  color: @theme_selected_fg_color;
+  color: #bcbec1;
 }
 
 #battery.warning {
@@ -142,20 +141,8 @@ window#waybar.hidden {
   animation-duration: 2s;
 }
 
-#custom-gpu-usage {
-  color: @theme_selected_fg_color;
-}
-
-#network {
-  color: @theme_selected_fg_color;
-}
-
 #network.disconnected {
   color: @wm_icon_bg;
-}
-
-#pulseaudio {
-  color: @theme_selected_fg_color;
 }
 
 #pulseaudio.muted {
