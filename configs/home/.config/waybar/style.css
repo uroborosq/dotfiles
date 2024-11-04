@@ -30,8 +30,8 @@
 
 /* The whole bar */
 #waybar {
-  background: rgba(35, 35, 35, 0.8);
-  color: white;
+  background: #232831;
+  color: #bcbec1;
   font-family: "Cantarell";
   font-size: 13px;
 }
@@ -47,38 +47,53 @@ window#waybar.hidden {
 #workspaces {
   padding: 0px 2px;
   margin: 0px 3px;
-  border: solid rgba(100, 100, 100, 0.8) 1px;
 }
 
 #workspaces button {
   /* To compensate for the top border and still have vertical centering */
   padding: 2px 3px;
   margin: 2px 1px;
-  color: white;
+  color: #bcbec1;
   border: solid rgba(150, 150, 150, 0.8) 1px;
+}
+
+#workspaces button.active {
+  border: solid rgba(150, 150, 150, 0.8) 1px;
+  color: #bcbec1;
+  font-weight: bold;
+  border: solid white 1px;
 }
 
 #workspaces button.focused {
   border: solid rgba(150, 150, 150, 0.8) 1px;
-  color: white;
+  font-weight: bold;
+  color: #bcbec1;
   border: solid white 1px;
 }
 
 #workspaces button.infocused {
   border: solid rgba(150, 150, 150, 0.8) 1px;
-  color: white;
+  color: red;
+  border: solid white 1px;
+}
+
+#workspaces button.persistent {
+  border: solid rgba(150, 150, 150, 0.8) 1px;
+  color: red;
   border: solid white 1px;
 }
 
 #workspaces button.urgent {
-  border-color: @error_color;
-  color: @error_color;
+  border-color: #30b9d9;
+  color: #30b9d9;
   border: solid blue 1px;
 }
 
 #mode {
 }
 
+#custom-logo,
+#pulseaudio,
 #clock,
 #custom-playerctl,
 #custom-power,
@@ -105,23 +120,21 @@ window#waybar.hidden {
 #custom-ram,
 #custom-clock,
 #custom-temp,
+#temperature,
+#custom-close,
 #idle_inhibitor {
   border: solid rgba(150, 150, 150, 0.8) 1px;
   padding-left: 10px;
+  color: #bcbec1;
   padding-right: 10px;
   margin: 2px 2px;
-}
-#temperature,
-#tray,
-#custom-close {
-  color: @theme_selected_fg_color;
 }
 
 #battery {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate;
-  color: @theme_selected_fg_color;
+  color: #bcbec1;
 }
 
 #battery.warning {
@@ -142,20 +155,8 @@ window#waybar.hidden {
   animation-duration: 2s;
 }
 
-#custom-gpu-usage {
-  color: @theme_selected_fg_color;
-}
-
-#network {
-  color: @theme_selected_fg_color;
-}
-
 #network.disconnected {
   color: @wm_icon_bg;
-}
-
-#pulseaudio {
-  color: @theme_selected_fg_color;
 }
 
 #pulseaudio.muted {
@@ -176,5 +177,5 @@ window#waybar.hidden {
 }
 
 #idle_inhibitor.activated {
-  color: @theme_selected_fg_color;
+  color: #30b9d9;
 }

@@ -2,22 +2,23 @@
   {
     "layer": "top",
     "modules-left": [
-      "sway/workspaces",
+      "custom/logo",
       "custom/cpu",
       "custom/cpu-freq",
       "custom/ram",
       "custom/temp",
-      "custom/net"
+      "custom/net",
+      "custom/playerctl"
     ],
     "modules-center": [
       "custom/clock"
     ],
     "modules-right": [
-      "custom/playerctl",
+      "hyprland/workspaces",
       "tray",
-      "sway/language",
-      "pulseaudio",
+      "hyprland/language",
       "network",
+      "idle_inhibitor",
       "battery"
     ],
     "sway/window": {
@@ -42,14 +43,14 @@
         ""
       ]
     },
-    "sway/workspaces": {
+    "custom/logo": {
+      "format": " ",
+      "on-click": "kitty --hold --class terminal-floating fastfetch"
+    },
+    "hyprland/workspaces": {
       "all-outputs": true,
       "persistent_workspaces": {
-        "1": [],
-        "2": [],
-        "3": [],
-        "4": [],
-        "5": []
+        "*": 4
       }
     },
     "custom/playerctl": {
@@ -67,7 +68,9 @@
       "format": "{}",
       "interval": 1,
       "exec": "/usr/bin/uq-cpu-usage-once",
-      "on-click": "kitty --class=terminal-floating htop"
+      "on-click": "kitty --class=terminal-floating htop",
+      "min-length": 5,
+      "max-length": 5
     },
     "custom/ram": {
       "format": "{}",
@@ -77,12 +80,16 @@
     "custom/cpu-freq": {
       "format": "{}",
       "interval": 1,
-      "exec": "/usr/bin/uq-cpu-frequency"
+      "exec": "/usr/bin/uq-cpu-frequency",
+      "min-length": 8,
+      "max-length": 8
     },
     "custom/net": {
       "format": "{}",
       "interval": 1,
-      "exec": "/usr/bin/uq-net"
+      "exec": "/usr/bin/uq-net",
+      "min-length": 16,
+      "max-length": 16
     },
     "memory": {
       "interval": 5,
@@ -131,7 +138,7 @@
       "scroll-step": 1,
       "on-click": "kitty --class=terminal-floating ncpamixer -t o"
     },
-    "sway/language": {
+    "hyprland/language": {
       "format": "{}",
       "min-length": 3
     },
@@ -139,7 +146,8 @@
       "format": " {}",
       "interval": 2,
       "exec": "/usr/bin/uq-thinkpad-e14-gen-temperature",
-      "min-length": 10
+      "min-length": 13,
+      "max-length": 13
     },
     "network": {
       "interval": 2,
@@ -154,6 +162,13 @@
       "max-length": 50,
       "min-length": 2,
       "on-click": "kitty --class=terminal-floating nmtui-connect"
+    },
+    "idle_inhibitor": {
+      "format": "{icon}",
+      "format-icons": {
+        "activated": "",
+        "deactivated": ""
+      }
     }
   }
 ]

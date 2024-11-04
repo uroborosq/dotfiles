@@ -128,4 +128,9 @@ j() {
 typeset -gaU chpwd_functions
 chpwd_functions+=__jump_chpwd
 
+
+function launch {
+      nohup $1 >/dev/null 2>/dev/null & disown; exit
+}
+
 compctl -U -K jump_completion j
