@@ -9,11 +9,11 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"os"
 	"os/exec"
 	"os/signal"
-	"path/filepath"
 	"slices"
 	"strings"
 	"syscall"
@@ -30,7 +30,10 @@ const (
 var allowedDE = []string{"sway", "Hyprland"}
 
 func main() {
-	log.Infof("Starting EXEC-WAYBAR service")
+	path := flag.String("path", "", "path to waybar config")
+	flag.Parse()
+
+	logger.Infof("Starting EXEC-WAYBAR service")
 
 	if !slices.Contains(allowedDE, os.Getenv("XDG_CURRENT_DESKTOP")) {
 		log.Fatalf("Can be used only on %s", strings.Join(allowedDE, ", "))
@@ -41,15 +44,10 @@ func main() {
 	for range limit {
 		select {
 		case <-ctx.Done():
-			log.Infof("Received interrupt signal! Aboring...")
+			log.Infof("Received interrupt signal! Aborting...")
 			os.Exit(1)
 		default:
-			homeDir, err := os.UserHomeDir()
-			if err != nil {
-				log.Fatalf("can't determine user home dir: %s", err.Error())
-			}
-			configPath := filepath.Join(homeDir, ".config", "waybar", "config.json")
-			if err := exec.Command("waybar", fmt.Sprintf("--config %s", configPath)).Run(); err != nil {
+			if err := exec.Command("waybar", fmt.Sprintf("--config %s", *path)).Run(); err != nil {
 				logger.Warnf(err.Error())
 			}
 		}
