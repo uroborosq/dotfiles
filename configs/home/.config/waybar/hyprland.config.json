@@ -2,7 +2,6 @@
   {
     "layer": "top",
     "modules-left": [
-      "custom/logo",
       "custom/cpu",
       "custom/cpu-freq",
       "custom/ram",

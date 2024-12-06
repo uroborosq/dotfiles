@@ -43,3 +43,5 @@ echo -e "${ICyan} rust packages updating...${Default}"
 
 cargo install cargo-update
 cargo install-update -a
+
+echo -e "${ICyan} hyprland plugins updating...${Default}"

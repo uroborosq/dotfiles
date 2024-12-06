@@ -273,7 +273,7 @@ exec --no-startup-id /usr/lib/pam_kwallet_init
 # popup notification service
 exec --no-startup-id /usr/bin/mako
 # show panels
-exec "killall uq-exec-waybar; uq-exec-waybar"
+exec "killall uq-exec-waybar; uq-exec-waybar --config ~/.config/waybar/sway.config.json"
 exec_always "killall waybar"
 # automatic display profiles
 exec_always "killall kanshi; kanshi"
