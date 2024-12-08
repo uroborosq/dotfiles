@@ -45,3 +45,6 @@ cargo install cargo-update
 cargo install-update -a
 
 echo -e "${ICyan} hyprland plugins updating...${Default}"
+if [[ -f /usr/bin/hyprpm ]]; then
+	hyprpm update
+fi
