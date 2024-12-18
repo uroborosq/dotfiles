@@ -14,7 +14,7 @@ const (
 	red          byte = 0
 	green        byte = 255
 	blue         byte = 255
-	deviceNumber      = "7"
+	deviceNumber      = "0"
 )
 
 func i2csetPerDevice(deviceNumber string, stickNumber string, first string, second string) error {

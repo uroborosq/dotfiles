@@ -16,6 +16,7 @@ func (b *CpufreqBooster) SetStatus(status bool) error {
 	if status {
 		return os.WriteFile(b.path, []byte{'1'}, 0644)
 	}
+
 	return os.WriteFile(b.path, []byte{'0'}, 0644)
 }
 
@@ -24,5 +25,6 @@ func (b *CpufreqBooster) Status() bool {
 	if err != nil {
 		return false
 	}
+
 	return output[0] == '1'
 }
