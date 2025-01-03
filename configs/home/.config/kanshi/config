@@ -13,4 +13,7 @@ profile work {
 	output DP-1 scale 1.0 position 1920,0 mode 2560x1440@100Hz enable
 }
 
-
+profile home_desktop {
+	output "LG Electronics LG ULTRAGEAR 310NTTQDU745" scale 1.25 mode 2560x1440@144Hz position 0,0 
+	output "Acer Technologies XV322QK KV 54030A5414200" scale 1.5 mode 3840x2160@144Hz position 2048,0 
+}
