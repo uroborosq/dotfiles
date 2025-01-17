@@ -16,6 +16,7 @@
       "hyprland/workspaces",
       "tray",
       "hyprland/language",
+      "pulseaudio",
       "network",
       "idle_inhibitor",
       "battery"
@@ -33,7 +34,7 @@
     },
     "battery": {
       "interval": 3,
-      "format": "{capacity}% {icon}  {power:0.1f} W",
+      "format": "{capacity}% {icon}    {power:0.1f} W",
       "format-icons": [
         "",
         "",
@@ -163,7 +164,7 @@
       "on-click": "kitty --class=terminal-floating nmtui-connect"
     },
     "idle_inhibitor": {
-      "format": "{icon}",
+      "format": "{icon} ",
       "format-icons": {
         "activated": "",
         "deactivated": ""
