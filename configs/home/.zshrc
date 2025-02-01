@@ -94,6 +94,7 @@ alias ssh='TERM=xterm-256color kitten ssh'
 alias sssh='TERM=xterm-256color kitten ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null'
 alias rr='ranger'
 alias lg='lazygit'
+alias ln='launch neovide'
 # Path
 
 export PATH="$HOME/.local/bin:$PATH"
