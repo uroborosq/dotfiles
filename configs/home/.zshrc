@@ -80,7 +80,6 @@ key[Shift-Tab]="${terminfo[kcbt]}"
 
 # Aliases definitions part
 
-alias sudo=run0
 alias ok=exit
 alias nf=fastfetch
 alias vim='nvim'
