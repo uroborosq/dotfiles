@@ -34,6 +34,7 @@ antigen bundle command-not-found
 antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle zdharma-continuum/fast-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle MichaelAquilina/zsh-you-should-use
 
 antigen theme romkatv/powerlevel10k
 
@@ -82,7 +83,6 @@ key[Shift-Tab]="${terminfo[kcbt]}"
 
 alias ok=exit
 alias nf=fastfetch
-alias vim='nvim'
 alias svim='sudo nvim'
 alias pg='pwgen -cn1sy 16'
 alias ls="lsd"
@@ -94,7 +94,6 @@ alias ssh='TERM=xterm-256color kitten ssh'
 alias sssh='TERM=xterm-256color kitten ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null'
 alias rr='ranger'
 alias lg='lazygit'
-alias ln='launch neovide'
 # Path
 
 export PATH="$HOME/.local/bin:$PATH"

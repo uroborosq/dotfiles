@@ -7,7 +7,9 @@
 ## Server
 ## You can set the server endpoint here and an optional authentication token if required.
 [server]
-endpoint = "http://localhost:22442" # http or https URL
+endpoint = "http://localhost:8800"              # http or https URL
+token = "auth_27c37522842c48ffa33bfa7127e84ae5"
+
 
 ## You can add custom request headers.
 # [server.requestHeaders]
@@ -26,4 +28,3 @@ endpoint = "http://localhost:22442" # http or https URL
 ## Your contribution is greatly appreciated. However, if you prefer not to participate, you can disable anonymous usage tracking here.
 [anonymousUsageTracking]
 disable = true # set to true to disable
-
