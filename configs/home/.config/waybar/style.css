@@ -32,7 +32,8 @@
 #waybar {
   background: #232831;
   color: #bcbec1;
-  font-family: "Cantarell";
+  font-family: "Adwaita";
+  /* font-weight: bold; */
   font-size: 13px;
 }
 

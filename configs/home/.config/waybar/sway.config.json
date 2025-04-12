@@ -90,7 +90,7 @@
       "max-length": 100
     },
     "custom/clock": {
-      "exec": "date '+%H:%m %d %b %a'",
+      "exec": "date '+%H:%M %d %b %a'",
       "format": "{}",
       "interval": 1,
       "on-click": "kitty --class=terminal-floating calcurse"

@@ -41,14 +41,9 @@ if [[ $(hostname) == "NB-3814" ]]; then
 	GO_BINARIES=$(/usr/bin/ls "$GOPATH"/bin -I buf)
 fi
 
-go-global-update $GO_BINARIES
+go-global-update "$GO_BINARIES"
 
 echo -e "${ICyan} rust packages updating...${Default}"
 
 cargo install cargo-update
 cargo install-update -a
-
-echo -e "${ICyan} hyprland plugins updating...${Default}"
-if [[ -f /usr/bin/hyprpm ]]; then
-	hyprpm update
-fi
