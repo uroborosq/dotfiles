@@ -33,17 +33,19 @@ done
 
 cd -- "$current_directory" || exit
 
-echo -e "${ICyan} go binaries updating...${Default}"
+if command -v go 2>&1 >/dev/null; then
+	echo -e "${ICyan} go binaries updating...${Default}"
+	go install github.com/Gelio/go-global-update@latest
 
-go install github.com/Gelio/go-global-update@latest
-
-if [[ $(hostname) == "NB-3814" ]]; then
-	GO_BINARIES=$(/usr/bin/ls "$GOPATH"/bin -I buf)
+	if [[ $(hostname) == "NB-3814" ]]; then
+		GO_BINARIES=$(/usr/bin/ls "$GOPATH"/bin -I buf)
+	fi
 fi
-
 go-global-update "$GO_BINARIES"
 
-echo -e "${ICyan} rust packages updating...${Default}"
+if command -v cargo 2>&1 >/dev/null; then
+	echo -e "${ICyan} rust packages updating...${Default}"
 
-cargo install cargo-update
-cargo install-update -a
+	cargo install cargo-update
+	cargo install-update -a
+fi
