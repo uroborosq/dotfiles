@@ -90,11 +90,15 @@ alias l="lsd --date '+%d.%m.%Y %H:%M' -lah"
 alias св='cd'
 alias rmunsed='sudo pacman -Rnucs $(pacman -Qtdq)'
 alias grep='grep --color=auto'
-alias ssh='TERM=xterm-256color kitten ssh'
-alias sssh='TERM=xterm-256color kitten ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null'
+alias ssh='kitten ssh'
+alias sssh='kitten ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null'
 alias rr='ranger'
 alias lg='lazygit'
 # Path
+#
+if [[ $TERM == "xterm-kitty" ]]; then
+  alias mpv='mpv -vo=kitty'
+fi
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
