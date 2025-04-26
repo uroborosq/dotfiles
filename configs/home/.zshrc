@@ -90,10 +90,14 @@ alias l="lsd --date '+%d.%m.%Y %H:%M' -lah"
 alias св='cd'
 alias rmunsed='sudo pacman -Rnucs $(pacman -Qtdq)'
 alias grep='grep --color=auto'
+# alias ssh='TERM=xterm-256color kitten ssh'
+# alias sssh='TERM=xterm-256color kitten ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null'
 alias ssh='kitten ssh'
 alias sssh='kitten ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null'
 alias rr='ranger'
 alias lg='lazygit'
+alias fzf='fzf --preview "bat --style=numbers --color=always {1}" --preview-window=right:50%'
+alias ffzf='fzf --ansi --prompt="Search>" --bind "change:reload:rg --color=always --smart-case --line-number --column {q} || true" --delimiter ":" --nth 3..'
 # Path
 #
 if [[ $TERM == "xterm-kitty" ]]; then
@@ -102,10 +106,16 @@ fi
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/Рабочий стол/Linux/bin/:$PATH"
-export PATH="$HOME/Рабочий стол/Linux/scripts/:$PATH"
 export PATH="$HOME/.local/share/go/bin/:$PATH"
 
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
 
 ulimit -n 10000
 
