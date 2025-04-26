@@ -5,7 +5,7 @@ set $floating_term kitty --class=terminal-floating
 set $term kitty
 set $menu wofi --allow-images --insensitive true --show drun -a -w 2
 set $FULLSCREEN_MENU wofi --allow-images --insensitive true --show drun -a -W 100% -H 80% -w 6
-set $opacity 0.9
+set $opacity 1.0
 
 ### Правила окон
 
@@ -15,28 +15,21 @@ for_window [title="Choose ONE of the audio conference options"] floating enable
 for_window [title="Открыть файл"] floating enable
 for_window [title="Открыть папку"] floating enable
 for_window [title="Firefox — индикатор доступа"] floating enable
-for_window [app_id="terminal-floating"] floating enable
-# opacity $opacity, blur enable
-# for_window [app_id="Alacritty"] opacity $opacity, blur enable
-# for_window [app_id="kitty"] opacity $opacity, blur enable
-# for_window [app_id="neovide"] blur enable, opacity $opacity
+for_window [app_id="terminal-floating"] floating enable, opacity $opacity
+for_window [app_id="Alacritty"] opacity $opacity
+for_window [app_id="kitty"] opacity $opacity
+for_window [app_id="neovide"] opacity $opacity
 
-corner_radius 5
-layer_effects "waybar" blur enable 
-### Настройка мониторов
-# default_border pixel 10px
 gaps inner 5
-# corner_radius 10
 
 # Управление обоями
-
-# output "*" bg /usr/share/backgrounds/archlinux/landscape.jpg fill
 
 exec waypaper --restore
 
 ### Настройка энергосбережения
 
-set $SWAYLOCK_COMMAND "swaylock -f --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5 --effect-vignette 0.5:0.5 --ring-color ffffff --key-hl-color 00CCff --line-color 00000000 --inside-color 00000088 --separator-color 00000000 --text-color ffffff"
+# set $SWAYLOCK_COMMAND "swaylock -f --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5 --effect-vignette 0.5:0.5 --ring-color ffffff --key-hl-color 00CCff --line-color 00000000 --inside-color 00000088 --separator-color 00000000 --text-color ffffff"
+set $SWAYLOCK_COMMAND "swaylock -f --image /usr/share/backgrounds/archlinux/geolanes.png --indicator-idle-visible --inside-color 0x363636"
 
 exec swayidle -w \
 timeout 270 'notify-send Энергосбережение "скоро засну"' \
@@ -158,7 +151,7 @@ bindsym --to-code $mod+b splith
 bindsym --to-code $mod+v splitv
 
 # Switch the current container between different layout styles
-bindsym --to-code $mod+s layout stacking
+# bindsym --to-code $mod+s layout stacking # not needed at all
 bindsym --to-code $mod+w layout tabbed
 bindsym --to-code $mod+e layout toggle split
 
@@ -213,9 +206,11 @@ mode "resize" {
 bindsym --locked XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ && wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -o '[0-9.]\+' | awk '{ print $1 * 100 }' > $WOBSOCK
 bindsym --locked XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -o '[0-9.]\+' | awk '{ print $1 * 100 }' > $WOBSOCK
 bindsym --locked XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && ([[ $(wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -i muted) == "" ]] && wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -o '[0-9.]\+' | awk '{ print $1 * 100 }' > $WOBSOCK) || echo 0 > $WOBSOCK
-# Скриншоты
 
-bindsym Print exec slurp | grim -g - - | wl-copy && wl-paste > $(xdg-user-dir PICTURES)/Снимки\ экрана/$(date +'%Y-%m-%d-%H%M%SС.png') # Скриншот области
+bindsym --to-code $mod+s exec $floating_term ncpamixer -t o
+
+# Скриншоты
+bindsym Print exec slurp | grim -g - - | wl-copy && wl-paste > $(xdg-user-dir PICTURES)/screenshots/$(date +'%Y-%m-%d-%H%M%SС.png') # Скриншот области
 
 # Яркость
 
@@ -228,7 +223,7 @@ bindsym --locked --no-warn XF86AudioPlay exec playerctl play-pause
 bindsym --locked --no-warn XF86AudioNext exec playerctl next
 bindsym --locked --no-warn XF86AudioPrev exec playerctl previous
 
-bindsym --to-code Mod1+p exec cliphist list | wofi -S dmenu | cliphist decode | wl-copy
+bindsym --to-code $mod+p exec cliphist list | wofi -S dmenu | cliphist decode | wl-copy
 
 
 # Жесты тачпада
