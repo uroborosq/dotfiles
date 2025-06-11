@@ -29,7 +29,7 @@ sync:
 		host_path=$$(echo "$$i" | cut -c13-) ; \
 		if [[ -f $$i ]]; then \
 			echo "Linking $$host_path to $$i" ; \
-			ln -f $$host_path $$i ; \
+			sudo ln -f $$host_path $$i ; \
 		fi ; \
 	done 
 
@@ -48,10 +48,10 @@ config:
 		echo $$i $$path ; \
 		if [[ -d $$i ]]; then \
 			echo "Creating directory $$i" ; \
-			mkdir -p $$path ; \
+			sudo mkdir -p $$path ; \
 		elif [[ -f $$i ]]; then \
 			echo "Linking $$i to $$path" ; \
-			ln -f $$i $$path ; \
+			sudo ln -f $$i $$path ; \
 		fi \
 	done
 	@for i in $(shell find configs/home); do \
