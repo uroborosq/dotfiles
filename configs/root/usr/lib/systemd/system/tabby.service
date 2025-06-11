@@ -1,8 +1,0 @@
-[Unit]
-Description=Self-hosted AI code assitant Tabby
-
-[Service]
-ExecStart=/usr/bin/tabby serve --model StarCoder-1B --device vulkan --port 22442 --parallelism 12
-
-[Install]
-WantedBy=multi-user.target

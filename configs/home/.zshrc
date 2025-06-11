@@ -48,6 +48,9 @@ bindkey '^[[B' history-substring-search-down
 bindkey '^[[H' beginning-of-line
 bindkey '^[[F' end-of-line
 
+# bindkey '^[[C' forward-word
+# bindkey '^[[D' backward-word
+
 typeset -g -A key
 
 key[Home]="${terminfo[khome]}"
@@ -98,6 +101,8 @@ alias rr='ranger'
 alias lg='lazygit'
 alias fzf='fzf --preview "bat --style=numbers --color=always {1}" --preview-window=right:50%'
 alias ffzf='fzf --ansi --prompt="Search>" --bind "change:reload:rg --color=always --smart-case --line-number --column {q} || true" --delimiter ":" --nth 3..'
+alias nv='nvim'
+
 # Path
 #
 if [[ $TERM == "xterm-kitty" ]]; then
@@ -112,7 +117,7 @@ function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
 	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
+		builtin cd -- "$cwd" || exit
 	fi
 	rm -f -- "$tmp"
 }
@@ -137,7 +142,7 @@ jump_completion() {
 
 j() {
   local dir="$(jump cd $@)"
-  test -d "$dir" && cd "$dir"
+  test -d "$dir" && cd "$dir" || exit
 }
 
 typeset -gaU chpwd_functions
@@ -145,7 +150,7 @@ chpwd_functions+=__jump_chpwd
 
 
 function launch {
-      nohup $1 >/dev/null 2>/dev/null & disown; exit
+      nohup "$1" >/dev/null 2>/dev/null & disown; exit
 }
 
 compctl -U -K jump_completion j
