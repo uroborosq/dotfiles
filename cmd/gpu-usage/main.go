@@ -13,5 +13,6 @@ func main() {
 		fmt.Printf("error: %s", string(output))
 		os.Exit(1)
 	}
+
 	fmt.Printf("%s%%\n", strings.TrimSpace(string(output)))
 }

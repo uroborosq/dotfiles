@@ -53,22 +53,30 @@ func setStaticColorToSingleStick(deviceNumber string, stickAddress string, red b
 	if err != nil {
 		return err
 	}
+
 	time.Sleep(delay)
+
 	err = i2csetPerDevice(deviceNumber, stickAddress, "0x32", fmt.Sprintf("0x%x", green))
 	if err != nil {
 		return err
 	}
+
 	time.Sleep(delay)
+
 	err = i2csetPerDevice(deviceNumber, stickAddress, "0x33", fmt.Sprintf("0x%x", blue))
 	if err != nil {
 		return err
 	}
+
 	time.Sleep(delay)
+
 	err = i2csetPerDevice(deviceNumber, stickAddress, "0x08", "0x44")
 	if err != nil {
 		return err
 	}
+
 	time.Sleep(delay)
+
 	return nil
 }
 
@@ -77,6 +85,7 @@ func setOrange() error {
 	if err != nil {
 		return err
 	}
+
 	return setStaticColorToSingleStick(deviceNumber, "0x63", red, green, blue)
 }
 
@@ -85,6 +94,7 @@ func turnOff() error {
 	if err != nil {
 		return err
 	}
+
 	return setStaticColorToSingleStick(deviceNumber, "0x63", 0, 0, 0)
 }
 
@@ -92,6 +102,7 @@ func main() {
 	offFlag := flag.Bool("off", false, "turn off rgb lighting")
 	onFlag := flag.Bool("on", false, "turn on with 255 60 0")
 	flag.Parse()
+
 	if *onFlag && *offFlag {
 		fmt.Println("error")
 		os.Exit(1)
@@ -111,5 +122,6 @@ func main() {
 		fmt.Println("no flags used")
 		os.Exit(1)
 	}
+
 	fmt.Println("ok")
 }

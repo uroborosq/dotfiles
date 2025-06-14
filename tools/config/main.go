@@ -58,9 +58,11 @@ func main() {
 	userPath := filepath.Join(sourcePath, "home")
 
 	syncDir(systemPath, "/", linker.SymLinker{})
+
 	currentUser, err := user.Current()
 	if err != nil {
 		panic(err)
 	}
+
 	syncDir(userPath, currentUser.HomeDir, linker.SymLinker{})
 }

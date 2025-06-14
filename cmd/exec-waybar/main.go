@@ -10,7 +10,6 @@ package main
 import (
 	"context"
 	"flag"
-	"fmt"
 	"os"
 	"os/exec"
 	"os/signal"
@@ -19,7 +18,6 @@ import (
 	"syscall"
 
 	"github.com/charmbracelet/log"
-
 	"linux/pkg/logger"
 )
 
@@ -47,11 +45,12 @@ func main() {
 			log.Infof("Received interrupt signal! Aborting...")
 			os.Exit(1)
 		default:
-			if err := exec.Command("waybar", fmt.Sprintf("--config %s", *path)).Run(); err != nil {
+			if err := exec.Command("waybar", "--config "+*path).Run(); err != nil {
 				logger.Warnf(err.Error())
 			}
 		}
 	}
+
 	logger.Fatalf("Exceeded number of attempts: %d", limit)
 	os.Exit(1)
 }

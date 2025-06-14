@@ -47,6 +47,7 @@ func main() {
 					break
 				}
 			}
+
 			waitGroup.Done()
 		}()
 	}
