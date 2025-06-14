@@ -14,6 +14,7 @@ func main() {
 	memTotalStr, _ := bufReader.ReadString('\n')
 	bufReader.ReadLine()
 	memAvailableStr, _ := bufReader.ReadString('\n')
+
 	for range 11 {
 		bufReader.ReadLine()
 	}

@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/spf13/viper"
-
 	"linux/pkg/battery"
 	"linux/pkg/boost"
 	"linux/pkg/logger"

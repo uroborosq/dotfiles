@@ -1,11 +1,12 @@
 package monitor
 
 import (
+	"errors"
 	"fmt"
+	"slices"
 
 	"github.com/godbus/dbus/v5"
 	"github.com/kr/pretty"
-	"golang.org/x/exp/slices"
 )
 
 const (
@@ -100,7 +101,7 @@ func GetBuiltinIndex(state State) (int, error) {
 		}
 	}
 
-	return 0, fmt.Errorf("can't determine builtin monitor")
+	return 0, errors.New("can't determine builtin monitor")
 }
 
 type ApplyConfigType uint32
@@ -113,21 +114,21 @@ const (
 
 func ExternalOny(conn *dbus.Conn, state State, builtinMonitorInfo Info) error {
 	if len(state.Monitors) != 2 {
-		return fmt.Errorf("only dual monitor configuration is supported")
+		return errors.New("only dual monitor configuration is supported")
 	}
 
 	builtinLogicalMonitorIdx := slices.IndexFunc(state.LogicalMonitors, func(logicalMonitor LogicalMonitorResponse) bool {
 		return slices.Contains(logicalMonitor.Monitors, builtinMonitorInfo)
 	})
 	if builtinLogicalMonitorIdx == -1 {
-		return fmt.Errorf("given logical configuration doesn't contain builtin monitor")
+		return errors.New("given logical configuration doesn't contain builtin monitor")
 	}
 
 	builtinPhysicalMonitorIdx := slices.IndexFunc(state.Monitors, func(monitor Monitor) bool {
 		return monitor.Info == builtinMonitorInfo
 	})
 	if builtinPhysicalMonitorIdx == -1 {
-		return fmt.Errorf("given physical configuration doesn't contain builtin monitor")
+		return errors.New("given physical configuration doesn't contain builtin monitor")
 	}
 
 	logicalMonitors := make([]LogicalMonitorRequest, 1)
@@ -151,16 +152,17 @@ func ExternalOny(conn *dbus.Conn, state State, builtinMonitorInfo Info) error {
 	pretty.Println(logicalMonitors)
 
 	mutter := conn.Object(dbusDestMutterDisplayConfig, dbusPathMutterDisplayConfig)
+
 	return mutter.Call(dbusMethodApplyMonitorsConfig, 0, state.Serial, Persistent, logicalMonitors, state.Properties).Err
 }
 
 func TwoMonitors(conn *dbus.Conn, state State, builtinMonitorInfo Info) error {
 	if len(state.LogicalMonitors) != 1 || len(state.Monitors) != 2 {
-		return fmt.Errorf("wrong display configuration")
+		return errors.New("wrong display configuration")
 	}
 
 	if slices.Contains(state.LogicalMonitors[0].Monitors, builtinMonitorInfo) {
-		return fmt.Errorf("wrong display configuration")
+		return errors.New("wrong display configuration")
 	}
 
 	builtinIdx := slices.IndexFunc(state.Monitors, func(monitor Monitor) bool {
@@ -188,9 +190,11 @@ func TwoMonitors(conn *dbus.Conn, state State, builtinMonitorInfo Info) error {
 				MonitorModeID: state.Monitors[1-builtinIdx].Modes[0].Id,
 				Properties:    state.Monitors[1-builtinIdx].Properties,
 			},
-		}}
+		},
+	}
 
 	mutter := conn.Object(dbusDestMutterDisplayConfig, dbusPathMutterDisplayConfig)
+
 	return mutter.Call(dbusMethodApplyMonitorsConfig, 0, state.Serial, Persistent, logicalMonitors, state.Properties).Err
 }
 

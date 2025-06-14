@@ -5,7 +5,6 @@ import (
 	"strings"
 )
 
-
 type Battery interface {
 	IsCharging() bool
 }
@@ -25,5 +24,6 @@ func (b *PrimaryBattery) IsCharging() bool {
 	if err != nil {
 		return false
 	}
+
 	return strings.TrimSpace(string(output)) != "Discharging"
 }

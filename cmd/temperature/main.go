@@ -20,6 +20,7 @@ func main() {
 	secondSecond := make(chan byte)
 	thirdFirst := make(chan []byte)
 	thirdSecond := make(chan byte)
+
 	go get("/sys/module/k10temp/drivers/pci:k10temp/0000:00:18.3/hwmon/hwmon5/temp1_input", firstFirst, firstSecond)
 	go get("/sys/module/amdgpu/drivers/pci:amdgpu/module/drivers/pci:amdgpu/0000:03:00.0/hwmon/hwmon4/temp1_input", secondFirst, secondSecond)
 	go get("/sys/module/nvme/drivers/pci:nvme/0000:02:00.0/nvme/nvme0/hwmon3/temp3_input", thirdFirst, thirdSecond)

@@ -18,6 +18,7 @@ func getStats(str string) (int, int) {
 	total := 0
 	work := 0
 	valuesCount := len(valuesOfFirstTime)
+
 	for i := range valuesCount {
 		parsedValue, _ := strconv.Atoi(valuesOfFirstTime[i])
 		total += parsedValue
@@ -62,7 +63,7 @@ func readFile(path string) (cpuStats, error) {
 }
 
 func main() {
-	execType := flag.String("type", "once", "once or loop")
+	execType := flag.String("repeat", "once", "once or loop")
 
 	flag.Parse()
 
