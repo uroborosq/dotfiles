@@ -21,6 +21,8 @@ func main() {
 		waitGroup sync.WaitGroup
 	)
 
+	runtime.GOMAXPROCS(1) // too long to spawn all threads
+
 	waitGroup.Add(runtime.NumCPU())
 
 	for i := range runtime.NumCPU() {
