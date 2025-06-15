@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"sync"
 	"sync/atomic"
+	"time"
 	"unsafe"
 )
 
@@ -20,8 +21,6 @@ func main() {
 		maxFreq   atomic.Int64
 		waitGroup sync.WaitGroup
 	)
-
-	runtime.GOMAXPROCS(1) // too long to spawn all threads
 
 	waitGroup.Add(runtime.NumCPU())
 
