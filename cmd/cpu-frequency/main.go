@@ -7,8 +7,9 @@ import (
 	"strconv"
 	"sync"
 	"sync/atomic"
-	"time"
 	"unsafe"
+
+	"linux/pkg/hp"
 )
 
 const (
@@ -26,19 +27,9 @@ func main() {
 
 	for i := range runtime.NumCPU() {
 		go func() {
-			freqBytes, err := os.ReadFile(fmt.Sprintf(cpuFrequencySysPath, i))
-			if err != nil {
-				fmt.Println(err.Error())
-				os.Exit(1)
-			}
-
+			freqBytes := hp.P(os.ReadFile(fmt.Sprintf(cpuFrequencySysPath, i)))
 			freqStr := unsafe.String(unsafe.SliceData(freqBytes), len(freqBytes))
-
-			freq, err := strconv.ParseInt(freqStr[:len(freqBytes)-1], 10, 64)
-			if err != nil {
-				fmt.Println(err.Error())
-				os.Exit(1)
-			}
+			freq := hp.P(strconv.ParseInt(freqStr[:len(freqBytes)-1], 10, 64))
 
 			for {
 				currentMaxFreq := maxFreq.Load()
