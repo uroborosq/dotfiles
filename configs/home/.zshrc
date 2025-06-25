@@ -32,13 +32,13 @@ antigen bundle lein
 antigen bundle command-not-found
 
 antigen bundle zsh-users/zsh-history-substring-search
-antigen bundle zdharma-continuum/fast-syntax-highlighting
+# antigen bundle zdharma-continuum/fast-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle MichaelAquilina/zsh-you-should-use
 
 antigen theme romkatv/powerlevel10k
 
-
+antigen bundle zsh-users/zsh-syntax-highlighting
 antigen apply
 
 # Keybinds
