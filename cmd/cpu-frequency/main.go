@@ -8,8 +8,6 @@ import (
 	"sync"
 	"sync/atomic"
 	"unsafe"
-
-	"linux/pkg/hp"
 )
 
 const (
