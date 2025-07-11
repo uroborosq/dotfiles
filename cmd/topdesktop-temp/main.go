@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	"linux/pkg/hwmon"
 	"log"
 	"os/exec"
 	"strconv"
 	"strings"
+
+	"linux/pkg/hwmon"
 )
 
 func gpuTemp(ch chan string) {
@@ -16,6 +17,7 @@ func gpuTemp(ch chan string) {
 
 func floatToTemp(value float64) string {
 	s := strconv.FormatFloat(value, 'f', 0, 64)
+
 	return strings.Join([]string{s[:2], ".", s[2:3]}, "")
 }
 
@@ -31,5 +33,4 @@ func main() {
 	}
 
 	fmt.Printf("%s°C %s°C %s°C\n", floatToTemp(sensors["k10temp"]["Tctl"]), floatToTemp(sensors["nvme"]["Sensor 2"]), <-gpu)
-
 }

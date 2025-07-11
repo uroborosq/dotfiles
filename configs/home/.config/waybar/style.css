@@ -30,8 +30,8 @@
 
 /* The whole bar */
 #waybar {
-  background: #232831;
-  color: #bcbec1;
+  background: #1f1f28;
+  color: #dcd7ba;
   font-family: "Adwaita";
   /* font-weight: bold; */
   font-size: 13px;
@@ -54,34 +54,34 @@ window#waybar.hidden {
   /* To compensate for the top border and still have vertical centering */
   padding: 2px 3px;
   margin: 2px 1px;
-  color: #bcbec1;
+  color: #dcd7ba;
   border: solid rgba(150, 150, 150, 0.8) 1px;
 }
 
 #workspaces button.active {
   border: solid rgba(150, 150, 150, 0.8) 1px;
-  color: #bcbec1;
+  color: #dcd7ba;
   font-weight: bold;
-  border: solid white 1px;
+  border: solid #dcd7ba 1px;
 }
 
 #workspaces button.focused {
   border: solid rgba(150, 150, 150, 0.8) 1px;
   font-weight: bold;
-  color: #bcbec1;
-  border: solid white 1px;
+  color: #dcd7ba;
+  border: solid #dcd7ba 1px;
 }
 
 #workspaces button.infocused {
   border: solid rgba(150, 150, 150, 0.8) 1px;
   color: red;
-  border: solid white 1px;
+  border: solid #dcd7ba 1px;
 }
 
 #workspaces button.persistent {
   border: solid rgba(150, 150, 150, 0.8) 1px;
   color: red;
-  border: solid white 1px;
+  border: solid #dcd7ba 1px;
 }
 
 #workspaces button.urgent {
@@ -126,7 +126,7 @@ window#waybar.hidden {
 #idle_inhibitor {
   border: solid rgba(150, 150, 150, 0.8) 1px;
   padding-left: 10px;
-  color: #bcbec1;
+  color: #dcd7ba;
   padding-right: 10px;
   margin: 2px 2px;
 }
@@ -135,7 +135,7 @@ window#waybar.hidden {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate;
-  color: #bcbec1;
+  color: #dcd7ba;
 }
 
 #battery.warning {

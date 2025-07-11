@@ -32,13 +32,13 @@ antigen bundle lein
 antigen bundle command-not-found
 
 antigen bundle zsh-users/zsh-history-substring-search
-antigen bundle zdharma-continuum/fast-syntax-highlighting
+# antigen bundle zdharma-continuum/fast-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle MichaelAquilina/zsh-you-should-use
 
 antigen theme romkatv/powerlevel10k
 
-
+antigen bundle zsh-users/zsh-syntax-highlighting
 antigen apply
 
 # Keybinds
@@ -111,7 +111,9 @@ fi
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.nimble/bin:$PATH"
 export PATH="$HOME/.local/share/go/bin/:$PATH"
+export PATH="$HOME/.nimble/bin/:$PATH"
 
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd

@@ -5,9 +5,8 @@ import (
 	"flag"
 	"fmt"
 	"os/exec"
+	"slices"
 	"strings"
-
-	"golang.org/x/exp/slices"
 )
 
 func main() {
@@ -15,9 +14,11 @@ func main() {
 	flag.Parse()
 
 	cmd := exec.Command("playerctl", "metadata", "xesam:title")
+
 	titleBytes, err := cmd.Output()
 	if err != nil {
 		fmt.Println("")
+
 		return
 	}
 
@@ -49,5 +50,6 @@ func main() {
 		output.WriteString(" | ")
 		output.WriteString(string(artist))
 	}
+
 	fmt.Println(output.String())
 }

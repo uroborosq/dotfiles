@@ -26,6 +26,7 @@ func readStats(scanner *bufio.Scanner) (int64, int64) {
 			send += tmp
 		}
 	}
+
 	return received, send
 }
 

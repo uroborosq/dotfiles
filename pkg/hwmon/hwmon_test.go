@@ -2,8 +2,9 @@ package hwmon_test
 
 import (
 	"fmt"
-	"linux/pkg/hwmon"
 	"testing"
+
+	"linux/pkg/hwmon"
 )
 
 func TestLinuxSensorParser_Parse(t *testing.T) {

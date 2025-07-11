@@ -14,10 +14,10 @@ type CpufreqBooster struct {
 
 func (b *CpufreqBooster) SetStatus(status bool) error {
 	if status {
-		return os.WriteFile(b.path, []byte{'1'}, 0644)
+		return os.WriteFile(b.path, []byte{'1'}, 0o644)
 	}
 
-	return os.WriteFile(b.path, []byte{'0'}, 0644)
+	return os.WriteFile(b.path, []byte{'0'}, 0o644)
 }
 
 func (b *CpufreqBooster) Status() bool {
