@@ -21,34 +21,31 @@ func main() {
 		waitGroup sync.WaitGroup
 	)
 
-	waitGroup.Add(runtime.NumCPU())
+	runtime.GOMAXPROCS(1)
 
 	for i := range runtime.NumCPU() {
-		go func() {
-			freqBytes, err := os.ReadFile(fmt.Sprintf(cpuFrequencySysPath, i))
-			if err != nil {
-				fmt.Println(err.Error())
-				os.Exit(1)
-			}
+		freqBytes, err := os.ReadFile(fmt.Sprintf(cpuFrequencySysPath, i))
+		if err != nil {
+			fmt.Println(err.Error())
+			os.Exit(1)
+		}
 
-			freqStr := unsafe.String(unsafe.SliceData(freqBytes), len(freqBytes))
+		freqStr := unsafe.String(unsafe.SliceData(freqBytes), len(freqBytes))
 
-			freq, err := strconv.ParseInt(freqStr[:len(freqBytes)-1], 10, 64)
-			if err != nil {
-				fmt.Println(err.Error())
-				os.Exit(1)
-			}
+		freq, err := strconv.ParseInt(freqStr[:len(freqBytes)-1], 10, 64)
+		if err != nil {
+			fmt.Println(err.Error())
+			os.Exit(1)
+		}
 
-			for {
-				currentMaxFreq := maxFreq.Load()
-				if freq > currentMaxFreq && maxFreq.CompareAndSwap(currentMaxFreq, freq) {
-					break
-				} else if freq <= currentMaxFreq {
-					break
-				}
+		for {
+			currentMaxFreq := maxFreq.Load()
+			if freq > currentMaxFreq && maxFreq.CompareAndSwap(currentMaxFreq, freq) {
+				break
+			} else if freq <= currentMaxFreq {
+				break
 			}
-			waitGroup.Done()
-		}()
+		}
 	}
 
 	waitGroup.Wait()

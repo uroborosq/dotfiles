@@ -5,31 +5,10 @@ set $floating_term kitty --class=terminal-floating
 set $term kitty
 set $menu wofi --allow-images --insensitive true --show drun -a -w 2
 set $FULLSCREEN_MENU wofi --allow-images --insensitive true --show drun -a -W 100% -H 80% -w 6
-set $opacity 1.0
-
-### Правила окон
-
-for_window [class="jetbrains-(.*)" title="splash"] floating enable
-for_window [app_id="python3"] floating enable
-for_window [title="Choose ONE of the audio conference options"] floating enable
-for_window [title="Открыть файл"] floating enable
-for_window [title="Открыть папку"] floating enable
-for_window [title="Firefox — индикатор доступа"] floating enable
-for_window [app_id="terminal-floating"] floating enable, opacity $opacity
-for_window [app_id="Alacritty"] opacity $opacity
-for_window [app_id="kitty"] opacity $opacity
-for_window [app_id="neovide"] opacity $opacity
-
-gaps inner 5
-
-# Управление обоями
-
-exec waypaper --restore
 
 ### Настройка энергосбережения
 
-# set $SWAYLOCK_COMMAND "swaylock -f --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5 --effect-vignette 0.5:0.5 --ring-color ffffff --key-hl-color 00CCff --line-color 00000000 --inside-color 00000088 --separator-color 00000000 --text-color ffffff"
-set $SWAYLOCK_COMMAND "swaylock -f --image /usr/share/backgrounds/archlinux/geolanes.png --indicator-idle-visible --inside-color 0x363636"
+set $SWAYLOCK_COMMAND "swaylock -f --image ~/apps/nordic-wallpapers/wallpapers/ign_nordhills.png --inside-color 0x363636"
 
 exec swayidle -w \
 timeout 270 'notify-send Энергосбережение "скоро засну"' \
@@ -72,7 +51,7 @@ bindsym $mod+Return exec $floating_term
 # Start an normal terminal
 bindsym $mod+Mod1+Return exec $term
 # Start file manager
-bindsym --to-code $mod+Mod1+m exec $term ranger
+bindsym --to-code $mod+Mod1+m exec $term yazi
 
 
 # Kill focused window
@@ -235,14 +214,42 @@ bindgesture swipe:3:down exec ydotool key 0x27
 
 bindsym --to-code $mod+n exec networkmanager_dmenu
 
+bindsym --to-code $mod+Mod1+p exec sway-color-picker
+
 ### Внешний вид
 
-font pango:Cantarell 11
+# Управление обоями
 
-set $bg #171717
-set $fg #eff1f5
-set $br #353535
-set $ia #232425
+exec waypaper --restore
+
+# Правила окон
+set $opacity 0.95
+
+for_window [class="jetbrains-(.*)" title="splash"] floating enable
+for_window [app_id="python3"] floating enable
+for_window [title="Choose ONE of the audio conference options"] floating enable
+for_window [title="Открыть файл"] floating enable
+for_window [title="Открыть папку"] floating enable
+for_window [title="Firefox — индикатор доступа"] floating enable
+for_window [app_id="terminal-floating"] floating enable, opacity $opacity
+for_window [app_id="Alacritty"] opacity $opacity
+for_window [app_id="kitty"] opacity $opacity
+for_window [app_id="neovide"] opacity $opacity
+
+gaps inner 0
+blur enable
+titlebar_separator disable
+default_border pixel 1
+default_floating_border none
+titlebar_padding 1
+# titlebar_border_thickness 0
+
+
+font pango:Adwaita 10
+
+set $bg #1F1F28
+set $fg #DCD7BA
+set $br #363646
 
 
 # class                 border  backgr. text    indicator child_border
@@ -282,7 +289,6 @@ exec /usr/lib/xdg-desktop-portal -r & /usr/lib/xdg-desktop-portal-wlr
 exec_always --no-startup-id sworkstyle &> /tmp/workstyle.log
 # init clibboard manager
 exec wl-paste --watch cliphist store
-
 
 include /etc/sway/config.d/*
 include ~/.config/sway/config.d/*

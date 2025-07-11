@@ -6,7 +6,6 @@ require (
 	github.com/charmbracelet/log v0.2.2
 	github.com/juju/loggo v1.0.0
 	github.com/kr/pretty v0.3.1
-	golang.org/x/exp v0.0.0-20230728194245-b0cb94b80691
 )
 
 require (

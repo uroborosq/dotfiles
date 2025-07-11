@@ -22,18 +22,21 @@ func (p *LinuxSensorParser) Parse() (map[string]map[string]float64, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	sensors := make(map[string]map[string]float64, len(monitors))
+
 	for _, monitor := range monitors {
-		//if !monitor.IsDir() {
+		// if !monitor.IsDir() {
 		//	continue
 		//}
 		name, sensor, err := p.parseLinuxMonitor(monitor)
 		if err != nil {
 			continue
 		}
-		sensors[name] = sensor
 
+		sensors[name] = sensor
 	}
+
 	return sensors, nil
 }
 
@@ -44,13 +47,16 @@ type Sensor struct {
 
 func (p *LinuxSensorParser) parseLinuxMonitor(dir os.DirEntry) (string, map[string]float64, error) {
 	var driverName string
+
 	sensors := make([]Sensor, 10)
 	sensorsMap := make(map[string]float64, 10)
 	path := p.hwmonPath + dir.Name()
+
 	files, err := os.ReadDir(path)
 	if err != nil {
 		return "", nil, err
 	}
+
 	for _, file := range files {
 		name := file.Name()
 
@@ -59,7 +65,9 @@ func (p *LinuxSensorParser) parseLinuxMonitor(dir os.DirEntry) (string, map[stri
 			if err != nil {
 				continue
 			}
+
 			driverName = strings.TrimSpace(string(content))
+
 			continue
 		}
 
@@ -76,6 +84,7 @@ func (p *LinuxSensorParser) parseLinuxMonitor(dir os.DirEntry) (string, map[stri
 		if err != nil {
 			continue
 		}
+
 		switch typeFile {
 		case sensorName:
 			nameSensor := strings.TrimSpace(string(content))
@@ -86,10 +95,12 @@ func (p *LinuxSensorParser) parseLinuxMonitor(dir os.DirEntry) (string, map[stri
 			if err != nil {
 				continue
 			}
+
 			sensors[number].Value = value
 			if sensors[number].Name == "" {
 				continue
 			}
+
 			sensorsMap[sensors[number].Name] = value
 		}
 	}
@@ -121,15 +132,20 @@ func parseSensorName(name string) (int, fileType, error) {
 			return 0, 0, errors.New("gop")
 		}
 	}
+
 	var buffer strings.Builder
+
 	var counter int
 	for _, r := range name[4:] {
 		counter++
+
 		if r == '_' {
 			break
 		}
+
 		buffer.WriteRune(r)
 	}
+
 	number, err := strconv.Atoi(buffer.String())
 	if err != nil {
 		return 0, 0, err
