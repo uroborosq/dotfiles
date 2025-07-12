@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+	"sync"
 )
 
 type LinuxSensorParser struct {
@@ -23,19 +24,28 @@ func (p *LinuxSensorParser) Parse() (map[string]map[string]float64, error) {
 		return nil, err
 	}
 
+	var sensorLock sync.Mutex
 	sensors := make(map[string]map[string]float64, len(monitors))
+	var wg sync.WaitGroup
 
 	for _, monitor := range monitors {
-		// if !monitor.IsDir() {
-		//	continue
-		//}
-		name, sensor, err := p.parseLinuxMonitor(monitor)
-		if err != nil {
-			continue
-		}
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			// if !monitor.IsDir() {
+			//	continue
+			//}
+			name, sensor, err := p.parseLinuxMonitor(monitor)
+			if err != nil {
+				return
+			}
 
-		sensors[name] = sensor
+			sensorLock.Lock()
+			sensors[name] = sensor
+			sensorLock.Unlock()
+		}()
 	}
+	wg.Wait()
 
 	return sensors, nil
 }
@@ -48,7 +58,7 @@ type Sensor struct {
 func (p *LinuxSensorParser) parseLinuxMonitor(dir os.DirEntry) (string, map[string]float64, error) {
 	var driverName string
 
-	sensors := make([]Sensor, 10)
+	sensors := make([]Sensor, 0, 10)
 	sensorsMap := make(map[string]float64, 10)
 	path := p.hwmonPath + dir.Name()
 

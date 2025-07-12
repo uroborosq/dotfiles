@@ -223,7 +223,7 @@ bindsym --to-code $mod+Mod1+p exec sway-color-picker
 exec waypaper --restore
 
 # Правила окон
-set $opacity 0.95
+set $opacity 0.92
 
 for_window [class="jetbrains-(.*)" title="splash"] floating enable
 for_window [app_id="python3"] floating enable
