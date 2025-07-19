@@ -3,20 +3,11 @@ package main
 import (
 	"fmt"
 	"os"
-	"runtime/pprof"
 	"strconv"
 	"strings"
-
-	"linux/pkg/hp"
 )
 
 func main() {
-	err := pprof.StartCPUProfile(hp.P(os.OpenFile("cpu.prof", os.O_CREATE|os.O_WRONLY, 0644)))
-	if err != nil {
-		panic(err)
-	}
-	defer pprof.StopCPUProfile()
-
 	content, _ := os.ReadFile("/proc/meminfo")
 	lines := strings.Split(string(content), "\n")
 
