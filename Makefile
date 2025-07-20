@@ -3,8 +3,8 @@ CONF_FILES=$(shell find config)
 
 USER_HOME ?= $$HOME
 
+
 build:
-	#tinygo build -opt=2 -no-debug -gc=leaking -panic=trap -o ../../bin/uq-$$i main.go && echo 'Build successful' ; 
 	@go mod tidy
 	@for i in $(shell ls cmd) ; do \
 		cd cmd/$$i ; \
@@ -13,6 +13,15 @@ build:
 		cd ../.. ; \
 	done
 
+
+tinygo:
+	@go mod tidy
+	@for i in $(shell ls cmd) ; do \
+		cd cmd/$$i ; \
+		echo "Building $$i" ; \
+		tinygo build -opt=2 -no-debug -gc=leaking -panic=trap -o ../../bin/uq-$$i main.go && echo 'Build successful' ; 
+		cd ../.. ; \
+	done
 
 install: build
 	@chmod 755 bin/*

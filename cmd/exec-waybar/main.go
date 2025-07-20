@@ -18,6 +18,7 @@ import (
 	"syscall"
 
 	"github.com/charmbracelet/log"
+
 	"linux/pkg/logger"
 )
 

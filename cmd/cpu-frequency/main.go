@@ -21,8 +21,6 @@ func main() {
 		waitGroup sync.WaitGroup
 	)
 
-	runtime.GOMAXPROCS(1)
-
 	for i := range runtime.NumCPU() {
 		freqBytes, err := os.ReadFile(fmt.Sprintf(cpuFrequencySysPath, i))
 		if err != nil {
