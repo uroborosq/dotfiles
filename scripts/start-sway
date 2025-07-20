@@ -1,6 +1,6 @@
-#!/bin/env zsh
+#!/bin/env bash
 
-export $(dbus-launch)
+export "$(dbus-launch)"
 
 export SDL_VIDEODRIVER=wayland
 export _JAVA_AWT_WM_NONREPARENTING=1

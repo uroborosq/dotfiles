@@ -1,9 +1,0 @@
-#!/bin/bash
-
-paru -S \
-	plasma \
-	kdesysguar \
-	konsole \
-	yakuake \
-	spectacle \
-	plasma-wayland-session

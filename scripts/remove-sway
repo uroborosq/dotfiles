@@ -28,7 +28,7 @@ paru -Rnucs \
 	wmname \
 	network-manager-applet \
 	kanshi \
-	swaylock-effects \
+	swaylock \
 	ydotool \
 	xorg-xwayland \
 	awesome-terminal-fonts \
