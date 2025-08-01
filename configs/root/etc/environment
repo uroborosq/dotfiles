@@ -7,7 +7,7 @@ MOZ_ENABLE_WAYLAND=1
 GOPATH="/home/dmitriy.tikhomirov/.local/share/go"
 QT_QPA_PLATFORMTHEME=qt5ct
 QT_QPA_PLATFORM="wayland;xcb"
-
+YADRO_API_KEY=sk-mDcEAJXRs49ray51rf_j_A
 XCURSOR_SIZE=24
 XCURSOR_THEME=Breeze_Snow
 ELECTRON_OZONE_PLATFORM_HINT=auto
