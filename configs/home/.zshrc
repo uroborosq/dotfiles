@@ -32,7 +32,6 @@ antigen bundle lein
 antigen bundle command-not-found
 
 antigen bundle zsh-users/zsh-history-substring-search
-# antigen bundle zdharma-continuum/fast-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle MichaelAquilina/zsh-you-should-use
 
@@ -111,9 +110,7 @@ fi
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.nimble/bin:$PATH"
 export PATH="$HOME/.local/share/go/bin/:$PATH"
-export PATH="$HOME/.nimble/bin/:$PATH"
 
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -153,6 +150,12 @@ chpwd_functions+=__jump_chpwd
 
 function launch {
       nohup "$1" >/dev/null 2>/dev/null & disown; exit
+}
+
+function nd {
+  ADDRESS=$(hyprctl activewindow -j | jq -r ".address")
+  bash -c "TERM=xterm-256color neovide; hyprctl dispatch movetoworkspace r+0,address:$ADDRESS" &
+  hyprctl dispatch movetoworkspacesilent special:magic,address:"$ADDRESS"
 }
 
 compctl -U -K jump_completion j

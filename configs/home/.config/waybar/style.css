@@ -90,9 +90,9 @@ window#waybar.hidden {
   border: solid blue 1px;
 }
 
-#mode {
-}
+#mode {}
 
+#power-profiles-daemon,
 #custom-logo,
 #pulseaudio,
 #clock,
@@ -122,11 +122,15 @@ window#waybar.hidden {
 #custom-clock,
 #custom-temp,
 #temperature,
+#systemd-failed-units,
+#wireplumber,
+#cava,
 #custom-close,
 #idle_inhibitor {
   border: solid rgba(150, 150, 150, 0.8) 1px;
   padding-left: 10px;
   color: #dcd7ba;
+  /* text-align: center; */
   padding-right: 10px;
   margin: 2px 2px;
 }
@@ -174,8 +178,7 @@ window#waybar.hidden {
   padding-right: 10px;
 }
 
-#idle_inhibitor {
-}
+#idle_inhibitor {}
 
 #idle_inhibitor.activated {
   color: #30b9d9;
