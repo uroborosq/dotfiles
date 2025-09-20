@@ -1,0 +1,10 @@
+#!/bin/env bash
+
+WORKSPACE_ID=$(hyprctl activeworkspace -j | jq -r '.id')
+WINDOWS=$(hyprctl clients -j | jq -r ".[] | select(.workspace.name==$WORKSPACE_ID) | .address")
+
+hyprctl dispatch togglegroup
+
+for i in $WINDOWS; do
+    echo "$i"
+done

@@ -2,27 +2,92 @@
   {
     "layer": "top",
     "modules-left": [
+      "systemd-failed-units",
+      "hyprland/workspaces",
       "custom/cpu",
       "custom/cpu-freq",
       "custom/ram",
       "custom/temp",
-      "custom/net",
-      "custom/playerctl"
+      "custom/net"
     ],
     "modules-center": [
       "custom/clock"
     ],
     "modules-right": [
-      "hyprland/workspaces",
+      "cava",
+      "custom/playerctl",
       "tray",
       "hyprland/language",
       "pulseaudio",
-      "network",
       "idle_inhibitor",
+      "network",
+      "power-profiles-daemon",
       "battery"
     ],
     "sway/window": {
       "max-length": 50
+    },
+    "systemd-failed-units": {
+      "hide-on-ok": false,
+      "format": "✗ {nr_failed}",
+      "format-ok": "✓",
+      "system": true,
+      "user": true
+    },
+    "cava": {
+      "framerate": 60,
+      "autosens": 1,
+      "sensitivity": 100,
+      "bars": 14,
+      "lower_cutoff_freq": 50,
+      "higher_cutoff_freq": 10000,
+      "hide_on_silence": false,
+      "method": "pulse",
+      "source": "auto",
+      "stereo": true,
+      "reverse": false,
+      "bar_delimiter": 0,
+      "monstercat": false,
+      "waves": false,
+      "noise_reduction": 0.77,
+      "input_delay": 2,
+      "format-icons": [
+        "▁",
+        "▂",
+        "▃",
+        "▄",
+        "▅",
+        "▆",
+        "▇",
+        "█"
+      ],
+      "actions": {
+        "on-click-right": "mode"
+      }
+    },
+    "wireplumber": {
+      "format": "{volume}% {icon} {format_source}",
+      "format-muted": " {format_source}",
+      "format-source": "{source_volume}% ",
+      "format-source-muted": " ",
+      "format-icons": {
+        "default": [
+          "",
+          ""
+        ]
+      },
+      "on-click": "helvum"
+    },
+    "power-profiles-daemon": {
+      "format": "{icon} ",
+      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+      "tooltip": true,
+      "format-icons": {
+        "default": "",
+        "performance": "",
+        "balanced": "",
+        "power-saver": ""
+      }
     },
     "custom/close": {
       "format": "kill",
@@ -34,7 +99,7 @@
     },
     "battery": {
       "interval": 3,
-      "format": "{capacity}% {icon}    {power:0.1f} W",
+      "format": "{capacity}% {icon}  {power:0.1f} W",
       "format-icons": [
         "",
         "",
@@ -43,14 +108,16 @@
         ""
       ]
     },
-    "custom/logo": {
-      "format": " ",
-      "on-click": "kitty --hold --class terminal-floating fastfetch"
-    },
     "hyprland/workspaces": {
       "all-outputs": true,
       "persistent_workspaces": {
-        "*": 4
+        "1": [
+          "*"
+        ],
+        "2": "*",
+        "3": "*",
+        "4": "*",
+        "5": "*"
       }
     },
     "custom/playerctl": {
@@ -68,9 +135,7 @@
       "format": "{}",
       "interval": 1,
       "exec": "/usr/bin/uq-cpu-usage-once",
-      "on-click": "kitty --class=terminal-floating htop",
-      "min-length": 5,
-      "max-length": 5
+      "on-click": "kitty --class=terminal-floating htop"
     },
     "custom/ram": {
       "format": "{}",
@@ -80,16 +145,12 @@
     "custom/cpu-freq": {
       "format": "{}",
       "interval": 1,
-      "exec": "/usr/bin/uq-cpu-frequency",
-      "min-length": 8,
-      "max-length": 8
+      "exec": "/usr/bin/uq-cpu-frequency"
     },
     "custom/net": {
       "format": "{}",
       "interval": 1,
-      "exec": "/usr/bin/uq-net",
-      "min-length": 16,
-      "max-length": 16
+      "exec": "/usr/bin/uq-net"
     },
     "memory": {
       "interval": 5,
@@ -101,22 +162,6 @@
       "format": "{}",
       "interval": 1,
       "on-click": "kitty --class=terminal-floating calcurse"
-    },
-    "custom/pipewire": {
-      "format": "{icon}",
-      "return-type": "json",
-      "signal": 8,
-      "interval": "once",
-      "format-icons": {
-        "mute": "",
-        "default": [
-          "",
-          "",
-          "",
-          ""
-        ]
-      },
-      "exec": "pw-volume status"
     },
     "pulseaudio": {
       "format": "{volume}% {icon}",
@@ -138,7 +183,7 @@
       "scroll-step": 1,
       "on-click": "kitty --class=terminal-floating ncpamixer -t o"
     },
-    "hyprland/language": {
+    "sway/language": {
       "format": "{}",
       "min-length": 3
     },
@@ -146,12 +191,11 @@
       "format": " {}",
       "interval": 2,
       "exec": "/usr/bin/uq-thinkpad-e14-gen-temperature",
-      "min-length": 13,
-      "max-length": 13
+      "min-length": 10
     },
     "network": {
       "interval": 2,
-      "format": "{ifname}",
+      "format": "{ifname} ",
       "format-wifi": "",
       "format-ethernet": "",
       "format-disconnected": "",
