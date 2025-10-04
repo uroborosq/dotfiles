@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"runtime"
 	"sync/atomic"
 )
@@ -17,5 +16,5 @@ func main() {
 		}()
 	}
 
-	<-context.Background().Done()
+	select {}
 }

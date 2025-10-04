@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"log/syslog"
 	"strings"
 	"sync"
 	"text/template"
@@ -25,16 +26,23 @@ func blur(file string) error {
 }
 
 func main() {
-	names, err := script.Exec("swaymsg -r -t get_outputs").JQ(`.[] | select(.type == "output" and .active == true) | .name`).Slice()
+	log, err := syslog.NewLogger(syslog.LOG_ERR, 0)
 	if err != nil {
 		panic(err)
 	}
 
+	names, err := script.Exec("swaymsg -r -t get_outputs").JQ(`.[] | select(.type == "output" and .active == true) | .name`).Slice()
+	if err != nil {
+		log.Fatalln(err)
+	}
+
 	bimg.VipsVectorSetEnabled(true)
 
-	_, err = script.Slice(names).ExecForEach("grim -t jpeg -q 80 -o {{ . }} /tmp/swaylock-{{ . }}.png").Slice()
+	s, err := script.Slice(names).ExecForEach("grim -t jpeg -q 80 -o {{ . }} /tmp/swaylock-{{ . }}.png").String()
 	if err != nil {
-		panic(err)
+		log.Println(err)
+	} else if s != "" {
+		log.Println(err)
 	}
 
 	var wg sync.WaitGroup
@@ -43,7 +51,7 @@ func main() {
 			name := strings.Trim(name, `"`)
 			err := blur(fmt.Sprintf("/tmp/swaylock-%s.png", name))
 			if err != nil {
-				panic(err)
+				log.Println(err)
 			}
 		})
 	}
@@ -51,18 +59,18 @@ func main() {
 
 	t, err := template.New("").Parse("swaylock {{ range . }} -i {{ . }}:/tmp/swaylock-{{ . }}.png {{ end }}")
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 
 	b := bytes.NewBuffer(nil)
 	if err := t.Execute(b, names); err != nil {
-		panic(err)
+		log.Println(err)
 	}
 
 	args, _ := script.Args().Join().String()
 
 	err = script.Exec(b.String() + args).Wait()
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 }
