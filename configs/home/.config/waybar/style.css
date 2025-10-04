@@ -90,11 +90,9 @@ window#waybar.hidden {
   border: solid blue 1px;
 }
 
-#mode {}
 
 #power-profiles-daemon,
 #custom-logo,
-#pulseaudio,
 #clock,
 #custom-playerctl,
 #custom-power,
@@ -128,12 +126,23 @@ window#waybar.hidden {
 #custom-close,
 #idle_inhibitor {
   border: solid rgba(150, 150, 150, 0.8) 1px;
-  padding-left: 10px;
   color: #dcd7ba;
   /* text-align: center; */
+  padding-left: 10px;
   padding-right: 10px;
   margin: 2px 2px;
 }
+
+#pulseaudio,
+#network {
+  border: solid rgba(150, 150, 150, 0.8) 1px;
+  color: #dcd7ba;
+  /* text-align: center; */
+  padding-left: 10px;
+  padding-right: 16px;
+  margin: 2px 2px;
+}
+
 
 #battery {
   animation-timing-function: linear;

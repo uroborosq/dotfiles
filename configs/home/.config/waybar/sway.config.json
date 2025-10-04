@@ -7,6 +7,7 @@
       "custom/cpu",
       "custom/cpu-freq",
       "custom/ram",
+      "sway/mode",
       "custom/temp",
       "custom/net"
     ],
@@ -78,8 +79,13 @@
       },
       "on-click": "helvum"
     },
+    "sway/mode": {
+      "format": " {}",
+      "max-length": 50,
+      "min-length": 50
+    },
     "power-profiles-daemon": {
-      "format": "{icon} ",
+      "format": "{icon}",
       "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
       "tooltip": true,
       "format-icons": {
@@ -108,17 +114,8 @@
         ""
       ]
     },
-    "hyprland/workspaces": {
-      "all-outputs": true,
-      "persistent_workspaces": {
-        "1": [
-          "*"
-        ],
-        "2": "*",
-        "3": "*",
-        "4": "*",
-        "5": "*"
-      }
+    "sway/workspaces": {
+      "all-outputs": true
     },
     "custom/playerctl": {
       "format": "{}",
@@ -195,7 +192,7 @@
     },
     "network": {
       "interval": 2,
-      "format": "{ifname} ",
+      "format": "{ifname}",
       "format-wifi": "",
       "format-ethernet": "",
       "format-disconnected": "",
@@ -203,8 +200,6 @@
       "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
       "tooltip-format-ethernet": "{ifname} ",
       "tooltip-format-disconnected": "Disconnected",
-      "max-length": 50,
-      "min-length": 2,
       "on-click": "kitty --class=terminal-floating nmtui-connect"
     },
     "idle_inhibitor": {
