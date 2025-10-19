@@ -1,5 +1,3 @@
-# scrollback_pager nvim +"source $HOME/.config/kitty/vi-mode.lua"
-
 action_alias kitty_scrollback_nvim kitten $HOME/.local/share/nvim/lazy/kitty-scrollback.nvim/python/kitty_scrollback_nvim.py
 
 # Browse scrollback buffer in nvim
@@ -81,7 +79,6 @@ map alt+f toggle_layout stack
 # map ctrl+, layout_action bias 66
 map ctrl+, kitten tall.py
 text_composition_strategy 1.0 15
-
 
 map ctrl+j kitten pass_keys.py bottom ctrl+j "^nvim"
 map ctrl+k kitten pass_keys.py top    ctrl+k "^nvim"
