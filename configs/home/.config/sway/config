@@ -47,7 +47,7 @@ input type:mouse {
 bindsym --to-code $mod+d exec $menu
 
 # Start a terminal
-bindsym $mod+Return exec $floating_term
+bindsym $mod+Return exec kitten quick-access-terminal -o columns=$(echo "2 * $(swaymsg -r -t get_outputs | jq '.[] | select(.focused = true) | .current_mode.width') / 3" | bc)px
 # Start an normal terminal
 bindsym $mod+Mod1+Return exec $term
 # Start file manager
@@ -249,20 +249,28 @@ for_window [app_id="Alacritty"] opacity $opacity
 for_window [app_id="kitty"] opacity $opacity
 for_window [app_id="neovide"] opacity $opacity
 
-gaps inner 0
+gaps inner 5
+corner_radius 10
 blur enable
 titlebar_separator disable
-default_border pixel 1
+
+hide_edge_borders smart
+
+default_border pixel 3
 default_floating_border none
-titlebar_padding 1
+# titlebar_padding 1
 # titlebar_border_thickness 0
+
+layer_effects kitty-quick-access {
+    blur enable;
+} 
 
 
 font pango:Adwaita 10
 
 set $bg #1F1F28
 set $fg #DCD7BA
-set $br #363646
+set $br #8B78AD
 
 
 # class                 border  backgr. text    indicator child_border
