@@ -3,18 +3,29 @@ set $mod Mod4
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 set $floating_term kitty --class=terminal-floating
 set $term kitty
-set $menu wofi --allow-images --insensitive true --show drun -a -w 2
+set $menu wofi --allow-images --insensitive true --show drun -a -w 1
 set $FULLSCREEN_MENU wofi --allow-images --insensitive true --show drun -a -W 100% -H 80% -w 6
 
-### Настройка энергосбережения
+## Настройка энергосбережения
 
-set $SWAYLOCK_COMMAND "swaylock -f --image ~/apps/nordic-wallpapers/wallpapers/ign_nordhills.png --inside-color 0x363636"
+set $SWAYLOCK_COMMAND "uq-swaylock -f \
+                        --inside-color 36363600 \
+                        --indicator-idle-visible \
+                        --ring-color 453645AA \
+                        --line-color 00000000 \
+                        --bs-hl-color 453645AA \
+                        --layout-bg-color 00000000 \
+                        --separator-color 453645AA \
+                        --key-hl-color 8B78AD \
+                        --text-color 8B78AD \
+                        "
 
 exec swayidle -w \
-timeout 270 'notify-send Энергосбережение "скоро засну"' \
-timeout 299 $SWAYLOCK_COMMAND \
-timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-before-sleep $SWAYLOCK_COMMAND 
+    timeout 270 bash -c "echo \$(notify-send -p Энергосбережение 'скоро засну') > /tmp/notif-id" \
+    resume "makoctl dismiss -n $(cat /tmp/notif-id)" \
+    timeout 299 $SWAYLOCK_COMMAND \
+    timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+    before-sleep $SWAYLOCK_COMMAND 
 
 for_window [class="^.*"] inhibit_idle fullscreen
 
@@ -47,7 +58,8 @@ input type:mouse {
 bindsym --to-code $mod+d exec $menu
 
 # Start a terminal
-bindsym $mod+Return exec kitten quick-access-terminal -o columns=$(echo "2 * $(swaymsg -r -t get_outputs | jq '.[] | select(.focused = true) | .current_mode.width') / 3" | bc)px
+bindsym $mod+Return exec kitten quick-access-terminal -o columns=$(echo "3 * $(swaymsg -r -t get_outputs | jq '.[] | select(.focused == true) | .rect.width') / 4" | bc)px 
+
 # Start an normal terminal
 bindsym $mod+Mod1+Return exec $term
 # Start file manager
@@ -125,6 +137,8 @@ bindsym $mod+Shift+0 move container to workspace number 10
 #
 bindsym --whole-window $mod+button5 workspace next
 bindsym --whole-window $mod+button4 workspace prev
+
+bindsym --to-code $mod+t opacity 1, blur disable
 
 bindsym --to-code $mod+b splith
 bindsym --to-code $mod+v splitv
@@ -248,22 +262,28 @@ for_window [app_id="terminal-floating"] floating enable, opacity $opacity
 for_window [app_id="Alacritty"] opacity $opacity
 for_window [app_id="kitty"] opacity $opacity
 for_window [app_id="neovide"] opacity $opacity
+for_window [title="Картинка в картинке"] floating enable, sticky enable
 
 gaps inner 5
 corner_radius 10
 blur enable
-titlebar_separator disable
+# titlebar_separator disable
 
 hide_edge_borders smart
 
 default_border pixel 3
 default_floating_border none
-# titlebar_padding 1
+titlebar_padding 1
 # titlebar_border_thickness 0
 
 layer_effects kitty-quick-access {
     blur enable;
 } 
+
+layer_effects wofi {
+    opacity $opacity;
+    blur enable;
+}
 
 
 font pango:Adwaita 10
@@ -283,17 +303,9 @@ client.unfocused        $bg     $bg     $fg     $bg       $bg
 
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 
-exec_always {
-    gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'
-    gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
-    gsettings set org.gnome.desktop.interface cursor-theme 'Breeze_Snow'
-}
-
-# seat * xcursor_theme Breeze_Snow
-# seat seat0 xcursor_size 24
-
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
-exec systemctl --user import-environment
+exec systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK I3SOCK XCURSOR_SIZE XCURSOR_THEME QT_QPA_PLATFORMTHEME
+exec dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
+exec dbus-update-activation-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK I3SOCK XCURSOR_SIZE XCURSOR_THEME QT_QPA_PLATFORMTHEME
 exec_always rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 # exec wmname LG3DС
 exec dex -a --environment sway

@@ -1,3 +1,9 @@
+@define-color wb_border_selected @theme_selected_bg_color;
+@define-color wb_selected @theme_unfocused_selected_bg_color;
+@define-color wb_border @borders;
+@define-color wb_text @theme_text_color;
+@define-color wb_background @theme_bg_color;
+
 @keyframes blink-warning {
   70% {
     color: @wm_icon_bg;
@@ -30,8 +36,8 @@
 
 /* The whole bar */
 #waybar {
-  background: #1f1f28;
-  color: #dcd7ba;
+  background: @wb_background;
+  color: @wb_text;
   font-family: "Adwaita";
   /* font-weight: bold; */
   font-size: 13px;
@@ -54,44 +60,41 @@ window#waybar.hidden {
   /* To compensate for the top border and still have vertical centering */
   padding: 2px 3px;
   margin: 2px 1px;
-  color: #dcd7ba;
-  border: solid rgba(150, 150, 150, 0.8) 1px;
+  color: @wb_text;
+  border: solid @wb_border 1px;
 }
 
 #workspaces button.active {
-  border: solid rgba(150, 150, 150, 0.8) 1px;
-  color: #dcd7ba;
+  border: solid @wb_border_selected 1px;
+  color: @wb_text;
   font-weight: bold;
-  border: solid #dcd7ba 1px;
 }
 
 #workspaces button.focused {
-  border: solid rgba(150, 150, 150, 0.8) 1px;
+  border: solid @wb_text 1px;
   font-weight: bold;
-  color: #dcd7ba;
-  border: solid #dcd7ba 1px;
+  color: @wb_text;
 }
 
 #workspaces button.infocused {
-  border: solid rgba(150, 150, 150, 0.8) 1px;
+  border: solid @wb_border 1px;
   color: red;
-  border: solid #dcd7ba 1px;
+  border: solid @wb_border 1px;
 }
 
 #workspaces button.persistent {
-  border: solid rgba(150, 150, 150, 0.8) 1px;
-  color: red;
-  border: solid #dcd7ba 1px;
+  border: solid @wb_border 1px;
+  color: @error_color;
+  border: solid @wb_border 1px;
 }
 
 #workspaces button.urgent {
   border-color: #30b9d9;
-  color: #30b9d9;
+  color: @wb_text;
   border: solid blue 1px;
 }
 
 
-#power-profiles-daemon,
 #custom-logo,
 #clock,
 #custom-playerctl,
@@ -125,18 +128,19 @@ window#waybar.hidden {
 #cava,
 #custom-close,
 #idle_inhibitor {
-  border: solid rgba(150, 150, 150, 0.8) 1px;
-  color: #dcd7ba;
+  border: solid @wb_border 1px;
+  color: @wb_text;
   /* text-align: center; */
   padding-left: 10px;
   padding-right: 10px;
   margin: 2px 2px;
 }
 
+#power-profiles-daemon,
 #pulseaudio,
 #network {
-  border: solid rgba(150, 150, 150, 0.8) 1px;
-  color: #dcd7ba;
+  border: solid @wb_border 1px;
+  color: @wb_text;
   /* text-align: center; */
   padding-left: 10px;
   padding-right: 16px;
@@ -148,7 +152,7 @@ window#waybar.hidden {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate;
-  color: #dcd7ba;
+  color: @wb_text;
 }
 
 #battery.warning {
@@ -170,15 +174,15 @@ window#waybar.hidden {
 }
 
 #network.disconnected {
-  color: @wm_icon_bg;
+  color: @wb_text;
 }
 
 #pulseaudio.muted {
-  color: @wm_icon_bg;
+  color: @wb_text;
 }
 
 #custom-wf-recorder {
-  color: @error_color;
+  color: @wb_text;
   padding-right: 10px;
 }
 
@@ -190,5 +194,5 @@ window#waybar.hidden {
 #idle_inhibitor {}
 
 #idle_inhibitor.activated {
-  color: #30b9d9;
+  color: @wb_selected;
 }
