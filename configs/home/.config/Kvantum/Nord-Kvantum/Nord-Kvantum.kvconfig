@@ -71,6 +71,9 @@ dialog_button_layout=0
 intensity=1.00
 saturation=1.00
 shadowless_popup=false
+drag_from_buttons=false
+menu_blur_radius=0
+tooltip_blur_radius=0
 
 [GeneralColors]
 window.color=#20212b
@@ -94,11 +97,11 @@ link.visited.color=#8fbcbb
 progress.indicator.text.color=#eceff4
 
 [Hacks]
-transparent_ktitle_label=true
-transparent_dolphin_view=true
+transparent_ktitle_label=false
+transparent_dolphin_view=false
 transparent_pcmanfm_sidepane=true
-blur_translucent=true
-transparent_menutitle=true
+blur_translucent=false
+transparent_menutitle=false
 respect_darkness=true
 kcapacitybar_as_progressbar=true
 force_size_grip=true
@@ -115,6 +118,10 @@ no_selection_tint=false
 opaque_colors=false
 kinetic_scrolling=false
 scroll_jump_workaround=false
+blur_only_active_window=false
+centered_forms=false
+noninteger_translucency=false
+style_vertical_toolbars=false
 
 [PanelButtonCommand]
 frame=true
