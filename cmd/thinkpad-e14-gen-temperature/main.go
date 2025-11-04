@@ -17,7 +17,7 @@ func main() {
 		log.Fatalln(err.Error())
 	}
 
-	fmt.Printf("%s°C %s°C", floatToTemp(sensors["thinkpad"]["CPU"]), floatToTemp(sensors["thinkpad"]["GPU"]))
+	fmt.Printf("%s°C %s°C", floatToTemp(sensors["coretemp"]["Package id 0"]), floatToTemp(sensors["nvme"]["Composite"]))
 }
 
 func floatToTemp(value float64) string {

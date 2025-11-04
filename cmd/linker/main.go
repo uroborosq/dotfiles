@@ -44,8 +44,8 @@ func main() {
 			panic(err)
 		}
 
-		templ := fmt.Sprintf(`cp -f {{ . }} `, a ...any)
-	err = script.Slice(files).ExecForEach()
+		templ := fmt.Sprintf(`cp -f {{ . }} `)
+		err = script.Slice(files).ExecForEach()
 
 	case "from":
 	default:
