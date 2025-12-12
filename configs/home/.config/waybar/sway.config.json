@@ -2,7 +2,6 @@
   {
     "layer": "top",
     "modules-left": [
-      "systemd-failed-units",
       "sway/workspaces",
       "custom/cpu",
       "custom/cpu-freq",

@@ -82,8 +82,19 @@ key[Shift-Tab]="${terminfo[kcbt]}"
 # bindkey ';5D' backward-word
 
 # Aliases definitions part
+#
 
-alias ok=exit
+ok() {
+  if [ ! -z "$NVIM" ]; then 
+    nvim --server "$NVIM" --remote-send "<C-'>"
+  elif [ -z "$KITTY_QUICK" ]; then 
+    exit
+  else 
+    kitten quick-access-terminal
+  fi
+}
+
+# alias ok=exit
 alias nf=fastfetch
 alias svim='sudo nvim'
 alias pg='pwgen -cn1sy 16'
@@ -101,6 +112,8 @@ alias lg='lazygit'
 alias fzf='fzf --preview "bat --style=numbers --color=always {1}" --preview-window=right:50%'
 alias ffzf='fzf --ansi --prompt="Search>" --bind "change:reload:rg --color=always --smart-case --line-number --column {q} || true" --delimiter ":" --nth 3..'
 alias nv='nvim'
+alias tbssh='~/desktop/owned/tbssh.tcl'
+alias rjournalctl="journalctl  --file './*/*.journal'"
 
 # Path
 #
@@ -150,12 +163,6 @@ chpwd_functions+=__jump_chpwd
 
 function launch {
       nohup "$1" >/dev/null 2>/dev/null & disown; exit
-}
-
-function nd {
-  ADDRESS=$(hyprctl activewindow -j | jq -r ".address")
-  bash -c "TERM=xterm-256color neovide; hyprctl dispatch movetoworkspace r+0,address:$ADDRESS" &
-  hyprctl dispatch movetoworkspacesilent special:magic,address:"$ADDRESS"
 }
 
 compctl -U -K jump_completion j
