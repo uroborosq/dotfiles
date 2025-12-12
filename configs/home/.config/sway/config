@@ -45,7 +45,7 @@ input "type:touchpad" {
 
 input type:keyboard {
     xkb_layout us,ru
-    xkb_options grp:win_space_toggle
+    xkb_options grp:win_space_toggle,caps:none
     xkb_numlock enable
 }
 
@@ -58,12 +58,12 @@ input type:mouse {
 bindsym --to-code $mod+d exec $menu
 
 # Start a terminal
-bindsym $mod+Return exec kitten quick-access-terminal -o columns=$(echo "3 * $(swaymsg -r -t get_outputs | jq '.[] | select(.focused == true) | .rect.width') / 4" | bc)px 
+bindsym $mod+Return exec KITTY_QUICK=1 kitten quick-access-terminal -o columns=$(echo "4 * $(swaymsg -r -t get_outputs | jq '.[] | select(.focused == true) | .rect.width') / 5" | bc)px 
 
 # Start an normal terminal
 bindsym $mod+Mod1+Return exec $term
 # Start file manager
-bindsym --to-code $mod+Mod1+m exec $term yazi
+bindsym --to-code $mod+Mod1+m exec $term zsh -c 'yazi'
 
 
 # Kill focused window

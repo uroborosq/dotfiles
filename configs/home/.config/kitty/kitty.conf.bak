@@ -90,7 +90,7 @@ listen_on unix:@mykitty
 # symbol_map codepoints Adwaita Mono
 
 # BEGIN_KITTY_THEME
-# Nordfox
+# Kanagawa
 include current-theme.conf
 # END_KITTY_THEME
 #
@@ -98,7 +98,7 @@ include current-theme.conf
 
 
 # BEGIN_KITTY_FONTS
-font_family      family="Adwaita Mono"
+font_family      family="AdwaitaMono Nerd Font"
 bold_font        auto
 italic_font      auto
 bold_italic_font auto

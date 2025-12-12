@@ -39,7 +39,7 @@ sync:
 		host_path=$$(echo "$$i" | cut -c13-) ; \
 		if [[ -f $$i ]]; then \
 			echo "Linking $$host_path to $$i" ; \
-			sudo ln -f $$host_path $$i ; \
+			# sudo ln -f $$host_path $$i ; \
 		fi ; \
 	done 
 
@@ -47,7 +47,7 @@ sync:
 		host_path="${USER_HOME}/$$(echo "$$i" | cut -c14-)" ; \
 		if [[ -f $$i ]]; then \
 			echo "Linking $$host_path to $$i" ; \
-			ln -f $$i $$host_path ; \
+			# ln -f $$i $$host_path ; \
 		fi ; \
 	done
 
