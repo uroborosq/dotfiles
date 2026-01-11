@@ -116,10 +116,6 @@ alias tbssh='~/desktop/owned/tbssh.tcl'
 alias rjournalctl="journalctl  --file './*/*.journal'"
 
 # Path
-#
-if [[ $TERM == "xterm-kitty" ]]; then
-  alias mpv='mpv -vo=kitty'
-fi
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
