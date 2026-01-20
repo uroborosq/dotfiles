@@ -1,0 +1,21 @@
+input "type:touchpad" {
+    dwt enabled
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+    scroll_factor 0.3
+}
+
+# Клавиатура
+
+input type:keyboard {
+    xkb_layout us,ru
+    xkb_options grp:win_space_toggle,caps:none
+    xkb_numlock enable
+}
+
+input type:mouse {
+    accel_profile flat
+}
+
+
