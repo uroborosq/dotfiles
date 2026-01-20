@@ -1,9 +1,0 @@
-#!/bin/bash
-
-nvim ~/.config/sway/config \
-    ~/.config/waybar/config.json \
-    ~/.config/waybar/style.css \
-    ~/.config/kitty/kitty.conf \
-    ~/.config/mako/config \
-    ~/.config/wofi/style.css \
-    ~/.config/wob/wob.ini
