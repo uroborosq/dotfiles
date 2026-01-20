@@ -20,9 +20,9 @@ set $SWAYLOCK_COMMAND "uq-swaylock -f \
                         --text-color 8B78AD \
                         "
 
-exec swayidle -w \
-    timeout 270 bash -c "echo \$(notify-send -p Энергосбережение 'скоро засну') > /tmp/notif-id" \
-    resume "makoctl dismiss -n $(cat /tmp/notif-id)" \
+exec_always swayidle -w \
+    timeout 270 'notify-send -p Энергосбережение > /tmp/notify-id' \
+    resume 'makoctl dismiss -n $(cat /tmp/notify-id)' \
     timeout 299 $SWAYLOCK_COMMAND \
     timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
     before-sleep $SWAYLOCK_COMMAND 
@@ -263,6 +263,7 @@ for_window [app_id="Alacritty"] opacity $opacity
 for_window [app_id="kitty"] opacity $opacity
 for_window [app_id="neovide"] opacity $opacity
 for_window [title="Картинка в картинке"] floating enable, sticky enable
+for_window [title="Picture-in-Picture"] floating enable, sticky enable
 
 gaps inner 5
 corner_radius 10
@@ -281,7 +282,6 @@ layer_effects kitty-quick-access {
 } 
 
 layer_effects wofi {
-    opacity $opacity;
     blur enable;
 }
 
