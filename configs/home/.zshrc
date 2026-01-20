@@ -117,10 +117,6 @@ alias rjournalctl="journalctl  --file './*/*.journal'"
 alias cn='cn --config ~/.continue/config.yaml'
 
 # Path
-#
-if [[ $TERM == "xterm-kitty" ]]; then
-  alias mpv='mpv -vo=kitty'
-fi
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
