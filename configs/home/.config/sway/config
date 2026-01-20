@@ -20,7 +20,7 @@ set $SWAYLOCK_COMMAND "uq-swaylock -f \
                         --text-color 8B78AD \
                         "
 
-exec_always swayidle -w \
+exec swayidle -w \
     timeout 270 'notify-send -p Энергосбережение > /tmp/notify-id' \
     resume 'makoctl dismiss -n $(cat /tmp/notify-id)' \
     timeout 299 $SWAYLOCK_COMMAND \
