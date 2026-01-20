@@ -1,0 +1,43 @@
+set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
+set $SWAYLOCK_COMMAND "uq-swaylock -f \
+                        --inside-color 36363600 \
+                        --indicator-idle-visible \
+                        --ring-color 453645AA \
+                        --line-color 00000000 \
+                        --bs-hl-color 453645AA \
+                        --layout-bg-color 00000000 \
+                        --separator-color 453645AA \
+                        --key-hl-color 8B78AD \
+                        --text-color 8B78AD \
+                        "
+
+exec swayidle -w \
+    timeout 270 'notify-send -p Энергосбережение > /tmp/notify-id' \
+    resume 'makoctl dismiss -n $(cat /tmp/notify-id)' \
+    timeout 299 $SWAYLOCK_COMMAND \
+    timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+    before-sleep $SWAYLOCK_COMMAND 
+
+exec waypaper --restore
+
+exec systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK I3SOCK XCURSOR_SIZE XCURSOR_THEME QT_QPA_PLATFORMTHEME
+exec dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
+exec dbus-update-activation-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK I3SOCK XCURSOR_SIZE XCURSOR_THEME QT_QPA_PLATFORMTHEME
+exec_always rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
+# exec wmname LG3DС
+exec dex -a --environment sway
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/lib/pam_kwallet_init
+# popup notification service
+exec --no-startup-id /usr/bin/mako
+# show panels
+exec "killall uq-exec-waybar; uq-exec-waybar --path ~/.config/waybar/sway.config.json"
+exec_always "killall waybar"
+# automatic display profiles
+exec_always "killall kanshi; kanshi"
+# system actions provider for wlroots-based WMs, like screen sharing
+exec /usr/lib/xdg-desktop-portal -r & /usr/lib/xdg-desktop-portal-wlr
+exec_always --no-startup-id sworkstyle &> /tmp/workstyle.log
+# init clibboard manager
+exec wl-paste --watch cliphist store
+
