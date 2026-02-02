@@ -100,7 +100,11 @@
     },
     "tray": {
       "icon-size": 21,
-      "spacing": 10
+      "spacing": 10,
+      "icons": {
+        "easyeffects": "/usr/share/icons/hicolor/scalable/apps/com.github.wwmm.easyeffects-symbolic.svg",
+        "контур.толк": "/home/dmitriy.tikhomirov/desktop/owned/ktalk.png"
+      }
     },
     "battery": {
       "interval": 3,

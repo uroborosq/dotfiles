@@ -114,6 +114,7 @@ alias ffzf='fzf --ansi --prompt="Search>" --bind "change:reload:rg --color=alway
 alias nv='nvim'
 alias tbssh='~/desktop/owned/tbssh.tcl'
 alias rjournalctl="journalctl  --file './*/*.journal'"
+alias cn='cn --config ~/.continue/config.yaml'
 
 # Path
 
