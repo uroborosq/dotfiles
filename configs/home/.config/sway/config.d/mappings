@@ -1,0 +1,196 @@
+set $mod Mod4
+set $menu wofi --allow-images --insensitive true --show drun -a -w 1
+set $term kitty
+set $floating_term kitty --class=terminal-floating
+
+### Комбинации клавиш
+
+bindsym --to-code $mod+d exec $menu
+
+# Start a terminal
+bindsym $mod+Return exec KITTY_QUICK=1 kitten quick-access-terminal -o columns=$(echo "4 * $(swaymsg -r -t get_outputs | jq '.[] | select(.focused == true) | .rect.width') / 5" | bc)px 
+
+# Start an normal terminal
+bindsym $mod+Mod1+Return exec $term
+# Start file manager
+bindsym --to-code $mod+Mod1+m exec $term zsh -c 'yazi'
+
+
+# Kill focused window
+bindsym --to-code $mod+q kill
+
+floating_modifier $mod normal
+
+bindsym --to-code $mod+Shift+c reload
+bindsym --to-code $mod+Mod1+l exec $SWAYLOCK_COMMAND
+
+# Exit sway (logs you out of your Wayland session)
+bindsym --to-code $mod+Shift+e exec nwg-bar
+#
+# Moving around:
+#
+# Move your focus around
+# bindsym $mod+Left focus left
+# bindsym $mod+Down focus down
+# bindsym $mod+Up focus up
+# bindsym $mod+Right focus right
+
+bindsym --to-code $mod+h exec vim-sway-nav left
+bindsym --to-code $mod+j exec vim-sway-nav down
+bindsym --to-code $mod+k exec vim-sway-nav up
+bindsym --to-code $mod+l exec vim-sway-nav right
+
+# bindsym --to-code $mod+h focus left
+# bindsym --to-code $mod+j focus down
+# bindsym --to-code $mod+k focus up
+# bindsym --to-code $mod+l focus right
+
+# Ditto, with arrow keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+bindsym --to-code $mod+Shift+h move left
+bindsym --to-code $mod+Shift+j move down
+bindsym --to-code $mod+Shift+k move up
+bindsym --to-code $mod+Shift+l move right
+#
+#
+# Workspaces:
+#
+# Switch to workspace
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+# Note: workspaces can have any name you want, not just numbers.
+# We just use 1-10 as the default.
+#
+# Layout stuff:
+#
+bindsym --whole-window $mod+button5 workspace next
+bindsym --whole-window $mod+button4 workspace prev
+
+bindsym --to-code $mod+t opacity 1, blur disable
+
+bindsym --to-code $mod+b splith
+bindsym --to-code $mod+v splitv
+
+# Switch the current container between different layout styles
+# bindsym --to-code $mod+s layout stacking # not needed at all
+bindsym --to-code $mod+w layout tabbed
+bindsym --to-code $mod+e layout toggle split
+
+# Make the current focus fullscreen
+
+bindsym --to-code $mod+f fullscreen
+
+# Toggle the current focus between tiling and floating mode
+bindsym --to-code $mod+x floating toggle
+
+# Swap focus between the tiling area and the floating area
+bindsym --to-code $mod+c focus mode_toggle
+
+# Move focus to the parent container
+bindsym --to-code $mod+a focus parent
+
+bindsym $mod+tab workspace next_on_output
+bindsym $mod+Lock workspace prev_on_output
+
+bindsym --to-code $mod+Control+Shift+l move workspace to output right
+bindsym --to-code $mod+Control+Shift+h move workspace to output left
+bindsym --to-code $mod+Control+Shift+j move workspace to output down
+bindsym --to-code $mod+Control+Shift+k move workspace to output up
+
+# Scratchpad:
+
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# search open windows
+bindsym --to-code $mod+Shift+s exec wofi-windows
+
+#
+# Resizing containers:
+#
+bindsym $mod+r mode "resize"
+mode "resize" {
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+    bindsym --to-code h resize shrink width 10px
+    bindsym --to-code j resize grow height 10px
+    bindsym --to-code k resize shrink height 10px
+    bindsym --to-code l resize grow width 10px
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# wireplumber
+
+set $volume_up wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ && wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -o '[0-9.]\+' | awk '{ print $1 * 100 }' > $WOBSOCK;
+set $volume_down wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -o '[0-9.]\+' | awk '{ print $1 * 100 }' > $WOBSOCK
+set $volume_mute wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && ([[ $(wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -i muted) == "" ]] && wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -o '[0-9.]\+' | awk '{ print $1 * 100 }' > $WOBSOCK) || echo 0 > $WOBSOCK
+
+bindsym --locked XF86AudioRaiseVolume exec $volume_up
+bindsym --locked XF86AudioLowerVolume exec $volume_down
+bindsym --locked XF86AudioMute exec $volume_mute
+
+bindsym --locked Shift+F2 exec $volume_up
+bindsym --locked Shift+F1 exec $volume_down
+bindsym --locked Shift+F3 exec $volume_mute
+
+
+bindsym --to-code $mod+s exec $floating_term ncpamixer -t o
+
+# Скриншоты
+bindsym Print exec slurp | grim -g - - | wl-copy && wl-paste > $(xdg-user-dir PICTURES)/screenshots/$(date +'%Y-%m-%d-%H%M%SС.png') # Скриншот области
+
+# Яркость
+bindsym XF86MonBrightnessUp exec light -A 5 && light -G | cut -d'.' -f1 > $WOBSOCK
+bindsym XF86MonBrightnessDown exec light -U 5 && light -G | cut -d'.' -f1 > $WOBSOCK
+
+# Управление мультимедиа
+
+bindsym --locked --no-warn XF86AudioPlay exec playerctl play-pause
+bindsym --locked --no-warn XF86AudioNext exec playerctl next
+bindsym --locked --no-warn XF86AudioPrev exec playerctl previous
+
+bindsym --locked --no-warn $mod+F11 exec playerctl play-pause
+bindsym --locked --no-warn $mod+F12 exec playerctl next
+bindsym --locked --no-warn $mod+F10 exec playerctl previous
+
+bindsym --to-code $mod+p exec cliphist list | wofi -S dmenu | cliphist decode | wl-copy
+
+
+# Жесты тачпада
+
+bindgesture swipe:3:right workspace prev
+bindgesture swipe:3:left workspace next
+# TODO: some workspaces overview
+bindgesture swipe:3:up exec $FULLSCREEN_MENU
+bindgesture swipe:3:down exec ydotool key 0x27
+
+bindsym --to-code $mod+n exec networkmanager_dmenu
+
+bindsym --to-code $mod+Mod1+p exec sway-color-picker
+
