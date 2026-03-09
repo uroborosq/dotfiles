@@ -1,14 +1,25 @@
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
-set $SWAYLOCK_COMMAND "uq-swaylock -f \
+set $SWAYLOCK_COMMAND "~/.nimble/bin/uq_swaylock -f \
                         --inside-color 36363600 \
+                        --inside-ver-color 36363600 \
+                        --inside-wrong-color 36363600 \
+                        --inside-clear-color 36363600 \
                         --indicator-idle-visible \
                         --ring-color 453645AA \
+                        --ring-ver-color 8B78AD \
+                        --ring-wrong-color FF0000 \
                         --line-color 00000000 \
+                        --line-ver-color 8B78AD \
+                        --line-clear-color 00000000 \
+                        --line-wrong-color 00000000 \
                         --bs-hl-color 453645AA \
                         --layout-bg-color 00000000 \
                         --separator-color 453645AA \
                         --key-hl-color 8B78AD \
                         --text-color 8B78AD \
+                        --text-ver-color 00000000 \
+                        --text-clear-color 00000000 \
+                        --text-wrong-color 00000000 \
                         "
 
 exec swayidle -w \
@@ -31,7 +42,10 @@ exec --no-startup-id /usr/lib/pam_kwallet_init
 # popup notification service
 exec --no-startup-id /usr/bin/mako
 # show panels
-exec "killall uq-exec-waybar; uq-exec-waybar --path ~/.config/waybar/sway.config.json"
+
+
+
+exec "killall uq_waybar; ~/.nimble/bin/uq_waybar ~/.config/waybar/sway.config.json"
 exec_always "killall waybar"
 # automatic display profiles
 exec_always "killall kanshi; kanshi"
