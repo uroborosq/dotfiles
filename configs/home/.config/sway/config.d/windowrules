@@ -15,6 +15,9 @@ for_window [app_id="kitty"] opacity $opacity
 for_window [app_id="neovide"] opacity $opacity
 for_window [title="Картинка в картинке"] floating enable, sticky enable
 for_window [title="Picture-in-Picture"] floating enable, sticky enable
+for_window [title="^Peek preview$"] opacity $opacity
+
+no_focus [title="^Peek preview$"]
 
 gaps inner 5
 corner_radius 10
