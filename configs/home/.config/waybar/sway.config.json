@@ -4,6 +4,7 @@
         "modules-left": [
             "sway/workspaces",
             "custom/cpu",
+            "custom/iowait",
             "custom/cpu-freq",
             "custom/ram",
             "sway/mode",
@@ -192,6 +193,12 @@
             "interval": 2,
             "exec": "uq_temperature kvadra",
             "min-length": 10
+        },
+        "custom/iowait": {
+            "format": "{}",
+            "interval": 1,
+            "exec": "uq_iowait",
+            "on-click": "kitty --class=terminal-floating iostat -xz 1"
         },
         "network": {
             "interval": 2,

@@ -194,3 +194,5 @@ bindsym --to-code $mod+n exec networkmanager_dmenu
 
 bindsym --to-code $mod+Mod1+p exec sway-color-picker
 
+bindsym --to-code $mod+shift+b exec bash -lc 'out=$($GOPATH/bin/bb open "$(wl-paste)" 2>&1); notify-send "bb" "[$out]"'
+bindsym --to-code $mod+shift+d exec $floating_term $GOPATH/bin/bb dashboard

@@ -1,65 +1,11 @@
-/* /* ::root{ */
-*/
-/* /*     --accent: #5291e2; */
-*/
-/* /*     --dark: #383C4A; */
-*/
-/* /*     --light: #7C818C; */
-*/
-/* /*     --ld: #404552; */
-*/
-/* /*     --dl: #4B5162 */
-*/
-/* /*     --white: white; */
-*/
-/* /* } */
-*/
+@define-color theme_bg_color #0B272B;
+@define-color theme_selected_fg_color #413555;
+@define-color theme_unfocused_selected_bg_color #6D6370;
+@define-color theme_color_text #DEE2E2;
+@define-color theme_unfocused_base_color #6D6370;
+@define-color borders #B1B6B7;
+@define-color theme_selected_bg_color #574C62;
 
-/* * { */
-/*   font-family: Source Code Pro; */
-/* } */
-/**/
-/* window { */
-/*   background-color: #7c818c; */
-/* } */
-/**/
-/* #input { */
-/*   margin: 1px; */
-/*   border-radius: 0px; */
-/*   border: none; */
-/*   border-bottom: 2px solid white; */
-/*   background-color: #383c4a; */
-/*   color: white; */
-/* } */
-/**/
-/* #inner-box { */
-/*   background-color: #383c4a; */
-/* } */
-/**/
-/* #outer-box { */
-/*   margin: 1px; */
-/*   padding: 20px; */
-/*   background-color: #383c4a; */
-/* } */
-/**/
-/* #scroll { */
-/* } */
-/**/
-/* #text { */
-/*   padding: 5px; */
-/*   color: white; */
-/* } */
-/**/
-/* #entry:nth-child(even) { */
-/*   background-color: #404552; */
-/* } */
-/**/
-/* #entry:selected { */
-/*   background-color: #5291e2; */
-/* } */
-/**/
-/* #text:selected { */
-/* } */
 * {
   font-family: "Adwaita Mono";
 }

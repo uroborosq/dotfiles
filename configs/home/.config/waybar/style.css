@@ -1,8 +1,21 @@
-@define-color wb_border_selected @theme_selected_bg_color;
-@define-color wb_selected @theme_unfocused_selected_bg_color;
-@define-color wb_border @borders;
-@define-color wb_text @theme_text_color;
-@define-color wb_background @theme_bg_color;
+/* @import '/home/dmitriy.tikhomirov/.cache/wal/colors.css'; */
+
+/* Use the variables */
+/* #nav-bar { */
+/*   background-image: var(--wallpaper); */
+/*   color: var(--color7) !important; */
+/* } */
+/**/
+/* h1 { */
+/*   background-color: var(--color3); */
+/* } */
+
+
+@define-color wb_border_selected #A988D9;
+@define-color wb_selected #574C62;
+@define-color wb_border #AA99AE;
+@define-color wb_text #DEE2E2;
+@define-color wb_background #0B272B;
 
 @keyframes blink-warning {
   70% {
@@ -104,6 +117,7 @@ window#waybar.hidden {
 #custom-clipboard,
 #custom-menu,
 #custom-cpu-freq,
+#custom-iowait,
 #custom-net,
 #battery,
 #cpu,
