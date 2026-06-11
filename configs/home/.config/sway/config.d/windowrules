@@ -1,7 +1,8 @@
 for_window [class="^.*"] inhibit_idle fullscreen
 
 # Правила окон
-set $opacity 0.92
+# set $opacity 0.92
+set $opacity 0.90
 
 for_window [class="jetbrains-(.*)" title="splash"] floating enable
 for_window [app_id="python3"] floating enable
@@ -11,13 +12,17 @@ for_window [title="Открыть папку"] floating enable
 for_window [title="Firefox — индикатор доступа"] floating enable
 for_window [app_id="terminal-floating"] floating enable, opacity $opacity
 for_window [app_id="Alacritty"] opacity $opacity
-for_window [app_id="kitty"] opacity $opacity
-for_window [app_id="neovide"] opacity $opacity
+# for_window [app_id="kitty"] opacity $opacity
+for_window [app_id="foot"] opacity $opacity
+# for_window [app_id="neovide"] opacity $opacity
+for_window [title="Bild-im-Bild"] floating enable, sticky enable
 for_window [title="Картинка в картинке"] floating enable, sticky enable
 for_window [title="Picture-in-Picture"] floating enable, sticky enable
 for_window [title="^Peek preview$"] opacity $opacity
 
 no_focus [title="^Peek preview$"]
+no_focus [app_id="^chrome-localhost.*"]
+for_window [app_id="^chrome-localhost.*"] opacity $opacity
 
 gaps inner 5
 corner_radius 10
@@ -42,9 +47,14 @@ layer_effects wofi {
 
 font pango:Adwaita 10
 
-set $bg #1F1F28
-set $fg #DCD7BA
-set $br #8B78AD
+include "$HOME/.cache/wal/colors-sway"
+
+exec_always wallust run $(cat .config/waypaper/config.ini | grep -E '^wallpaper = .+' | awk '{ print $3 }';)
+
+set $bg $background
+set $fg $foreground
+set $br $cursor
+
 
 
 # class                 border  backgr. text    indicator child_border
