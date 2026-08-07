@@ -4,8 +4,11 @@ ignore-timeout=0
 padding=20
 border-size=1
 border-radius=5
-background-color=#2E3440DD
-border-color=#BCBEC1
-text-color=#FFFFFF
+background-color=#432C13
+border-color=#432C13
+text-color=#E6EAE6
 width=400
 height=300
+
+[mode=do-not-disturb]
+invisible=1

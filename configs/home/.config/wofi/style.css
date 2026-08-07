@@ -1,10 +1,10 @@
-@define-color theme_bg_color #0B272B;
-@define-color theme_selected_fg_color #413555;
-@define-color theme_unfocused_selected_bg_color #6D6370;
-@define-color theme_color_text #DEE2E2;
-@define-color theme_unfocused_base_color #6D6370;
-@define-color borders #B1B6B7;
-@define-color theme_selected_bg_color #574C62;
+@define-color theme_bg_color #432C13;
+@define-color theme_selected_fg_color #432C13;
+@define-color theme_unfocused_selected_bg_color #4B554A;
+@define-color theme_color_text #E6EAE6;
+@define-color theme_unfocused_base_color #4B554A;
+@define-color borders #BDC3BD;
+@define-color theme_selected_bg_color #47412E;
 
 * {
   font-family: "Adwaita Mono";
