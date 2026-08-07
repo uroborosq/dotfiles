@@ -1,5 +1,5 @@
 action_alias kitty_scrollback_nvim kitten $HOME/.local/share/nvim/lazy/kitty-scrollback.nvim/python/kitty_scrollback_nvim.py
-background_opacity 0.70
+
 # Browse scrollback buffer in nvim
 map kitty_mod+h kitty_scrollback_nvim
 # Browse output of the last shell command in nvim
@@ -8,10 +8,12 @@ map kitty_mod+g kitty_scrollback_nvim --config ksb_builtin_last_cmd_output
 cursor_shape block
 cursor_blink_interval 0
 
+# background_opacity 0.8
+
 # sync_to_monitor no
 # input_delay 0
 # repaint_delay 1
-font_size 11
+font_size 12
 
 modify_font cell_height 115%
 
@@ -51,8 +53,6 @@ map shift+left move_window left
 map shift+right move_window right
 map shift+down move_window down
 
-map ctrl+shift+u scroll_page_up
-map ctrl+shift+d scroll_page_down
 # # Switch focus to the neighboring window in the indicated direction
 # map alt+left neighboring_window left
 # map alt+right neighboring_window right
@@ -75,8 +75,6 @@ map alt+7 goto_tab 7
 map alt+8 goto_tab 8
 map alt+9 goto_tab 9
 
-map alt+p command_palette
-
 enabled_layouts tall:full_size=2;bias=66, splits, grid, stack
 map alt+f toggle_layout stack
 
@@ -94,24 +92,23 @@ listen_on unix:@mykitty
 # symbol_map codepoints Adwaita Mono
 
 # BEGIN_KITTY_THEME
-# Gruvbox Dark
+# Gruvbox Dark Soft
 include current-theme.conf
 # END_KITTY_THEME
 #
 #
 
+# russian
+# symbol_map U+0400-U+04FF,U+0500-U+052F FantasqueSansM Nerd Font
+# symbol_map U+0400-U+04FF,U+0500-U+052F Monofur Nerd Font Mono
+# symbol_map U+0400-U+04FF,U+0500-U+052F JetBrainsMono Nerd Font
+
+# font_family      family="CodeNewRoman Nerd Font"
+# font_family      family="Mononoki Nerd Font"
 
 # BEGIN_KITTY_FONTS
-font_family      family="AdwaitaMono Nerd Font"
+font_family      family="JetBrainsMono Nerd Font"
 bold_font        auto
 italic_font      auto
 bold_italic_font auto
 # END_KITTY_FONTS
-#
-
-# symbol_map U+E000-U+F8FF Symbols Nerd Font
-# symbol_map U+F0000-U+FFFFD Symbols Nerd Font
-# symbol_map U+100000-U+10FFFD Symbols Nerd Font#
-#
-
-symbol_map U+1F300-U+1FAFF Noto Color Emoji  
