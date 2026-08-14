@@ -19,8 +19,9 @@ input type:mouse {
     accel_profile flat
 }
 
-input type:pointer {
+input "57638:116:Ergohaven_K:04_Mouse" {
   accel_profile flat
+  scroll_factor 0.05
 }
 
 
