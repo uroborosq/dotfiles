@@ -114,10 +114,10 @@ bindsym --to-code $mod+a focus parent
 bindsym $mod+tab workspace next_on_output
 bindsym $mod+Lock workspace prev_on_output
 
-bindsym --to-code $mod+Control+Shift+l move workspace to output right
-bindsym --to-code $mod+Control+Shift+h move workspace to output left
-bindsym --to-code $mod+Control+Shift+j move workspace to output down
-bindsym --to-code $mod+Control+Shift+k move workspace to output up
+bindsym --to-code $mod+Control+l move workspace to output right
+bindsym --to-code $mod+Control+h move workspace to output left
+bindsym --to-code $mod+Control+j move workspace to output down
+bindsym --to-code $mod+Control+k move workspace to output up
 
 # Scratchpad:
 
@@ -163,6 +163,7 @@ bindsym --locked Shift+F3 exec $volume_mute
 bindsym --to-code $mod+s exec $floating_term ncpamixer -t o
 
 # Скриншоты
+bindsym Shift+Print exec slurp | grim -g - - | swappy -f - | wl-copy && wl-paste > $(xdg-user-dir PICTURES)/screenshots/$(date +'%Y-%m-%d-%H%M%SС.png') # Скриншот области
 bindsym Print exec slurp | grim -g - - | wl-copy && wl-paste > $(xdg-user-dir PICTURES)/screenshots/$(date +'%Y-%m-%d-%H%M%SС.png') # Скриншот области
 
 # Яркость
@@ -198,3 +199,5 @@ bindsym --to-code $mod+shift+b exec bash -lc 'out=$($GOPATH/bin/bb open "$(wl-pa
 bindsym --to-code $mod+shift+d exec $floating_term $GOPATH/bin/bb dashboard
 
 bindsym --to-code $mod+shift+n exec $floating_term makohist
+
+bindsym --to-code $mod+Mod1+f exec env WT_AUTOSTART=1 $term -d ~/desktop/owned/control_path/primary/ 

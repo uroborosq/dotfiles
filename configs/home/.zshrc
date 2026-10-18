@@ -103,16 +103,16 @@ alias rmunsed='sudo pacman -Rnucs $(pacman -Qtdq)'
 alias grep='grep --color=auto'
 # alias ssh='TERM=xterm-256color kitten ssh'
 # alias sssh='TERM=xterm-256color kitten ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null'
-alias ssh='kitten ssh'
-alias sssh='kitten ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null'
 alias rr='ranger'
 alias lg='lazygit'
 alias fzf='fzf --preview "bat --style=numbers --color=always {1}" --preview-window=right:50%'
 alias ffzf='fzf --ansi --prompt="Search>" --bind "change:reload:rg --color=always --smart-case --line-number --column {q} || true" --delimiter ":" --nth 3..'
 alias nv='nvim'
-alias tbssh='~/desktop/owned/tbssh.tcl'
+alias snv='SKIP_PROXY=1 nvim'
+alias tbssh='~/desktop/owned/tbssh/tbssh'
 alias rjournalctl="journalctl  --file './*/*.journal'"
 alias cn='cn --config ~/.continue/config.yaml'
+alias task='go-task'
 
 # Path
 
@@ -161,10 +161,30 @@ function launch {
 
 compctl -U -K jump_completion j
 
-# bun completions
-[ -s "/home/dmitriy.tikhomirov/.bun/_bun" ] && source "/home/dmitriy.tikhomirov/.bun/_bun"
+wt() {
+    cd ~/desktop/owned/control_path/primary/ || exit
+    local dir
+    dir=$(git worktree list --porcelain | sed -n 's/^worktree //p' |
+        fzf --prompt='worktree> ' --height=40% --reverse \
+            --preview='git -C {} status -sb; echo; git -C {} log --oneline -10' \
+            --preview-window='right:50%:wrap') || return
+    [ -n "$dir" ] && cd "$dir" && nvim || exit
+}
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-export HINDSIGHT_LLM_PROVIDER=claude-code
+if [[ -n $WT_AUTOSTART ]]; then
+    unset WT_AUTOSTART
+    wt
+fi
+
+# Remote Control в Claude Code только для репозитория uq-notes
+claude() {
+    if [[ $PWD == /home/dmitriy.tikhomirov/desktop/owned/uq-notes(|/*) ]]; then
+        command claude --remote-control "$@"
+    else
+        command claude "$@"
+    fi
+}
+
+# go-task completion (binary is go-task, `task` is an alias); regenerate with:
+# go-task --completion zsh, see ~/.zsh/completions/_go-task
+fpath=(~/.zsh/completions $fpath)

@@ -1,21 +1,45 @@
-/* @import '/home/dmitriy.tikhomirov/.cache/wal/colors.css'; */
+/* Waybar — сгруппированные секции, шрифт Mononoki Nerd Font.
+ *
+ * Внимание: wallust перезаписывает этот файл из шаблона
+ * ~/.config/wallust/templates/waybar.css (см. CLAUDE.md).
+ * Палитра ниже — снимок ~/.cache/wal/colors.json от 2026-09-05.
+ */
 
-/* Use the variables */
-/* #nav-bar { */
-/*   background-image: var(--wallpaper); */
-/*   color: var(--color7) !important; */
-/* } */
-/**/
-/* h1 { */
-/*   background-color: var(--color3); */
-/* } */
+/* ── Палитра ─────────────────────────────────────────────── */
 
+@define-color wb_background #213333;
+@define-color wb_hover      #2C4242;
+@define-color wb_text       #E8E9E9;
+@define-color wb_border     #7B7B6E;
+@define-color wb_divider    alpha(@wb_border, 0.45);
+@define-color wb_muted      alpha(@wb_text, 0.45);
 
-@define-color wb_border_selected #B05919;
-@define-color wb_selected #47412E;
-@define-color wb_border #748473;
-@define-color wb_text #E6EAE6;
-@define-color wb_background #432C13;
+@define-color wb_accent     #B07943;
+@define-color wb_selected   #554929;
+
+/* Цвета смысловых групп модулей.
+ * Для монохромной панели приравняйте все три к @wb_text. */
+/* Осветлённый {{color2}} (#878B2C): исходный тон сливался с фоном группы. */
+@define-color wb_sys        #ADB349;
+@define-color wb_io         #B0AF9D;
+@define-color wb_pwr        #B07943;
+
+/* Режимы power-profiles-daemon: от экономии к производительности. */
+@define-color wb_pp_saver    #ADB349;
+@define-color wb_pp_balanced #B07943;
+@define-color wb_pp_perf     #B85C3C;
+
+/* Фон групп — подтон ведущего цвета группы поверх фона панели. */
+@define-color wb_bg_left    alpha(@wb_sys, 0.12);
+@define-color wb_bg_center  alpha(@wb_accent, 0.14);
+@define-color wb_bg_right   alpha(@wb_io, 0.10);
+
+/* Используются анимациями батареи ниже. */
+@define-color warning_color #B07943;
+@define-color error_color   #B85C3C;
+@define-color wm_icon_bg    #213333;
+
+/* ── Анимации ────────────────────────────────────────────── */
 
 @keyframes blink-warning {
   70% {
@@ -39,134 +63,150 @@
   }
 }
 
-/* Reset all styles */
+/* ── Сброс ───────────────────────────────────────────────── */
+
 * {
-  border-radius: 4;
   min-height: 0;
   margin: 0;
   padding: 0;
-}
-
-/* The whole bar */
-#waybar {
-  background: @wb_background;
-  color: @wb_text;
-  font-family: "Adwaita";
-  /* font-weight: bold; */
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  /* Нужен вариант Propo, и только он:
+   *   "Mononoki Nerd Font"      — иконка рисуется шире своей ширины пера
+   *                               и заезжает на соседний знак;
+   *   "Mononoki Nerd Font Mono" — иконка ужата в одну ячейку и мельчает;
+   *   "Mononoki Nerd Font Propo" — ширина пера равна ширине иконки:
+   *                               полный размер и никаких наложений. */
+  font-family: "Mononoki Nerd Font Propo", "Symbols Nerd Font", monospace;
   font-size: 13px;
 }
 
+/* ── Панель ──────────────────────────────────────────────── */
+
 window#waybar {
-  border-radius: 0;
+  background: @wb_background;
+  color: @wb_text;
 }
 
 window#waybar.hidden {
   opacity: 0.2;
 }
 
+/* ── Группы модулей ──────────────────────────────────────── */
+
+.modules-left,
+.modules-center,
+.modules-right {
+  border: 1px solid @wb_border;
+  border-radius: 8px;
+  /* Вертикальный отступ задаёт просвет между группой и краем панели:
+   * высота панели зафиксирована в конфиге ("height": 34). */
+  margin: 4px 6px;
+  padding: 0 2px;
+}
+
+/* Свой подтон фона у каждой группы: полупрозрачный оттенок ведущего
+ * цвета группы, наложенный на фон панели. */
+.modules-left {
+  background-color: @wb_bg_left;
+  border-color: alpha(@wb_sys, 0.5);
+}
+
+.modules-center {
+  background-color: @wb_bg_center;
+  border-color: alpha(@wb_accent, 0.5);
+}
+
+.modules-right {
+  background-color: @wb_bg_right;
+  border-color: alpha(@wb_io, 0.4);
+}
+
+/* Модуль внутри группы: без рамки, отделён вертикальной чертой. */
+.modules-left > widget > *,
+.modules-center > widget > *,
+.modules-right > widget > * {
+  color: @wb_text;
+  padding: 0 10px;
+  margin: 0;
+  border-right: 1px solid @wb_divider;
+}
+
+/* У последнего модуля группы разделитель не нужен. */
+.modules-left > widget:last-child > *,
+.modules-center > widget:last-child > *,
+.modules-right > widget:last-child > * {
+  border-right: none;
+}
+
+/* ── Воркспейсы ──────────────────────────────────────────── */
+
 #workspaces {
-  padding: 0px 2px;
-  margin: 0px 3px;
+  padding: 0 4px;
 }
 
 #workspaces button {
-  /* To compensate for the top border and still have vertical centering */
-  padding: 2px 3px;
-  margin: 2px 1px;
-  color: @wb_text;
-  border: solid @wb_border 1px;
+  padding: 0 7px;
+  margin: 0 1px;
+  color: @wb_muted;
+  background-color: transparent;
+  /* нижние углы прямые, иначе подчёркивание активного выгибается по радиусу */
+  border-radius: 5px 5px 0 0;
 }
 
-#workspaces button.active {
-  border: solid @wb_border_selected 1px;
+#workspaces button:hover {
   color: @wb_text;
-  font-weight: bold;
+  background-color: @wb_hover;
 }
 
+#workspaces button.active,
 #workspaces button.focused {
-  border: solid @wb_text 1px;
-  font-weight: bold;
   color: @wb_text;
-}
-
-#workspaces button.infocused {
-  border: solid @wb_border 1px;
-  color: red;
-  border: solid @wb_border 1px;
-}
-
-#workspaces button.persistent {
-  border: solid @wb_border 1px;
-  color: @error_color;
-  border: solid @wb_border 1px;
+  box-shadow: inset 0 -2px @wb_accent;
 }
 
 #workspaces button.urgent {
-  border-color: #30b9d9;
-  color: @wb_text;
-  border: solid blue 1px;
+  color: @error_color;
+  box-shadow: inset 0 -2px @error_color;
 }
 
+/* ── Цвета по смысловым группам ──────────────────────────── */
 
-#custom-logo,
-#clock,
-#custom-playerctl,
-#custom-power,
-#custom-playerctl,
-#custom-weather,
-#custom-clipboard,
-#custom-menu,
+#custom-cpu,
 #custom-cpu-freq,
+#custom-ram,
 #custom-iowait,
-#custom-net,
-#battery,
+#custom-temp,
 #cpu,
-#language,
 #memory,
+#temperature {
+  color: @wb_sys;
+}
+
+#custom-net,
 #network,
 #pulseaudio,
-#tray,
-#mode,
-#custom-close,
-#custom-telegram,
-#custom-dolphin,
-#custom-firefox,
-#temperature,
-#custom-cpu,
-#custom-ram,
-#custom-clock,
-#custom-temp,
-#temperature,
-#systemd-failed-units,
-#wireplumber,
-#cava,
-#custom-close,
-#idle_inhibitor {
-  border: solid @wb_border 1px;
-  color: @wb_text;
-  /* text-align: center; */
-  padding-left: 10px;
-  padding-right: 10px;
-  margin: 2px 2px;
+#wireplumber {
+  color: @wb_io;
 }
 
+#battery,
 #power-profiles-daemon,
-#pulseaudio,
-#network {
-  border: solid @wb_border 1px;
-  color: @wb_text;
-  /* text-align: center; */
-  padding-left: 10px;
-  padding-right: 16px;
-  margin: 2px 2px;
+#idle_inhibitor {
+  color: @wb_pwr;
 }
 
+#mode {
+  color: @wb_accent;
+}
+
+/* ── Состояния ───────────────────────────────────────────── */
 
 #battery {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate;
-  color: @wb_text;
 }
 
 #battery.warning {
@@ -187,26 +227,65 @@ window#waybar.hidden {
   animation-duration: 2s;
 }
 
-#network.disconnected {
-  color: @wb_text;
+#network.disconnected,
+#pulseaudio.muted {
+  color: @wb_muted;
 }
 
-#pulseaudio.muted {
-  color: @wb_text;
+/* Значок режима питания окрашивается по текущему профилю.
+ * Классы power-saver/balanced/performance выставляет сам Waybar. */
+#power-profiles-daemon.power-saver {
+  color: @wb_pp_saver;
+}
+
+#power-profiles-daemon.balanced {
+  color: @wb_pp_balanced;
+}
+
+#power-profiles-daemon.performance {
+  color: @wb_pp_perf;
+}
+
+#idle_inhibitor.activated {
+  color: @wb_accent;
+}
+
+#systemd-failed-units {
+  color: @error_color;
+}
+
+#systemd-failed-units.ok {
+  color: @wb_muted;
+}
+
+/* ── Кликабельные модули ─────────────────────────────────── */
+
+#custom-cpu:hover,
+#custom-iowait:hover,
+#custom-clock:hover,
+#custom-playerctl:hover,
+#cpu:hover,
+#network:hover,
+#pulseaudio:hover,
+#wireplumber:hover,
+#cava:hover {
+  background-color: @wb_hover;
+}
+
+/* ── Прочее ──────────────────────────────────────────────── */
+
+#tray {
+  padding: 0 8px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
 }
 
 #custom-wf-recorder {
-  color: @wb_text;
-  padding-right: 10px;
-}
-
-#tray {
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-#idle_inhibitor {}
-
-#idle_inhibitor.activated {
-  color: @wb_selected;
+  color: @error_color;
 }

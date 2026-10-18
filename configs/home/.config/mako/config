@@ -4,9 +4,9 @@ ignore-timeout=0
 padding=20
 border-size=1
 border-radius=5
-background-color=#432C13
-border-color=#432C13
-text-color=#E6EAE6
+background-color=#213333
+border-color=#5A430B
+text-color=#E8E9E9
 width=400
 height=300
 

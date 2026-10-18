@@ -16,7 +16,7 @@ for_window [app_id="Alacritty"] opacity $opacity
 for_window [app_id="foot"] opacity $opacity
 # for_window [app_id="neovide"] opacity $opacity
 for_window [title="Bild-im-Bild"] floating enable, sticky enable
-for_window [app_id="entropy"] floating enable, sticky enable
+# for_window [app_id="entropy"] floating enable, sticky enable
 for_window [title="Индикатор раскладки — K:04"] floating enable, sticky enable
 for_window [title="Картинка в картинке"] floating enable, sticky enable
 for_window [title="Picture-in-Picture"] floating enable, sticky enable
@@ -30,8 +30,8 @@ no_focus [title="^uq-markdown$"]
 for_window [app_id="^chrome-localhost.*"] opacity $opacity
 
 gaps inner 5
-corner_radius 10
-blur enable
+#corner_radius 10
+# blur enable
 # titlebar_separator disable
 
 hide_edge_borders smart
@@ -41,26 +41,24 @@ default_floating_border none
 titlebar_padding 1
 # titlebar_border_thickness 0
 
-layer_effects kitty-quick-access {
-    blur enable;
-} 
-
-layer_effects wofi {
-    blur enable;
-}
+#layer_effects kitty-quick-access {
+#    blur enable;
+#} 
+#
+#layer_effects wofi {
+#    blur enable;
+#}
 
 
 font pango:Adwaita 10
 
 include "$HOME/.cache/wal/colors-sway"
 
-exec_always wallust run $(cat .config/waypaper/config.ini | grep -E '^wallpaper = .+' | awk '{ print $3 }';)
+# exec_always wallust run $(cat .config/waypaper/config.ini | grep -E '^wallpaper = .+' | awk '{ print $3 }';)
 
 set $bg $background
 set $fg $foreground
-set $br $cursor
-
-
+set $br $color2
 
 # class                 border  backgr. text    indicator child_border
 client.focused          $br     $br     $fg     $bg       $br

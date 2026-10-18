@@ -1,6 +1,7 @@
 [
     {
         "layer": "top",
+        "height": 34,
         "modules-left": [
             "sway/workspaces",
             "custom/cpu",
@@ -8,8 +9,7 @@
             "custom/cpu-freq",
             "custom/ram",
             "sway/mode",
-            "custom/temp",
-            "custom/net"
+            "custom/temp"
         ],
         "modules-center": [
             "custom/clock"
@@ -109,7 +109,7 @@
         },
         "battery": {
             "interval": 3,
-            "format": "{capacity}% {icon}  {power:0.1f} W",
+            "format": "{capacity}% {icon} {power:0.1f} W",
             "format-icons": [
                 "",
                 "",
@@ -119,7 +119,44 @@
             ]
         },
         "sway/workspaces": {
-            "all-outputs": true
+            "all-outputs": true,
+            "format": "{name} {windows}",
+            "format-window-separator": " ",
+            "window-rewrite-default": "\uf2d0",
+            "window-rewrite": {
+                "class<kitty>": "\uf120",
+                "class<Alacritty>": "\uf120",
+                "class<foot>": "\uf120",
+                "class<firefox>": "\uf269",
+                "class<chromium>": "\uf268",
+                "class<google-chrome>": "\uf268",
+                "class<code>": "\uf121",
+                "class<jetbrains-.*>": "\uf121",
+                "class<org.telegram.desktop>": "\uf2c6",
+                "class<telegram-desktop>": "\uf2c6",
+                "class<thunderbird>": "\uf0e0",
+                "class<org.keepassxc.KeePassXC>": "\uf084",
+                "class<Aladdin 2FA Desktop>": "\uf084",
+                "class<nautilus>": "\uf07b",
+                "class<thunar>": "\uf07b",
+                "class<org.gnome.Nautilus>": "\uf07b",
+                "class<imv>": "\uf03e",
+                "class<org.gnome.Loupe>": "\uf03e",
+                "class<zathura>": "\uf1c1",
+                "class<org.pwmt.zathura>": "\uf1c1",
+                "class<mpv>": "\uf03d",
+                "class<spotify>": "\uf1bc",
+                "class<com.github.wwmm.easyeffects>": "\uf001",
+                "class<ktalk>": "\uf03d",
+                "class<virt-manager>": "\uf233",
+                "class<org.pulseaudio.pavucontrol>": "\uf028"
+            },
+            "persistent-workspaces": {
+                "1": [],
+                "2": [],
+                "3": [],
+                "4": []
+            }
         },
         "custom/playerctl": {
             "format": "{}",
@@ -169,7 +206,6 @@
             "format-bluetooth": "{volume}% {icon}",
             "format-muted": "",
             "format-icons": {
-                "alsa_output.pci-0000_00_1f.3.analog-stereo": "",
                 "headphones": "",
                 "handsfree": "",
                 "headset": "",
@@ -213,7 +249,7 @@
             "on-click": "kitty --class=terminal-floating nmtui-connect"
         },
         "idle_inhibitor": {
-            "format": "{icon} ",
+            "format": "{icon}",
             "format-icons": {
                 "activated": "",
                 "deactivated": ""
