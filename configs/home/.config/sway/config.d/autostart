@@ -49,7 +49,10 @@ exec_always "killall waybar"
 exec_always "killall kanshi; kanshi"
 # system actions provider for wlroots-based WMs, like screen sharing
 exec /usr/lib/xdg-desktop-portal -r & /usr/lib/xdg-desktop-portal-wlr
-exec_always --no-startup-id sworkstyle &> /tmp/workstyle.log
+# sworkstyle переименовывал воркспейсы в "N: <иконки>". Из-за этого
+# persistent-workspaces в Waybar не совпадали по имени и кнопки двоились.
+# Иконки окон теперь рисует сам Waybar (window-rewrite в sway.config.json).
+# exec_always --no-startup-id sworkstyle &> /tmp/workstyle.log
 # init clibboard manager
 exec wl-paste --watch cliphist store
 

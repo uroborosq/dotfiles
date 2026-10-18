@@ -1,5 +1,11 @@
 # os:
 # open: 'nvim --server "$NVIM" --remote-send "<C-L>"  && nvim --server "$NVIM" --remote-send ":e {{filename}}<CR>" && nvim --server "$NVIM" --remote-send "<C-W>wq"'
+gui:
+  sidePanelWidth: 0.2
+  showRandomTip: false
+  nerdFontsVersion: "3"
+  screenMode: half
+  portraitMode: never
 git:
   diffRenderers:
     - colorArg: always
