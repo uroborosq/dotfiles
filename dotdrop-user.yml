@@ -1,0 +1,115 @@
+config:
+  backup: true
+  banner: true
+  create: true
+  dotpath: dotfiles
+  keepdot: false
+  link_dotfile_default: nolink
+  link_on_import: nolink
+  longkey: false
+dotfiles:
+  d_sway:
+    src: config/sway
+    dst: ~/.config/sway
+  d_nvim:
+    src: config/nvim
+    dst: ~/.config/nvim
+  d_mako:
+    src: config/mako
+    dst: ~/.config/mako
+  d_waybar:
+    src: config/waybar
+    dst: ~/.config/waybar
+  d_networkmanager-dmenu:
+    src: config/networkmanager-dmenu
+    dst: ~/.config/networkmanager-dmenu
+  d_wofi:
+    src: config/wofi
+    dst: ~/.config/wofi
+  d_wob:
+    src: config/wob
+    dst: ~/.config/wob
+  d_lazygit:
+    src: config/lazygit
+    dst: ~/.config/lazygit
+  f_zshrc:
+    src: zshrc
+    dst: ~/.zshrc
+  f_p10k.zsh:
+    src: p10k.zsh
+    dst: ~/.p10k.zsh
+  d_hypr:
+    src: config/hypr
+    dst: ~/.config/hypr
+  f_dolphinrc:
+    src: config/dolphinrc
+    dst: ~/.config/dolphinrc
+    chmod: '600'
+  f_user-dirs.dirs:
+    src: config/user-dirs.dirs
+    dst: ~/.config/user-dirs.dirs
+    chmod: '600'
+  f_chromium-flags.conf:
+    src: config/chromium-flags.conf
+    dst: ~/.config/chromium-flags.conf
+  d_mpv:
+    src: config/mpv
+    dst: ~/.config/mpv
+  d_kitty:
+    src: config/kitty
+    dst: ~/.config/kitty
+  d_kanshi:
+    src: config/kanshi
+    dst: ~/.config/kanshi
+  d_foot:
+    src: config/foot
+    dst: ~/.config/foot
+  d_nwg-bar:
+    src: config/nwg-bar
+    dst: ~/.config/nwg-bar
+  d_plasma-workspace:
+    src: config/plasma-workspace
+    dst: ~/.config/plasma-workspace
+  d_qt5ct:
+    src: config/qt5ct
+    dst: ~/.config/qt5ct
+  d_qt6ct:
+    src: config/qt6ct
+    dst: ~/.config/qt6ct
+  f_portals.conf:
+    src: config/xdg-desktop-portal/portals.conf
+    dst: ~/.config/xdg-desktop-portal/portals.conf
+  d_xdg-desktop-portal-wlr:
+    src: config/xdg-desktop-portal-wlr
+    dst: ~/.config/xdg-desktop-portal-wlr
+  d_yazi:
+    src: config/yazi
+    dst: ~/.config/yazi
+profiles:
+  NB-3814:
+    dotfiles:
+    - d_sway
+    - d_nvim
+    - d_mako
+    - d_waybar
+    - d_networkmanager-dmenu
+    - d_wofi
+    - d_wob
+    - d_lazygit
+    - f_zshrc
+    - f_p10k.zsh
+    - d_hypr
+    - f_dolphinrc
+    - f_user-dirs.dirs
+    - f_chromium-flags.conf
+    - d_mpv
+    - d_kitty
+    - d_kanshi
+    - d_foot
+    - d_nwg-bar
+    - d_plasma-workspace
+    - d_qt5ct
+    - d_qt6ct
+    - f_portals.conf
+    - d_xdg-desktop-portal-wlr
+    - d_yazi

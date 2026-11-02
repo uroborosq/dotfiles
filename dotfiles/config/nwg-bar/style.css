@@ -1,0 +1,42 @@
+window {
+	background-color: @theme_bg_color;
+	border-radius: 16px;
+	border: solid @theme_unfocused_selected_bg_color 1px;
+}
+
+/* Outer bar container, takes all the window width/height */
+#outer-box {
+	margin: 0px;
+}
+
+/* Inner bar container, surrounds buttons */
+#inner-box {
+	background-color: @theme_bg_color;
+	border-radius: 10px;
+	border-style: none;
+	border-width: 1px;
+	border-color: @borders;
+	padding: 5px;
+	margin: 5px
+}
+
+button,
+image {
+	background: none;
+	/* border: none; */
+	box-shadow: none
+}
+
+button {
+	padding-left: 10px;
+	padding-right: 10px;
+	margin: 5px
+}
+
+button:focus {
+	border: solid @theme_unfocused_selected_bg_color 1px;
+}
+
+button:hover {
+	background-color: @theme_unfocused_selected_bg_color;
+}

@@ -1,0 +1,67 @@
+@define-color theme_bg_color #213333;
+@define-color theme_selected_fg_color #5A430B;
+@define-color theme_unfocused_selected_bg_color #4F4F47;
+@define-color theme_color_text #E8E9E9;
+@define-color theme_unfocused_base_color #4F4F47;
+@define-color borders #BFC1C1;
+@define-color theme_selected_bg_color #554929;
+
+* {
+  font-family: "Adwaita Mono";
+}
+
+window {
+  background-color: @theme_bg_color;
+  border-radius: 16px;
+  border: solid @theme_unfocused_selected_bg_color 1px;
+}
+
+#input {
+  margin: 5px;
+  border-radius: 16px;
+  border: solid @theme_selected_fg_color 1px;
+  background-color: @theme_bg_color;
+  color: @theme_text_color;
+}
+
+#inner-box {
+  border-radius: 16px;
+  background-color: @theme_bg_color;
+}
+
+#outer-box {
+  border-radius: 16px;
+  margin: 2px;
+  padding: 10px;
+  background-color: @theme_bg_color;
+}
+
+#scroll {
+  margin: 5px;
+}
+
+#text {
+  padding: 4px;
+  color: @theme_color_text;
+}
+
+#entry {
+  border-radius: 0px;
+  border-bottom: solid @borders 1px;
+  background: @theme_unfocused_base_color;
+}
+
+#entry:nth-child(even) {
+  background-color: @theme_bg_color;
+  border-radius: 0px;
+  border-bottom: solid @borders 1px;
+}
+
+#entry:selected {
+  border-radius: 10px;
+  background-color: @theme_selected_bg_color;
+}
+
+#text:selected {
+  background: transparent;
+}

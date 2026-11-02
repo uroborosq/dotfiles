@@ -1,0 +1,292 @@
+/* Waybar — сгруппированные секции, шрифт Mononoki Nerd Font.
+ *
+ * Файл редактируется вручную (wallust его больше не генерирует).
+ * Палитра — gruvbox-material, как в nvim: background = "soft",
+ * foreground = "material", тёмный вариант
+ * (~/.config/nvim/lua/plugins/colorscheme.lua; значения взяты из
+ * autoload/gruvbox_material.vim плагина sainnhe/gruvbox-material).
+ */
+
+/* ── Палитра ─────────────────────────────────────────────── */
+
+@define-color wb_background #32302f; /* bg0 */
+@define-color wb_hover      #504945; /* bg3 */
+@define-color wb_text       #d4be98; /* fg0 */
+@define-color wb_border     #7c6f64; /* grey0 */
+@define-color wb_divider    alpha(@wb_border, 0.45);
+@define-color wb_muted      alpha(@wb_text, 0.45);
+
+@define-color wb_accent     #e78a4e; /* orange */
+@define-color wb_selected   #574833; /* bg_visual_yellow */
+
+/* Цвета смысловых групп модулей.
+ * Для монохромной панели приравняйте все три к @wb_text. */
+@define-color wb_sys        #a9b665; /* green */
+@define-color wb_io         #7daea3; /* blue */
+@define-color wb_pwr        #d8a657; /* yellow */
+
+/* Режимы power-profiles-daemon: от экономии к производительности. */
+@define-color wb_pp_saver    #a9b665; /* green */
+@define-color wb_pp_balanced #d8a657; /* yellow */
+@define-color wb_pp_perf     #ea6962; /* red */
+
+/* Фон групп — подтон ведущего цвета группы поверх фона панели. */
+@define-color wb_bg_left    alpha(@wb_sys, 0.12);
+@define-color wb_bg_center  alpha(@wb_accent, 0.14);
+@define-color wb_bg_right   alpha(@wb_io, 0.10);
+
+/* Используются анимациями батареи ниже. */
+@define-color warning_color #d8a657; /* yellow */
+@define-color error_color   #ea6962; /* red */
+@define-color wm_icon_bg    #32302f; /* bg0 */
+
+/* ── Анимации ────────────────────────────────────────────── */
+
+@keyframes blink-warning {
+  70% {
+    color: @wm_icon_bg;
+  }
+
+  to {
+    color: @wm_icon_bg;
+    background-color: @warning_color;
+  }
+}
+
+@keyframes blink-critical {
+  70% {
+    color: @wm_icon_bg;
+  }
+
+  to {
+    color: @wm_icon_bg;
+    background-color: @error_color;
+  }
+}
+
+/* ── Сброс ───────────────────────────────────────────────── */
+
+* {
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  /* Нужен вариант Propo, и только он:
+   *   "Mononoki Nerd Font"      — иконка рисуется шире своей ширины пера
+   *                               и заезжает на соседний знак;
+   *   "Mononoki Nerd Font Mono" — иконка ужата в одну ячейку и мельчает;
+   *   "Mononoki Nerd Font Propo" — ширина пера равна ширине иконки:
+   *                               полный размер и никаких наложений. */
+  font-family: "Mononoki Nerd Font Propo", "Symbols Nerd Font", monospace;
+  font-size: 14px;
+}
+
+/* ── Панель ──────────────────────────────────────────────── */
+
+window#waybar {
+  background: @wb_background;
+  color: @wb_text;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+/* ── Группы модулей ──────────────────────────────────────── */
+
+.modules-left,
+.modules-center,
+.modules-right {
+  border: 1px solid @wb_border;
+  border-radius: 8px;
+  /* Вертикальный отступ задаёт просвет между группой и краем панели:
+   * высота панели зафиксирована в конфиге ("height": 34). */
+  margin: 4px 6px;
+  padding: 0 2px;
+}
+
+/* Свой подтон фона у каждой группы: полупрозрачный оттенок ведущего
+ * цвета группы, наложенный на фон панели. */
+.modules-left {
+  background-color: @wb_bg_left;
+  border-color: alpha(@wb_sys, 0.5);
+}
+
+.modules-center {
+  background-color: @wb_bg_center;
+  border-color: alpha(@wb_accent, 0.5);
+}
+
+.modules-right {
+  background-color: @wb_bg_right;
+  border-color: alpha(@wb_io, 0.4);
+}
+
+/* Модуль внутри группы: без рамки, отделён вертикальной чертой. */
+.modules-left > widget > *,
+.modules-center > widget > *,
+.modules-right > widget > * {
+  color: @wb_text;
+  padding: 0 10px;
+  margin: 0;
+  border-right: 1px solid @wb_divider;
+}
+
+/* У последнего модуля группы разделитель не нужен. */
+.modules-left > widget:last-child > *,
+.modules-center > widget:last-child > *,
+.modules-right > widget:last-child > * {
+  border-right: none;
+}
+
+/* ── Воркспейсы ──────────────────────────────────────────── */
+
+#workspaces {
+  padding: 0 4px;
+}
+
+#workspaces button {
+  padding: 0 7px;
+  margin: 0 1px;
+  color: @wb_muted;
+  background-color: transparent;
+  /* нижние углы прямые, иначе подчёркивание активного выгибается по радиусу */
+  border-radius: 5px 5px 0 0;
+}
+
+#workspaces button:hover {
+  color: @wb_text;
+  background-color: @wb_hover;
+}
+
+#workspaces button.active,
+#workspaces button.focused {
+  color: @wb_text;
+  box-shadow: inset 0 -2px @wb_accent;
+}
+
+#workspaces button.urgent {
+  color: @error_color;
+  box-shadow: inset 0 -2px @error_color;
+}
+
+/* ── Цвета по смысловым группам ──────────────────────────── */
+
+#custom-cpu,
+#custom-cpu-freq,
+#custom-ram,
+#custom-iowait,
+#custom-temp,
+#cpu,
+#memory,
+#temperature {
+  color: @wb_sys;
+}
+
+#custom-net,
+#network,
+#pulseaudio,
+#wireplumber {
+  color: @wb_io;
+}
+
+#battery,
+#power-profiles-daemon,
+#idle_inhibitor {
+  color: @wb_pwr;
+}
+
+#mode {
+  color: @wb_accent;
+}
+
+/* ── Состояния ───────────────────────────────────────────── */
+
+#battery {
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#battery.warning {
+  color: @warning_color;
+}
+
+#battery.critical {
+  color: @error_color;
+}
+
+#battery.warning.discharging {
+  animation-name: blink-warning;
+  animation-duration: 3s;
+}
+
+#battery.critical.discharging {
+  animation-name: blink-critical;
+  animation-duration: 2s;
+}
+
+#network.disconnected,
+#pulseaudio.muted {
+  color: @wb_muted;
+}
+
+/* Значок режима питания окрашивается по текущему профилю.
+ * Классы power-saver/balanced/performance выставляет сам Waybar. */
+#power-profiles-daemon.power-saver {
+  color: @wb_pp_saver;
+}
+
+#power-profiles-daemon.balanced {
+  color: @wb_pp_balanced;
+}
+
+#power-profiles-daemon.performance {
+  color: @wb_pp_perf;
+}
+
+#idle_inhibitor.activated {
+  color: @wb_accent;
+}
+
+#systemd-failed-units {
+  color: @error_color;
+}
+
+#systemd-failed-units.ok {
+  color: @wb_muted;
+}
+
+/* ── Кликабельные модули ─────────────────────────────────── */
+
+#custom-cpu:hover,
+#custom-iowait:hover,
+#custom-clock:hover,
+#custom-playerctl:hover,
+#cpu:hover,
+#network:hover,
+#pulseaudio:hover,
+#wireplumber:hover,
+#cava:hover {
+  background-color: @wb_hover;
+}
+
+/* ── Прочее ──────────────────────────────────────────────── */
+
+#tray {
+  padding: 0 8px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+}
+
+#custom-wf-recorder {
+  color: @error_color;
+}

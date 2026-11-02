@@ -1,0 +1,33 @@
+config:
+  backup: true
+  banner: true
+  create: true
+  dotpath: dotfiles
+  keepdot: false
+  link_dotfile_default: nolink
+  link_on_import: nolink
+  longkey: false
+dotfiles:
+  d_greetd:
+    src: etc/greetd
+    dst: /etc/greetd
+  f_logid.cfg:
+    src: etc/logid.cfg
+    dst: /etc/logid.cfg
+  f_makepkg.conf:
+    src: etc/makepkg.conf
+    dst: /etc/makepkg.conf
+  f_pacman.conf:
+    src: etc/pacman.conf
+    dst: /etc/pacman.conf
+  f_custom-sway.desktop:
+    src: usr/share/wayland-sessions/custom-sway.desktop
+    dst: /usr/share/wayland-sessions/custom-sway.desktop
+profiles:
+  NB-3814:
+    dotfiles:
+      - d_greetd
+      - f_logid.cfg
+      - f_makepkg.conf
+      - f_pacman.conf
+      - f_custom-sway.desktop

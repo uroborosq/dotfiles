@@ -1,0 +1,3 @@
+[screencast]
+exec_before=makoctl mode -a do-not-disturb
+exec_after=makoctl mode -r do-not-disturb

@@ -1,0 +1,69 @@
+for_window [class="^.*"] inhibit_idle fullscreen
+
+# Правила окон
+# set $opacity 0.92
+set $opacity 1
+
+for_window [class="jetbrains-(.*)" title="splash"] floating enable
+for_window [app_id="python3"] floating enable
+for_window [title="Choose ONE of the audio conference options"] floating enable
+for_window [title="Открыть файл"] floating enable
+for_window [title="Открыть папку"] floating enable
+for_window [title="Firefox — индикатор доступа"] floating enable
+for_window [app_id="terminal-floating"] floating enable, opacity $opacity
+for_window [app_id="Alacritty"] opacity $opacity
+# for_window [app_id="kitty"] opacity $opacity
+for_window [app_id="foot"] opacity $opacity
+# for_window [app_id="neovide"] opacity $opacity
+for_window [title="Bild-im-Bild"] floating enable, sticky enable
+# for_window [app_id="entropy"] floating enable, sticky enable
+for_window [title="Индикатор раскладки — K:04"] floating enable, sticky enable
+for_window [title="Картинка в картинке"] floating enable, sticky enable
+for_window [title="Picture-in-Picture"] floating enable, sticky enable
+for_window [title="^Peek preview$"] opacity $opacity
+for_window [title="kitty"] opacity $opacity
+
+no_focus [title="^Peek preview$"]
+no_focus [app_id="^chrome-localhost.*"]
+no_focus [title="^uq-markdown$"]
+
+for_window [app_id="^chrome-localhost.*"] opacity $opacity
+
+gaps inner 5
+#corner_radius 10
+# blur enable
+# titlebar_separator disable
+
+hide_edge_borders smart
+
+default_border pixel 3
+default_floating_border none
+titlebar_padding 1
+title_align center
+# titlebar_border_thickness 0
+
+#layer_effects kitty-quick-access {
+#    blur enable;
+#} 
+#
+#layer_effects wofi {
+#    blur enable;
+#}
+
+
+font pango:Mononoki Nerd Font 12
+
+# Палитра gruvbox-material (soft, material, dark) — как в nvim и waybar.
+# Раньше цвета подключались из ~/.cache/wal/colors-sway (wallust удалён 2026-10-07).
+set $bg  #32302f
+set $fg  #d4be98
+set $br  #e78a4e
+set $red #ea6962
+
+# class                 border  backgr. text    indicator child_border
+client.focused          $br     $br     $bg     $bg       $br
+client.focused_inactive $bg     $bg     $fg     $bg       $bg
+client.unfocused        $bg     $bg     $fg     $bg       $bg
+client.urgent           $red    $red    $bg     $red      $red
+
+

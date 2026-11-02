@@ -1,0 +1,20 @@
+default-timeout=6000
+ignore-timeout=0
+
+padding=20
+border-size=1
+border-radius=5
+# Палитра gruvbox-material (soft, material, dark) — как в nvim, waybar и wofi.
+background-color=#32302f
+border-color=#7c6f64
+text-color=#d4be98
+progress-color=over #504945
+width=400
+height=300
+max-history=100
+
+[urgency=critical]
+border-color=#ea6962
+
+[mode=do-not-disturb]
+invisible=1

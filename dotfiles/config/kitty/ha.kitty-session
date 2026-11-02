@@ -1,0 +1,5 @@
+launch zsh -c "sssh ha1"
+
+new_tab ha2
+
+launch zsh -c "sssh ha2"

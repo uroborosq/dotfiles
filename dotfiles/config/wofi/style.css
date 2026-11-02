@@ -1,0 +1,107 @@
+/* Wofi — в одном ключе с Waybar (~/.config/waybar/style.css).
+ *
+ * Файл редактируется вручную (wallust удалён 2026-10-07).
+ * Палитра — gruvbox-material, как в nvim: background = "soft",
+ * foreground = "material", тёмный вариант.
+ */
+
+/* ── Палитра ─────────────────────────────────────────────── */
+
+@define-color wf_background #32302f; /* bg0 */
+@define-color wf_text       #d4be98; /* fg0 */
+@define-color wf_border     #7c6f64; /* grey0 */
+@define-color wf_accent     #e78a4e; /* orange */
+
+/* ── Сброс ───────────────────────────────────────────────── */
+
+* {
+  font-family: "Mononoki Nerd Font Propo", "Symbols Nerd Font", monospace;
+  font-size: 14px;
+  /* GTK рисует фокусную рамку вокруг выбранной строки */
+  outline-style: none;
+}
+
+/* ── Окно ────────────────────────────────────────────────── */
+
+window {
+  background-color: @wf_background;
+  border: 1px solid @wf_border;
+  border-radius: 12px;
+}
+
+#outer-box {
+  margin: 2px;
+  padding: 8px;
+  background-color: transparent;
+}
+
+#inner-box {
+  background-color: transparent;
+}
+
+#scroll {
+  margin: 6px 0 0;
+}
+
+/* ── Поле ввода ──────────────────────────────────────────── */
+
+#input {
+  margin: 0 0 4px;
+  padding: 4px 10px;
+  color: @wf_text;
+  caret-color: @wf_accent;
+  background-color: alpha(@wf_accent, 0.12);
+  background-image: none;
+  border: 1px solid alpha(@wf_accent, 0.6);
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+#input:focus {
+  border-color: @wf_accent;
+}
+
+/* ── Список ──────────────────────────────────────────────── */
+
+#entry {
+  padding: 4px 8px;
+  margin: 1px 0;
+  background-color: transparent;
+  border-radius: 8px;
+}
+
+#entry:hover {
+  background-color: alpha(@wf_text, 0.06);
+}
+
+#entry:selected {
+  background-color: alpha(@wf_accent, 0.20);
+  box-shadow: inset 3px 0 @wf_accent;
+}
+
+#text {
+  padding: 2px 4px;
+  color: @wf_text;
+}
+
+#text:selected {
+  color: @wf_text;
+  background: transparent;
+}
+
+#img {
+  margin-right: 6px;
+}
+
+/* ── Прокрутка ───────────────────────────────────────────── */
+
+scrollbar {
+  background: transparent;
+  border: none;
+}
+
+scrollbar slider {
+  min-width: 4px;
+  background-color: alpha(@wf_text, 0.20);
+  border-radius: 4px;
+}
