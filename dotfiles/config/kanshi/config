@@ -2,23 +2,26 @@ profile laptoponly {
 	output eDP-1 scale 1.25 position 0,0 enable 
 }
 
-profile hause_ein_bildschirm {
-	output eDP-1 disable
-    output "YUE 2560x1600 CVT Unknown" scale 2.25 mode 2560x1600@60Hz position 720,1440
-	output "Acer Technologies XV322QK KV 54030A5414200" scale 1.5 mode 3840x2160@144Hz position 0,0 
-}
-
 profile home_three_monitors {
 	output eDP-1 disable
-	output "LG Electronics LG ULTRAGEAR 310NTTQDU745" scale 1.25 mode 2560x1440@60Hz position 0,0 transform 90
-	output "Acer Technologies XV322QK KV 54030A5414200" scale 1.5 mode 3840x2160@60Hz position 1152,0 
+	output "LG Electronics LG ULTRAGEAR 310NTTQDU745" scale 1.25 mode 2560x1440@60Hz position 0,0 
+	output "Acer Technologies XV322QK KV 54030A5414200" scale 1.5 mode 3840x2160@60Hz position 2048,0 
 }
 profile work {
 	output eDP-1 disable
+	output HDMI-A-1 scale 1.0 position 0,360 enable 
 	output DP-1 scale 1.0 position 1920,0 mode 2560x1440@100Hz enable
 }
 
 profile home_desktop {
-	output "LG Electronics LG ULTRAGEAR 310NTTQDU745" scale 1.25 mode 2560x1440@144Hz position 0,0  transform 90
-	output "Acer Technologies XV322QK KV 54030A5414200" scale 1.5 mode 3840x2160@144Hz position 1152,0 
+	output "LG Electronics LG ULTRAGEAR 310NTTQDU745" scale 1.25 mode 2560x1440@144Hz position 0,0 
+	output "Acer Technologies XV322QK KV 54030A5414200" scale 1.5 mode 3840x2160@144Hz position 2048,0 
 }
+
+profile home_wisecoco_yue_acer {
+	# Select the exact modeline registered by sway/config.d/10-wisecoco.conf.
+	output "KMN Wisecoco 0x00000001" scale 2 mode 1920x480@60Hz position 1239,866 enable
+	output "YUE 2560x1600 CVT Unknown" scale 2.25 mode 2560x1600@60Hz position 1690,2546 enable
+	output "Acer Technologies XV322QK KV 54030A5414200" scale 1.5 mode 3840x2160@144Hz position 1041,1106 enable
+}
+

@@ -44,11 +44,11 @@ dotfiles:
   f_dolphinrc:
     src: config/dolphinrc
     dst: ~/.config/dolphinrc
-    chmod: '600'
+    chmod: "600"
   f_user-dirs.dirs:
     src: config/user-dirs.dirs
     dst: ~/.config/user-dirs.dirs
-    chmod: '600'
+    chmod: "600"
   f_chromium-flags.conf:
     src: config/chromium-flags.conf
     dst: ~/.config/chromium-flags.conf
@@ -88,28 +88,31 @@ dotfiles:
 profiles:
   NB-3814:
     dotfiles:
-    - d_sway
-    - d_nvim
-    - d_mako
-    - d_waybar
-    - d_networkmanager-dmenu
-    - d_wofi
-    - d_wob
-    - d_lazygit
-    - f_zshrc
-    - f_p10k.zsh
-    - d_hypr
-    - f_dolphinrc
-    - f_user-dirs.dirs
-    - f_chromium-flags.conf
-    - d_mpv
-    - d_kitty
-    - d_kanshi
-    - d_foot
-    - d_nwg-bar
-    - d_plasma-workspace
-    - d_qt5ct
-    - d_qt6ct
-    - f_portals.conf
-    - d_xdg-desktop-portal-wlr
-    - d_yazi
+      - d_sway
+      - d_nvim
+      - d_mako
+      - d_waybar
+      - d_networkmanager-dmenu
+      - d_wofi
+      - d_wob
+      - d_lazygit
+      - f_zshrc
+      - f_p10k.zsh
+      - d_hypr
+      - f_dolphinrc
+      - f_user-dirs.dirs
+      - f_chromium-flags.conf
+      - d_mpv
+      - d_kitty
+      - d_kanshi
+      - d_foot
+      - d_nwg-bar
+      - d_plasma-workspace
+      - d_qt5ct
+      - d_qt6ct
+      - f_portals.conf
+      - d_xdg-desktop-portal-wlr
+      - d_yazi
+  TopDesktop:
+    include:
+      - NB-3814

@@ -31,3 +31,6 @@ profiles:
       - f_makepkg.conf
       - f_pacman.conf
       - f_custom-sway.desktop
+  TopDesktop:
+    include:
+      - NB-3814
