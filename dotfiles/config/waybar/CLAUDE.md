@@ -17,13 +17,13 @@ Because neither wrapper passes `-s`, Waybar falls back to auto-discovery for the
 
 `sway.config.json` pins `"height": 34`, so the bar no longer sizes itself to its content: the vertical `margin` on `.modules-*` in `style.css` is what controls the visible strip of bar background above and below each group. Changing one without the other changes the bar's height instead of the inset.
 
-`sway.config.json` sets `"output": "!YUE 2560x1600 CVT"`: the bar is drawn on every monitor except the small YUE panel (currently on `HDMI-A-1`). It matches by make + model rather than port, so it survives replugging. Waybar builds that identifier as `make model serial` but drops a serial Sway reports as `Unknown` — the string `"YUE 2560x1600 CVT Unknown"` does **not** match. Check the exact identifiers with `waybar -l debug -c … 2>&1 | grep "Output detection"`.
+`sway.config.json` defines two bars. The full bar excludes Wisecoco (`KMN Wisecoco 0x00000001`, currently `DP-2`) and YUE (`YUE 2560x1600 CVT`, currently `HDMI-A-1`); the compact bar is shown only on YUE. The YUE bar omits the CPU and Cava graphs and the current song. Output identifiers match the monitor make, model, and serial rather than the port, so they survive replugging. Check identifiers with `waybar -l debug -c … 2>&1 | grep "Output detection"`.
 
-Both JSON files are top-level *arrays* (Waybar's multi-bar form) containing a single bar object.
+`sway.config.json` is a top-level array with one object per bar. Both include `sway.modules.json`, which holds their shared module settings. The YUE bar overrides the workspace format for a compact display.
 
 ### Workspaces (Sway)
 
-`sway/workspaces` in `sway.config.json` carries `persistent-workspaces` for 1–4 plus `window-rewrite` rules that turn each window's `app_id`/X11 class into an icon (`format: "{name} {windows}"`).
+`sway/workspaces` in `sway.modules.json` carries `persistent-workspaces` for 1–4 plus `window-rewrite` rules that turn each window's `app_id`/X11 class into an icon on the full bar (`format: "{name} {windows}"`).
 
 This replaced `sworkstyle`, which used to rename workspaces to `N: <иконки>` from `~/.config/sway/config.d/autostart:52` (the line is now commented out). The two cannot coexist: Waybar matches `persistent-workspaces` keys against the workspace **name** as a plain string, so a persistent entry `"1"` does not match a workspace renamed to `1: ` and Waybar renders both buttons. Anything that renames workspaces away from bare numbers brings the duplicates back.
 
@@ -61,7 +61,7 @@ Every `custom/*` module shells out; a module rendering blank almost always means
 
 The two configs point at different, non-interchangeable binary sets:
 
-- `sway.config.json` uses the underscore names on `PATH` via `~/.nimble/bin`: `uq_cpuload`, `uq_ram`, `uq_cpufreq`, `uq_net`, `uq_iowait`, `uq_current_song`, `uq_temperature kvadra`.
+- `sway.modules.json` uses the underscore names on `PATH` via `~/.nimble/bin`: `uq_cpuload`, `uq_ram`, `uq_cpufreq`, `uq_net`, `uq_iowait`, `uq_current_song`, `uq_temperature topdesktop`.
 - `hyprland.config.json` uses absolute hyphenated paths: `/usr/bin/uq-cpu-usage-once`, `/usr/bin/uq-ram`, `/usr/bin/uq-cpu-frequency`, `/usr/bin/uq-net`, `/usr/bin/uq-current-song`, `/usr/bin/uq-thinkpad-e14-gen-temperature`. **None of these exist on this machine** — that config targets a different host (ThinkPad E14 vs. the Kvadra sensor profile used by the Sway config), so do not assume it is runnable here.
 
 The temperature module is hardware-specific by design (`uq_temperature <machine>`), so it is expected to differ between the two files.

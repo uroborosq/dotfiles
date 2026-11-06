@@ -1,0 +1,216 @@
+{
+    "sway/window": {
+        "max-length": 50
+    },
+    "systemd-failed-units": {
+        "hide-on-ok": false,
+        "format": "✗ {nr_failed}",
+        "format-ok": "✓",
+        "system": true,
+        "user": true
+    },
+    "custom/cava": {
+        "format": "{}",
+        "exec": "sh \"$HOME/.config/waybar/scripts/cava.sh\"",
+        "restart-interval": 5,
+        "tooltip": false
+    },
+    "wireplumber": {
+        "format": "{volume}% {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{source_volume}% ",
+        "format-source-muted": " ",
+        "format-icons": {
+            "default": [
+                "",
+                ""
+            ]
+        },
+        "on-click": "helvum"
+    },
+    "sway/mode": {
+        "format": " {}",
+        "max-length": 50,
+        "min-length": 50
+    },
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "",
+            "performance": "",
+            "balanced": "",
+            "power-saver": ""
+        }
+    },
+    "custom/close": {
+        "format": "kill",
+        "on-click": "swaymsg kill"
+    },
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10,
+        "icons": {
+            "easyeffects": "/usr/share/icons/hicolor/scalable/apps/com.github.wwmm.easyeffects-symbolic.svg",
+            "контур.толк": "/home/dmitriy.tikhomirov/desktop/owned/ktalk.png"
+        }
+    },
+    "battery": {
+        "interval": 3,
+        "format": "{capacity}% {icon} {power:0.1f} W",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
+    },
+    "sway/workspaces": {
+        "all-outputs": true,
+        "format": "{name} {windows}",
+        "format-window-separator": " ",
+        "window-rewrite-default": "",
+        "window-rewrite": {
+            "class<kitty>": "",
+            "class<Alacritty>": "",
+            "class<foot>": "",
+            "class<firefox>": "",
+            "class<chromium>": "",
+            "class<google-chrome>": "",
+            "class<code>": "",
+            "class<jetbrains-.*>": "",
+            "class<org.telegram.desktop>": "",
+            "class<telegram-desktop>": "",
+            "class<thunderbird>": "",
+            "class<org.keepassxc.KeePassXC>": "",
+            "class<Aladdin 2FA Desktop>": "",
+            "class<nautilus>": "",
+            "class<thunar>": "",
+            "class<org.gnome.Nautilus>": "",
+            "class<imv>": "",
+            "class<org.gnome.Loupe>": "",
+            "class<zathura>": "",
+            "class<org.pwmt.zathura>": "",
+            "class<mpv>": "",
+            "class<spotify>": "",
+            "class<com.github.wwmm.easyeffects>": "",
+            "class<ktalk>": "",
+            "class<virt-manager>": "",
+            "class<org.pulseaudio.pavucontrol>": ""
+        },
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": []
+        }
+    },
+    "custom/playerctl": {
+        "format": "{}",
+        "interval": 2,
+        "exec": "uq_current_song",
+        "max-length": 10000
+    },
+    "cpu": {
+        "interval": 2,
+        "format": "ЦП: {usage}%  {max_frequency} GHz",
+        "on-click": "kitty --class=terminal-floating htop"
+    },
+    "custom/cpu": {
+        "format": "{}",
+        "interval": 1,
+        "exec": "uq_cpuload",
+        "on-click": "kitty --class=terminal-floating htop"
+    },
+    "custom/cpu-cores": {
+        "format": "{}",
+        "return-type": "json",
+        "escape": false,
+        "exec": "python3 $HOME/.config/waybar/scripts/cpu-cores.py",
+        "restart-interval": 2,
+        "exec-on-event": false,
+        "on-click": "kitty --class=terminal-floating htop"
+    },
+    "custom/ram": {
+        "format": "{}",
+        "interval": 3,
+        "exec": "uq_ram"
+    },
+    "custom/cpu-freq": {
+        "format": "{}",
+        "interval": 1,
+        "exec": "uq_cpufreq"
+    },
+    "custom/net": {
+        "format": "{}",
+        "interval": 1,
+        "exec": "uq_net"
+    },
+    "memory": {
+        "interval": 5,
+        "format": "ОП: {used:0.1f} GiB, swap: {swapUsed:0.1f} GiB",
+        "max-length": 100
+    },
+    "custom/clock": {
+        "exec": "date '+%H:%M %d %b %a'",
+        "format": "{}",
+        "interval": 1,
+        "on-click": "kitty --class=terminal-floating calcurse"
+    },
+    "pulseaudio": {
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-muted": "",
+        "format-icons": {
+            "headphones": "",
+            "handsfree": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": [
+                "",
+                ""
+            ]
+        },
+        "scroll-step": 1,
+        "on-click": "kitty --class=terminal-floating ncpamixer -t o"
+    },
+    "sway/language": {
+        "format": "{}",
+        "min-length": 3
+    },
+    "custom/temp": {
+        "format": " {}",
+        "interval": 2,
+        "exec": "uq_temperature topdesktop",
+        "min-length": 10
+    },
+    "custom/iowait": {
+        "format": "{}",
+        "interval": 1,
+        "exec": "uq_iowait",
+        "on-click": "kitty --class=terminal-floating iostat -xz 1"
+    },
+    "network": {
+        "interval": 2,
+        "format": "{ifname}",
+        "format-wifi": "",
+        "format-ethernet": "",
+        "format-disconnected": "",
+        "tooltip-format": "{ifname}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+        "tooltip-format-ethernet": "{ifname} ",
+        "tooltip-format-disconnected": "Disconnected",
+        "on-click": "kitty --class=terminal-floating nmtui-connect"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    }
+}
