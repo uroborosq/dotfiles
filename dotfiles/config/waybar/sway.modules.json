@@ -154,7 +154,7 @@
         "exec": "uq_cpufreq"
     },
     "custom/net": {
-        "format": "{}",
+        "format": "󰖟 {}",
         "interval": 1,
         "exec": "uq_net"
     },
@@ -171,12 +171,12 @@
     },
     "pulseaudio": {
         "format": "{icon} {volume}%",
-        "format-bluetooth": "{icon} {volume}%",
+        "format-bluetooth": "{icon}  {volume}%",
         "format-muted": "",
         "format-icons": {
-            "headphones": "",
-            "handsfree": "",
-            "headset": "",
+            "headphone": "",
+            "hands-free": "󰂑",
+            "headset": "󰂑",
             "phone": "",
             "portable": "",
             "car": "",

@@ -21,6 +21,8 @@ Because neither wrapper passes `-s`, Waybar falls back to auto-discovery for the
 
 `sway.config.json` is a top-level array with one object per bar. Both bars include `sway.modules.json`, a top-level object with their shared module settings. The YUE bar overrides the workspace format for its compact display.
 
+Keep the YUE bar compact. Do not add modules to it unless the user explicitly asks for that panel to change.
+
 ### Workspaces (Sway)
 
 `sway/workspaces` in `sway.modules.json` carries `persistent-workspaces` for 1–4 plus `window-rewrite` rules that turn each window's `app_id`/X11 class into an icon on the full bar (`format: "{name} {windows}"`).

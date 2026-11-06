@@ -20,6 +20,7 @@
             "custom/clock"
         ],
         "modules-right": [
+            "custom/net",
             "custom/ram",
             "custom/temp",
             "custom/cava",
