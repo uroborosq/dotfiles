@@ -269,7 +269,7 @@ window#waybar.hidden {
 #network:hover,
 #pulseaudio:hover,
 #wireplumber:hover,
-#cava:hover {
+#custom-cava:hover {
   background-color: @wb_hover;
 }
 
