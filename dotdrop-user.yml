@@ -7,13 +7,13 @@ config:
   link_dotfile_default: nolink
   link_on_import: nolink
   longkey: false
+actions:
+  post:
+    enable_playerctld: "systemctl --user daemon-reload && systemctl --user enable --now playerctld.service"
 dotfiles:
   d_sway:
     src: config/sway
     dst: ~/.config/sway
-  d_nvim:
-    src: config/nvim
-    dst: ~/.config/nvim
   d_mako:
     src: config/mako
     dst: ~/.config/mako
@@ -85,11 +85,15 @@ dotfiles:
   d_yazi:
     src: config/yazi
     dst: ~/.config/yazi
+  f_playerctld.service:
+    src: config/systemd/user/playerctld.service
+    dst: ~/.config/systemd/user/playerctld.service
+    actions:
+      - enable_playerctld
 profiles:
   NB-3814:
     dotfiles:
       - d_sway
-      - d_nvim
       - d_mako
       - d_waybar
       - d_networkmanager-dmenu
@@ -113,6 +117,7 @@ profiles:
       - f_portals.conf
       - d_xdg-desktop-portal-wlr
       - d_yazi
+      - f_playerctld.service
   TopDesktop:
     include:
       - NB-3814

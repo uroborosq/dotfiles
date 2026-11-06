@@ -1,0 +1,11 @@
+[Unit]
+Description=Playerctl active media player selector
+
+[Service]
+Type=dbus
+BusName=org.mpris.MediaPlayer2.playerctld
+ExecStart=/usr/bin/playerctld
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
