@@ -6,6 +6,7 @@
         "modules-left": [
             "sway/workspaces",
             "custom/cpu",
+            "custom/cpu-cores",
             "custom/iowait",
             "custom/cpu-freq",
             "custom/ram",
@@ -151,6 +152,15 @@
             "exec": "uq_cpuload",
             "on-click": "kitty --class=terminal-floating htop"
         },
+        "custom/cpu-cores": {
+            "format": "{}",
+            "return-type": "json",
+            "escape": false,
+            "exec": "python3 $HOME/.config/waybar/scripts/cpu-cores.py",
+            "restart-interval": 2,
+            "exec-on-event": false,
+            "on-click": "kitty --class=terminal-floating htop"
+        },
         "custom/ram": {
             "format": "{}",
             "interval": 3,
@@ -203,7 +213,7 @@
         "custom/temp": {
             "format": " {}",
             "interval": 2,
-            "exec": "uq_temperature kvadra",
+            "exec": "uq_temperature topdesktop",
             "min-length": 10
         },
         "custom/iowait": {

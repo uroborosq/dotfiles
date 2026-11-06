@@ -175,6 +175,7 @@ window#waybar.hidden {
 /* ── Цвета по смысловым группам ──────────────────────────── */
 
 #custom-cpu,
+#custom-cpu-cores,
 #custom-cpu-freq,
 #custom-ram,
 #custom-iowait,
@@ -262,6 +263,7 @@ window#waybar.hidden {
 /* ── Кликабельные модули ─────────────────────────────────── */
 
 #custom-cpu:hover,
+#custom-cpu-cores:hover,
 #custom-iowait:hover,
 #custom-clock:hover,
 #custom-playerctl:hover,
@@ -274,6 +276,11 @@ window#waybar.hidden {
 }
 
 /* ── Прочее ──────────────────────────────────────────────── */
+
+#custom-cpu-cores {
+  font-size: 16px;
+  letter-spacing: 1px;
+}
 
 #tray {
   padding: 0 8px;
