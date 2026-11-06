@@ -8,19 +8,20 @@
         ],
         "height": 34,
         "modules-left": [
-            "sway/workspaces",
-            "custom/cpu",
-            "custom/cpu-cores",
-            "custom/iowait",
-            "custom/cpu-freq",
-            "custom/ram",
             "sway/mode",
-            "custom/temp"
+            "sway/workspaces",
+            "custom/cpu-cores",
+            "custom/cpu",
+            "custom/gpu",
+            "custom/iowait",
+            "custom/cpu-freq"
         ],
         "modules-center": [
             "custom/clock"
         ],
         "modules-right": [
+            "custom/ram",
+            "custom/temp",
             "custom/cava",
             "custom/playerctl",
             "tray",
@@ -41,19 +42,15 @@
         "modules-left": [
             "sway/workspaces",
             "custom/cpu",
-            "custom/ram",
-            "custom/temp"
+            "custom/gpu",
+            "custom/iowait"
         ],
         "modules-center": [
             "custom/clock"
         ],
         "modules-right": [
-            "tray",
-            "sway/language",
-            "pulseaudio",
-            "network",
-            "power-profiles-daemon",
-            "battery"
+            "custom/ram",
+            "custom/temp"
         ],
         "include": "sway.modules.json",
         "sway/workspaces": {

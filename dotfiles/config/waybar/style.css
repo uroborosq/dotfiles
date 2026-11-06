@@ -175,6 +175,7 @@ window#waybar.hidden {
 /* ── Цвета по смысловым группам ──────────────────────────── */
 
 #custom-cpu,
+#custom-gpu,
 #custom-cpu-cores,
 #custom-cpu-freq,
 #custom-ram,

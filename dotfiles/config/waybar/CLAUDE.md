@@ -17,9 +17,9 @@ Because neither wrapper passes `-s`, Waybar falls back to auto-discovery for the
 
 `sway.config.json` pins `"height": 34`, so the bar no longer sizes itself to its content: the vertical `margin` on `.modules-*` in `style.css` is what controls the visible strip of bar background above and below each group. Changing one without the other changes the bar's height instead of the inset.
 
-`sway.config.json` defines two bars. The full bar excludes Wisecoco (`KMN Wisecoco 0x00000001`, currently `DP-2`) and YUE (`YUE 2560x1600 CVT`, currently `HDMI-A-1`); the compact bar is shown only on YUE. The YUE bar omits the CPU and Cava graphs and the current song. Output identifiers match the monitor make, model, and serial rather than the port, so they survive replugging. Check identifiers with `waybar -l debug -c … 2>&1 | grep "Output detection"`.
+`sway.config.json` defines a full bar on every monitor except Wisecoco and the small YUE panel (currently on `HDMI-A-1`), plus a compact bar on YUE. It matches by make + model rather than port, so it survives replugging. Waybar builds that identifier as `make model serial` but drops a serial Sway reports as `Unknown` — the string `"YUE 2560x1600 CVT Unknown"` does **not** match. Check the exact identifiers with `waybar -l debug -c … 2>&1 | grep "Output detection"`.
 
-`sway.config.json` is a top-level array with one object per bar. Both include `sway.modules.json`, which holds their shared module settings. The YUE bar overrides the workspace format for a compact display.
+`sway.config.json` is a top-level array with one object per bar. Both bars include `sway.modules.json`, a top-level object with their shared module settings. The YUE bar overrides the workspace format for its compact display.
 
 ### Workspaces (Sway)
 
@@ -61,7 +61,7 @@ Every `custom/*` module shells out; a module rendering blank almost always means
 
 The two configs point at different, non-interchangeable binary sets:
 
-- `sway.modules.json` uses the underscore names on `PATH` via `~/.nimble/bin`: `uq_cpuload`, `uq_ram`, `uq_cpufreq`, `uq_net`, `uq_iowait`, `uq_current_song`, `uq_temperature topdesktop`.
+- `sway.config.json` uses the underscore names on `PATH` via `~/.nimble/bin`: `uq_cpuload`, `uq_ram`, `uq_cpufreq`, `uq_net`, `uq_iowait`, `uq_current_song`, `uq_temperature kvadra`.
 - `hyprland.config.json` uses absolute hyphenated paths: `/usr/bin/uq-cpu-usage-once`, `/usr/bin/uq-ram`, `/usr/bin/uq-cpu-frequency`, `/usr/bin/uq-net`, `/usr/bin/uq-current-song`, `/usr/bin/uq-thinkpad-e14-gen-temperature`. **None of these exist on this machine** — that config targets a different host (ThinkPad E14 vs. the Kvadra sensor profile used by the Sway config), so do not assume it is runnable here.
 
 The temperature module is hardware-specific by design (`uq_temperature <machine>`), so it is expected to differ between the two files.

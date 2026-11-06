@@ -58,7 +58,7 @@
     },
     "battery": {
         "interval": 3,
-        "format": "{capacity}% {icon} {power:0.1f} W",
+        "format": "{icon} {capacity}% {power:0.1f} W",
         "format-icons": [
             "",
             "",
@@ -109,9 +109,10 @@
     },
     "custom/playerctl": {
         "format": "{}",
+        "return-type": "json",
         "interval": 2,
-        "exec": "uq_current_song",
-        "max-length": 10000
+        "exec": "sh \"$HOME/.config/waybar/scripts/playerctl.sh\"",
+        "on-click-right": "playerctld shift"
     },
     "cpu": {
         "interval": 2,
@@ -119,10 +120,17 @@
         "on-click": "kitty --class=terminal-floating htop"
     },
     "custom/cpu": {
-        "format": "{}",
+        "format": " {}",
+        "tooltip-format": "Загрузка CPU: {}",
         "interval": 1,
         "exec": "uq_cpuload",
         "on-click": "kitty --class=terminal-floating htop"
+    },
+    "custom/gpu": {
+        "format": "󰢮 {}",
+        "tooltip-format": "Загрузка GPU: {}",
+        "interval": 2,
+        "exec": "uq_gpuload"
     },
     "custom/cpu-cores": {
         "format": "{}",
@@ -134,12 +142,14 @@
         "on-click": "kitty --class=terminal-floating htop"
     },
     "custom/ram": {
-        "format": "{}",
+        "format": " {}",
+        "tooltip-format": "ОЗУ / swap: {}",
         "interval": 3,
         "exec": "uq_ram"
     },
     "custom/cpu-freq": {
-        "format": "{}",
+        "format": " {}",
+        "tooltip-format": "Частота CPU: {}",
         "interval": 1,
         "exec": "uq_cpufreq"
     },
@@ -160,8 +170,8 @@
         "on-click": "kitty --class=terminal-floating calcurse"
     },
     "pulseaudio": {
-        "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon}",
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}%",
         "format-muted": "",
         "format-icons": {
             "headphones": "",
@@ -189,7 +199,8 @@
         "min-length": 10
     },
     "custom/iowait": {
-        "format": "{}",
+        "format": " {}",
+        "tooltip-format": "Ожидание I/O: {}",
         "interval": 1,
         "exec": "uq_iowait",
         "on-click": "kitty --class=terminal-floating iostat -xz 1"
