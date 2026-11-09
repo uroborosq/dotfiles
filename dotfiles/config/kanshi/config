@@ -1,3 +1,5 @@
+# vim: ft=swayconfig
+
 profile laptoponly {
 	output eDP-1 scale 1.25 position 0,0 enable 
 }

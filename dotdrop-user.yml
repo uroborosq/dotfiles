@@ -10,6 +10,7 @@ config:
 actions:
   post:
     enable_playerctld: "systemctl --user daemon-reload && systemctl --user enable --now playerctld.service"
+    reload_waybar: "killall -HUP waybar"
 dotfiles:
   d_sway:
     src: config/sway
@@ -20,6 +21,8 @@ dotfiles:
   d_waybar:
     src: config/waybar
     dst: ~/.config/waybar
+    actions:
+      - reload_waybar
   d_networkmanager-dmenu:
     src: config/networkmanager-dmenu
     dst: ~/.config/networkmanager-dmenu

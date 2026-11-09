@@ -112,7 +112,8 @@
         "return-type": "json",
         "interval": 2,
         "exec": "sh \"$HOME/.config/waybar/scripts/playerctl.sh\"",
-        "on-click-right": "playerctld shift"
+        "on-click-right": "playerctld shift",
+        "on-click": "playerctl play-pause"
     },
     "cpu": {
         "interval": 2,
