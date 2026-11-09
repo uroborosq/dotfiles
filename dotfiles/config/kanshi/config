@@ -4,7 +4,7 @@ profile laptoponly {
 
 profile home_three_monitors {
 	output eDP-1 disable
-	output "LG Electronics LG ULTRAGEAR 310NTTQDU745" scale 1.25 mode 2560x1440@60Hz position 0,0 
+	output "YUE 2560x1600 CVT Unknown" scale 2.25 mode 2560x1600@60Hz position 1690,2546 enable
 	output "Acer Technologies XV322QK KV 54030A5414200" scale 1.5 mode 3840x2160@60Hz position 2048,0 
 }
 profile work {
