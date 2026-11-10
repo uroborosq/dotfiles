@@ -1,7 +1,7 @@
 # vim: ft=swayconfig
 
 profile samsung {
-    output "Samsung Display Corp. 0x4187 Unknown" scale 1.75 position 0.0 enable
+    output "Samsung Display Corp. 0x4187 Unknown" scale 1.75 position 0,0 enable
 }
 
 profile laptoponly {
