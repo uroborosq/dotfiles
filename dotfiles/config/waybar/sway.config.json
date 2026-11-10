@@ -30,7 +30,6 @@
             "sway/language",
             "pulseaudio",
             "idle_inhibitor",
-            "network",
             "power-profiles-daemon",
             "battery"
         ],
@@ -60,7 +59,6 @@
             "sway/language",
             "pulseaudio",
             "idle_inhibitor",
-            "network",
             "power-profiles-daemon",
             "battery"
         ],
