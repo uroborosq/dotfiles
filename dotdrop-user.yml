@@ -124,3 +124,6 @@ profiles:
   TopDesktop:
     include:
       - NB-3814
+  TopLaptop:
+    include:
+      - NB-3814
