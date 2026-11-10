@@ -45,7 +45,6 @@
         "modules-left": [
             "sway/mode",
             "sway/workspaces",
-            "custom/cpu-cores",
             "custom/cpu",
             "custom/gpu",
             "custom/iowait",
@@ -55,7 +54,6 @@
             "custom/clock"
         ],
         "modules-right": [
-            "custom/ram",
             "custom/temp",
             "custom/playerctl",
             "tray",

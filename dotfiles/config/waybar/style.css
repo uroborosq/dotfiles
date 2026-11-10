@@ -64,8 +64,6 @@
   }
 }
 
-/* ── Сброс ───────────────────────────────────────────────── */
-
 * {
   min-height: 0;
   margin: 0;
@@ -73,17 +71,9 @@
   border: none;
   border-radius: 0;
   box-shadow: none;
-  /* Нужен вариант Propo, и только он:
-   *   "Mononoki Nerd Font"      — иконка рисуется шире своей ширины пера
-   *                               и заезжает на соседний знак;
-   *   "Mononoki Nerd Font Mono" — иконка ужата в одну ячейку и мельчает;
-   *   "Mononoki Nerd Font Propo" — ширина пера равна ширине иконки:
-   *                               полный размер и никаких наложений. */
   font-family: "Mononoki Nerd Font Propo", "Symbols Nerd Font", monospace;
   font-size: 14px;
 }
-
-/* ── Панель ──────────────────────────────────────────────── */
 
 window#waybar {
   background: @wb_background;
@@ -94,21 +84,15 @@ window#waybar.hidden {
   opacity: 0.2;
 }
 
-/* ── Группы модулей ──────────────────────────────────────── */
-
 .modules-left,
 .modules-center,
 .modules-right {
   border: 1px solid @wb_border;
   border-radius: 8px;
-  /* Вертикальный отступ задаёт просвет между группой и краем панели:
-   * высота панели зафиксирована в конфиге ("height": 34). */
   margin: 4px 6px;
   padding: 0 2px;
 }
 
-/* Свой подтон фона у каждой группы: полупрозрачный оттенок ведущего
- * цвета группы, наложенный на фон панели. */
 .modules-left {
   background-color: @wb_bg_left;
   border-color: alpha(@wb_sys, 0.5);
@@ -124,7 +108,6 @@ window#waybar.hidden {
   border-color: alpha(@wb_io, 0.4);
 }
 
-/* Модуль внутри группы: без рамки, отделён вертикальной чертой. */
 .modules-left > widget > *,
 .modules-center > widget > *,
 .modules-right > widget > * {
