@@ -4,6 +4,7 @@
         "output": [
             "!KMN Wisecoco 0x00000001",
             "!YUE 2560x1600 CVT",
+            "!eDP-1",
             "*"
         ],
         "height": 34,
@@ -24,6 +25,38 @@
             "custom/ram",
             "custom/temp",
             "custom/cava",
+            "custom/playerctl",
+            "tray",
+            "sway/language",
+            "pulseaudio",
+            "idle_inhibitor",
+            "network",
+            "power-profiles-daemon",
+            "battery"
+        ],
+        "include": "sway.modules.json"
+    },
+    {
+        "layer": "top",
+        "output": [
+            "eDP-1"
+        ],
+        "height": 34,
+        "modules-left": [
+            "sway/mode",
+            "sway/workspaces",
+            "custom/cpu-cores",
+            "custom/cpu",
+            "custom/gpu",
+            "custom/iowait",
+            "custom/cpu-freq"
+        ],
+        "modules-center": [
+            "custom/clock"
+        ],
+        "modules-right": [
+            "custom/ram",
+            "custom/temp",
             "custom/playerctl",
             "tray",
             "sway/language",
