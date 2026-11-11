@@ -1,6 +1,6 @@
 [mgr]
 prepend_keymap = [
   { on = [ "e", "e" ], run = 'shell "zsh" --block',     desc = "Open cwd in zsh" },
-  { on = [ "e", "n" ], run = 'shell "nvim ." --block',  desc = "Open cwd in nvim" },
-  { on = [ "e", "v" ], run = 'shell "neovide ." --orphan', desc = "Open cwd in neovide" },
+  { on = [ "e", "n" ], run = 'shell "nvim" --block',  desc = "Open cwd in nvim" },
+  { on = [ "e", "v" ], run = 'shell "neovide" --orphan', desc = "Open cwd in neovide" },
 ]
