@@ -11,23 +11,18 @@ for_window [title="Открыть файл"] floating enable
 for_window [title="Открыть папку"] floating enable
 for_window [title="Firefox — индикатор доступа"] floating enable
 for_window [app_id="terminal-floating"] floating enable, opacity $opacity
+for_window [app_id="^launcher$"] floating enable, resize set 640 440, move position center, sticky enable
 for_window [app_id="Alacritty"] opacity $opacity
-#for_window [app_id="kitty"] opacity $opacity
 for_window [app_id="foot"] opacity $opacity
-#for_window [app_id="neovide"] opacity $opacity
 for_window [title="Bild-im-Bild"] floating enable, sticky enable
-# for_window [app_id="entropy"] floating enable, sticky enable
 for_window [title="Индикатор раскладки — K:04"] floating enable, sticky enable
 for_window [title="Картинка в картинке"] floating enable, sticky enable
 for_window [title="Picture-in-Picture"] floating enable, sticky enable
-for_window [title="^Peek preview$"] opacity $opacity
-for_window [title="kitty"] opacity $opacity
 
-no_focus [title="^Peek preview$"]
-no_focus [app_id="^chrome-localhost.*"]
+#for_window [app_id="kitty"] opacity $opacity
+#for_window [app_id="neovide"] opacity $opacity
+
 no_focus [title="^uq-markdown$"]
-
-for_window [app_id="^chrome-localhost.*"] opacity $opacity
 
 gaps inner 5
 corner_radius 10
@@ -40,12 +35,7 @@ default_border pixel 3
 default_floating_border none
 titlebar_padding 1
 title_align center
-# titlebar_border_thickness 0
 
-#layer_effects kitty-quick-access {
-#    blur enable;
-#} 
-#
 #layer_effects wofi {
 #    blur enable;
 #}
@@ -53,8 +43,6 @@ title_align center
 
 font pango:Mononoki Nerd Font 12
 
-# Палитра gruvbox-material (soft, material, dark) — как в nvim и waybar.
-# Раньше цвета подключались из ~/.cache/wal/colors-sway (wallust удалён 2026-10-07).
 set $bg  #32302f
 set $fg  #d4be98
 set $br  #e78a4e
