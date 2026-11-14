@@ -40,4 +40,5 @@ exec waybar --config ~/.config/waybar/sway.config.json
 exec_always "killall kanshi; kanshi"
 exec /usr/lib/xdg-desktop-portal -r & /usr/lib/xdg-desktop-portal-wlr
 exec wl-paste --watch cliphist store
+exec gammastep-indicator
 

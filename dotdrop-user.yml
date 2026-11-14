@@ -9,8 +9,9 @@ config:
   longkey: false
 actions:
   post:
-    enable_playerctld: "systemctl --user daemon-reload && systemctl --user enable --now playerctld.service"
-    reload_waybar: "killall -HUP waybar"
+    enable_playerctld: systemctl --user daemon-reload && systemctl --user enable
+      --now playerctld.service
+    reload_waybar: killall -HUP waybar
 dotfiles:
   d_sway:
     src: config/sway
@@ -22,7 +23,7 @@ dotfiles:
     src: config/waybar
     dst: ~/.config/waybar
     actions:
-      - reload_waybar
+    - reload_waybar
   d_networkmanager-dmenu:
     src: config/networkmanager-dmenu
     dst: ~/.config/networkmanager-dmenu
@@ -47,11 +48,11 @@ dotfiles:
   f_dolphinrc:
     src: config/dolphinrc
     dst: ~/.config/dolphinrc
-    chmod: "600"
+    chmod: '600'
   f_user-dirs.dirs:
     src: config/user-dirs.dirs
     dst: ~/.config/user-dirs.dirs
-    chmod: "600"
+    chmod: '600'
   f_chromium-flags.conf:
     src: config/chromium-flags.conf
     dst: ~/.config/chromium-flags.conf
@@ -92,38 +93,42 @@ dotfiles:
     src: config/systemd/user/playerctld.service
     dst: ~/.config/systemd/user/playerctld.service
     actions:
-      - enable_playerctld
+    - enable_playerctld
+  d_gammastep:
+    src: config/gammastep
+    dst: ~/.config/gammastep
 profiles:
   NB-3814:
     dotfiles:
-      - d_sway
-      - d_mako
-      - d_waybar
-      - d_networkmanager-dmenu
-      - d_wofi
-      - d_wob
-      - d_lazygit
-      - f_zshrc
-      - f_p10k.zsh
-      - d_hypr
-      - f_dolphinrc
-      - f_user-dirs.dirs
-      - f_chromium-flags.conf
-      - d_mpv
-      - d_kitty
-      - d_kanshi
-      - d_foot
-      - d_nwg-bar
-      - d_plasma-workspace
-      - d_qt5ct
-      - d_qt6ct
-      - f_portals.conf
-      - d_xdg-desktop-portal-wlr
-      - d_yazi
-      - f_playerctld.service
+    - d_sway
+    - d_mako
+    - d_waybar
+    - d_networkmanager-dmenu
+    - d_wofi
+    - d_wob
+    - d_lazygit
+    - f_zshrc
+    - f_p10k.zsh
+    - d_hypr
+    - f_dolphinrc
+    - f_user-dirs.dirs
+    - f_chromium-flags.conf
+    - d_mpv
+    - d_kitty
+    - d_kanshi
+    - d_foot
+    - d_nwg-bar
+    - d_plasma-workspace
+    - d_qt5ct
+    - d_qt6ct
+    - f_portals.conf
+    - d_xdg-desktop-portal-wlr
+    - d_yazi
+    - f_playerctld.service
+    - d_gammastep
   TopDesktop:
     include:
-      - NB-3814
+    - NB-3814
   TopLaptop:
     include:
-      - NB-3814
+    - NB-3814
