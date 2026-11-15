@@ -30,4 +30,9 @@ profile home_wisecoco_yue_acer {
 	output "YUE 2560x1600 CVT Unknown" scale 2.25 mode 2560x1600@60Hz position 1690,2546 enable
 	output "Acer Technologies XV322QK KV 54030A5414200" scale 1.5 mode 3840x2160@144Hz position 1041,1106 enable
 }
+profile home_yue_acer {
+	# Select the exact modeline registered by sway/config.d/10-wisecoco.conf.
+	output "YUE 2560x1600 CVT Unknown" scale 2.25 mode 2560x1600@60Hz position 1690,2546 enable
+	output "Acer Technologies XV322QK KV 54030A5414200" scale 1.5 mode 3840x2160@144Hz position 1041,1106 enable
+}
 
